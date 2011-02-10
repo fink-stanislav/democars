@@ -11,11 +11,8 @@
     </h:head>
     <h:body>
         <rich:dataTable value="#{carsCollectionBean.cars}" var="car">
-            <f:facet name="caption">
-                <h:outputText value="Cars"/>
-            </f:facet>
             <f:facet name="header">
-                <h:outputText value="Cars table"/>
+                <h:outputText value="Cars Store"/>
             </f:facet>
             <rich:column>
                 <f:facet name="header">Make</f:facet>
@@ -26,12 +23,20 @@
                 <h:outputText value="#{car.model}"/>
             </rich:column>
             <rich:column>
+                <f:facet name="header">Price</f:facet>
+                <h:outputText value="#{car.price}"/>
+            </rich:column>
+            <rich:column>
                 <f:facet name="header">Mileage</f:facet>
                 <h:outputText value="#{car.mileage}"/>
             </rich:column>
             <rich:column>
                 <f:facet name="header">Vin</f:facet>
                 <h:outputText value="#{car.vin}"/>
+            </rich:column>
+            <rich:column>
+                <f:facet name="header">Condition</f:facet>
+                <h:outputText value="#{car.condition}"/>
             </rich:column>
         </rich:dataTable>
     </h:body>

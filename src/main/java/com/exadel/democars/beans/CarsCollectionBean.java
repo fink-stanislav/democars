@@ -1,19 +1,17 @@
 package com.exadel.democars.beans;
 
+import com.exadel.democars.application.DataManager;
+
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
+import java.io.FileNotFoundException;
 import java.io.Serializable;
 
-@ManagedBean(name="carsCollectionBean")
-@SessionScoped
+@ManagedBean(name = "carsCollectionBean")
+@RequestScoped
 public class CarsCollectionBean implements Serializable {
-	private static final Car[] cars = new Car[] {
-            new Car("Ford", "Scorpio", 100500.0, "ZXCDFG"),
-            new Car("Totota", "Corolla", 1000.0, "GSOMQ"),
-            new Car("Nissan", "Primera", 25000.2, "TDFFDD")
-    };
 
-	public Car[] getCars() {
-		return cars;
-	}
+    public Car[] getCars() {
+        return DataManager.getCarList();
+    }
 }

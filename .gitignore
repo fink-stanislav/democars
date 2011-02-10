@@ -1,5 +1,6 @@
 target/*
 .settings/*
+docs-private/*
 *.iml
 *.ipr
 *.iws
