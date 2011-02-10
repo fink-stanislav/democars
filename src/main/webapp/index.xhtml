@@ -1,17 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
- "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:rich="http://richfaces.org/rich">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:rich="http://richfaces.org/rich">
 <f:view>
-	<h:head>
-		<title>Demo application</title>
-	</h:head>
-	<h:body>
-        <h:outputText id="car" value='#{car.model}'/>
-        <a href="faces/carform.xhtml">carform</a>
-	</h:body>
+    <h:head>
+        <title>Demo application</title>
+    </h:head>
+    <h:body>
+        <rich:dataTable value="#{carsCollectionBean.cars}" var="car">
+            <f:facet name="caption">
+                <h:outputText value="Cars"/>
+            </f:facet>
+            <f:facet name="header">
+                <h:outputText value="Cars table"/>
+            </f:facet>
+            <rich:column>
+                <f:facet name="header">Make</f:facet>
+                <h:outputText value="#{car.make}"/>
+            </rich:column>
+            <rich:column>
+                <f:facet name="header">Model</f:facet>
+                <h:outputText value="#{car.model}"/>
+            </rich:column>
+            <rich:column>
+                <f:facet name="header">Mileage</f:facet>
+                <h:outputText value="#{car.mileage}"/>
+            </rich:column>
+            <rich:column>
+                <f:facet name="header">Vin</f:facet>
+                <h:outputText value="#{car.vin}"/>
+            </rich:column>
+        </rich:dataTable>
+    </h:body>
 </f:view>
 </html>

@@ -1,29 +1,19 @@
 package com.exadel.democars.beans;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import java.io.Serializable;
 
-import com.exadel.democars.beans.Car;
+@ManagedBean(name="carsCollectionBean")
+@SessionScoped
+public class CarsCollectionBean implements Serializable {
+	private static final Car[] cars = new Car[] {
+            new Car("Ford", "Scorpio", 100500.0, "ZXCDFG"),
+            new Car("Totota", "Corolla", 1000.0, "GSOMQ"),
+            new Car("Nissan", "Primera", 25000.2, "TDFFDD")
+    };
 
-public class CarsCollectionBean {
-	private Collection cars;
-	
-	public CarsCollectionBean() {
-		cars = new ArrayList<Car>();
-		Car car = new Car();
-		car.setId(10);
-		car.setMake("Ford");
-		car.setMileage(100500.0);
-		car.setModel("Scorpio");
-		car.setVin("ZXCDFG");
-		cars.add(car);
-	}
-
-	public Collection getCars() {
+	public Car[] getCars() {
 		return cars;
-	}
-
-	public void setCars(Collection cars) {
-		this.cars = cars;
 	}
 }

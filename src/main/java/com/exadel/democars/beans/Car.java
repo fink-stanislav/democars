@@ -1,17 +1,26 @@
 package com.exadel.democars.beans;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
 
 @ManagedBean(name="car")
-@RequestScoped
+@SessionScoped
 public class Car implements Serializable {
 	Integer id;
 	String make;
 	String model;
 	Double mileage;
 	String vin;
+
+    public Car() {}
+
+    public Car(String make, String model, Double mileage, String vin) {
+        this.make = make;
+        this.model = model;
+        this.mileage = mileage;
+        this.vin = vin;
+    }
 
     public Integer getId() {
 		return id;
