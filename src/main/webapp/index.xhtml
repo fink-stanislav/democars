@@ -10,34 +10,58 @@
         <title>Demo application</title>
     </h:head>
     <h:body>
-        <rich:dataTable value="#{carsCollectionBean.cars}" var="car">
+        <rich:dataTable value="#{carsCollectionBean.cars}" var="car" rows="10">
             <f:facet name="header">
                 <h:outputText value="Cars Store"/>
+                <rich:columnGroup>
+                    <h:column>
+                        <h:outputText value="Make"/>
+                    </h:column>
+                    <h:column>
+                        <h:outputText value="Model"/>
+                    </h:column>
+                    <h:column>
+                        <h:outputText value="Price"/>
+                    </h:column>
+                    <h:column>
+                        <h:outputText value="Mileage"/>
+                    </h:column>
+                    <h:column>
+                        <h:outputText value="VIN"/>
+                    </h:column>
+                    <h:column>
+                        <h:outputText value="Condition"/>
+                    </h:column>
+                </rich:columnGroup>
             </f:facet>
             <rich:column>
-                <f:facet name="header">Make</f:facet>
                 <h:outputText value="#{car.make}"/>
             </rich:column>
             <rich:column>
-                <f:facet name="header">Model</f:facet>
                 <h:outputText value="#{car.model}"/>
             </rich:column>
             <rich:column>
-                <f:facet name="header">Price</f:facet>
                 <h:outputText value="#{car.price}"/>
             </rich:column>
             <rich:column>
-                <f:facet name="header">Mileage</f:facet>
                 <h:outputText value="#{car.mileage}"/>
             </rich:column>
             <rich:column>
-                <f:facet name="header">Vin</f:facet>
                 <h:outputText value="#{car.vin}"/>
             </rich:column>
             <rich:column>
-                <f:facet name="header">Condition</f:facet>
                 <h:outputText value="#{car.condition}"/>
             </rich:column>
+            <f:facet name="footer">
+                <rich:dataScroller>
+                    <f:facet name="first">
+                        <h:outputText value="First"/>
+                    </f:facet>
+                    <f:facet name="last">
+                        <h:outputText value="Last"/>
+                    </f:facet>
+                </rich:dataScroller>
+            </f:facet>
         </rich:dataTable>
     </h:body>
 </f:view>
