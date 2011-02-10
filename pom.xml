@@ -1,0 +1,89 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.exadel</groupId>
+    <artifactId>demoapp</artifactId>
+    <packaging>war</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>Richfaces and JPA demo application</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <hibernate-core-version>3.6.1.Final</hibernate-core-version>
+        <jsf-version>2.0.3</jsf-version>
+        <richfaces-version>4.0.0.20101226-M5</richfaces-version>
+        <junit-version>3.8.1</junit-version>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>jboss-public-repository-group</id>
+            <name>JBoss Public Maven Repository Group</name>
+            <url>https://repository.jboss.org/nexus/content/groups/public/</url>
+            <layout>default</layout>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit-version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.faces</groupId>
+            <artifactId>jsf-impl</artifactId>
+            <version>${jsf-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.faces</groupId>
+            <artifactId>jsf-api</artifactId>
+            <version>${jsf-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.richfaces.core</groupId>
+            <artifactId>richfaces-core-api</artifactId>
+            <version>${richfaces-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.richfaces.core</groupId>
+            <artifactId>richfaces-core-impl</artifactId>
+            <version>${richfaces-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.richfaces.ui</groupId>
+            <artifactId>richfaces-components-ui</artifactId>
+            <version>${richfaces-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.richfaces.ui</groupId>
+            <artifactId>richfaces-components-api</artifactId>
+            <version>${richfaces-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate-core-version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>demoapp</finalName>
+    </build>
+</project>
