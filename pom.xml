@@ -13,6 +13,7 @@
         <jsf-version>2.0.3</jsf-version>
         <richfaces-version>4.0.0.20101226-M5</richfaces-version>
         <junit-version>3.8.1</junit-version>
+        <a4j-version>1.0.5</a4j-version>
     </properties>
 
     <repositories>
@@ -51,12 +52,14 @@
             <groupId>com.sun.faces</groupId>
             <artifactId>jsf-impl</artifactId>
             <version>${jsf-version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>com.sun.faces</groupId>
             <artifactId>jsf-api</artifactId>
             <version>${jsf-version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -88,6 +91,12 @@
             <artifactId>hibernate-core</artifactId>
             <version>${hibernate-core-version}</version>
         </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.ajax4jsf</groupId>-->
+            <!--<artifactId>ajax4jsf</artifactId>-->
+            <!--<version>${a4j-version}</version>-->
+        <!--</dependency>-->
     </dependencies>
 
     <build>
