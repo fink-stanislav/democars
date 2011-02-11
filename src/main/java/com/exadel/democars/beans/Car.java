@@ -14,8 +14,9 @@ public class Car implements Serializable {
     Integer mileage;
     String vin;
     Condition condition;
+    Features features;
 
-    public Car() {};
+    public Car() {}
 
     public enum Condition {
         Used, New
@@ -84,5 +85,13 @@ public class Car implements Serializable {
 
     public void setPrice(Float price) {
         this.price = price;
+    }
+
+    public Features getFeatures() {
+        return features;
+    }
+
+    public void setFeatures(Features features) {
+        this.features = features;
     }
 }

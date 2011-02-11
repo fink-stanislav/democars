@@ -1,0 +1,17 @@
+.tooltip {
+    border-width: 3px;
+    padding: 10px;
+}
+
+.tooltip-text {
+    width: 350px;
+    height: 80px;
+    border-width: 2px;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.tooltipData {
+    font-weight: bold;
+}
