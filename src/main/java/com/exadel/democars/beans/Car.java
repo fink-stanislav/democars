@@ -8,8 +8,7 @@ import java.io.Serializable;
 @RequestScoped
 public class Car implements Serializable {
     Integer id;
-    String make;
-    String model;
+    Model model;
     Float price;
     Integer mileage;
     String vin;
@@ -23,8 +22,9 @@ public class Car implements Serializable {
     }
 
     public Car(String make, String model, Float price, Integer mileage, String vin, Condition condition) {
-        this.make = make;
-        this.model = model;
+        this.model = new Model();
+        this.model.setMake(make);
+        this.model.setModel(model);
         this.price = price;
         this.mileage = mileage;
         this.vin = vin;
@@ -47,19 +47,11 @@ public class Car implements Serializable {
         this.id = id;
     }
 
-    public String getMake() {
-        return make;
-    }
-
-    public void setMake(String make) {
-        this.make = make;
-    }
-
-    public String getModel() {
+    public Model getModel() {
         return model;
     }
 
-    public void setModel(String model) {
+    public void setModel(Model model) {
         this.model = model;
     }
 

@@ -1,14 +1,8 @@
 package com.exadel.democars.model.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
-@Entity
 public class Model {
-	@Id @GeneratedValue
 	Integer id;
-	String title;
+	String model;
 	String make;
 
     public Integer getId() {
@@ -19,12 +13,12 @@ public class Model {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getModel() {
+        return model;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setModel(String title) {
+        this.model = title;
     }
 
     public String getMake() {
