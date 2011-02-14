@@ -8,8 +8,7 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQuery(name = "findAllCars", query = "select c from Car c")
 public class Car {
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     Integer id;
     Integer model;
     Double price;

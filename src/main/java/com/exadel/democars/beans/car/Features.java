@@ -1,10 +1,5 @@
-package com.exadel.democars.beans;
+package com.exadel.democars.beans.car;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-
-@ManagedBean(name = "features")
-@RequestScoped
 public class Features {
     private BodyType bodyType;
     private String engine;
@@ -12,18 +7,6 @@ public class Features {
     private Transmission transmission;
     private String exteriorColor;
     private String interiorColor;
-
-    public enum BodyType {
-        sedan, hatchback, minivan
-    }
-
-    public enum Fuel {
-        diesel, a80, a92, a95
-    }
-
-    public enum Transmission {
-        automatic, semiautomatic, mechanic
-    }
 
     public BodyType getBodyType() {
         return bodyType;

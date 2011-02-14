@@ -1,4 +1,4 @@
-package com.exadel.democars.view;
+package com.exadel.democars.view.model;
 
 import javax.faces.model.DataModel;
 import java.io.Serializable;

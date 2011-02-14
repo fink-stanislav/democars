@@ -5,7 +5,7 @@
          version="2.5">
 
     <listener>
-        <listener-class>com.exadel.democars.application.ApplicationInitializer</listener-class>
+        <listener-class>com.exadel.democars.application.Initializer</listener-class>
     </listener>
 
     <servlet>

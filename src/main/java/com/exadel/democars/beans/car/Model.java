@@ -1,4 +1,4 @@
-package com.exadel.democars.beans;
+package com.exadel.democars.beans.car;
 
 public class Model {
     private String model;

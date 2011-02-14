@@ -1,12 +1,6 @@
-package com.exadel.democars.beans;
+package com.exadel.democars.beans.car;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import java.io.Serializable;
-
-@ManagedBean(name = "car")
-@RequestScoped
-public class Car implements Serializable {
+public class Car {
     Integer id;
     Model model;
     Float price;
@@ -16,20 +10,6 @@ public class Car implements Serializable {
     Features features;
 
     public Car() {}
-
-    public enum Condition {
-        Used, New
-    }
-
-    public Car(String make, String model, Float price, Integer mileage, String vin, Condition condition) {
-        this.model = new Model();
-        this.model.setMake(make);
-        this.model.setModel(model);
-        this.price = price;
-        this.mileage = mileage;
-        this.vin = vin;
-        this.condition = condition;
-    }
 
     public Condition getCondition() {
         return condition;
