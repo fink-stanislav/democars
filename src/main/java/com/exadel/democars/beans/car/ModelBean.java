@@ -1,6 +1,6 @@
 package com.exadel.democars.beans.car;
 
-public class Model {
+public class ModelBean {
     private String model;
     private String make;
 

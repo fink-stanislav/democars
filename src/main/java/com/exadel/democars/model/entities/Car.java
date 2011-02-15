@@ -1,33 +1,46 @@
 package com.exadel.democars.model.entities;
 
-import javax.persistence.*;
+import com.exadel.democars.beans.car.Condition;
+
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQuery(name = "findAllCars", query = "select c from Car c")
 public class Car {
-    @Id @GeneratedValue
-    Integer id;
-    Integer model;
-    Double price;
-    Integer mileage;
-    String vin;
-    String condition;
-    Integer features;
+    @Id
+    @GeneratedValue
+    private Integer id;
+    private Double price;
+    private Integer mileage;
+    private String vin;
+    @Enumerated(EnumType.STRING)
+    private Condition condition;
+
+    @ManyToOne
+    @JoinColumn(name = "seller")
+    private Seller seller;
+
+    @ManyToOne
+    @JoinColumn(name = "model")
+    private Model model;
+
+    @ManyToOne
+    @JoinColumn(name = "features")
+    private Features features;
 
     public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    private void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getModel() {
-        return model;
-    }
-
-    public void setModel(Integer model) {
-        this.model = model;
     }
 
     public Double getPrice() {
@@ -54,19 +67,35 @@ public class Car {
         this.vin = vin;
     }
 
-    public Integer getFeatures() {
-        return features;
-    }
-
-    public void setFeatures(Integer features) {
-        this.features = features;
-    }
-
-    public String getCondition() {
+    public Condition getCondition() {
         return condition;
     }
 
-    public void setCondition(String condition) {
+    public void setCondition(Condition condition) {
         this.condition = condition;
+    }
+
+    public Seller getSeller() {
+        return seller;
+    }
+
+    public void setSeller(Seller seller) {
+        this.seller = seller;
+    }
+
+    public Model getModel() {
+        return model;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
+    }
+
+    public Features getFeatures() {
+        return features;
+    }
+
+    public void setFeatures(Features features) {
+        this.features = features;
     }
 }

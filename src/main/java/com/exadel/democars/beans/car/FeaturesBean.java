@@ -1,9 +1,9 @@
 package com.exadel.democars.beans.car;
 
-public class Features {
+public class FeaturesBean {
     private BodyType bodyType;
-    private String engine;
     private Fuel fuel;
+    private Engine engine;
     private Transmission transmission;
     private String exteriorColor;
     private String interiorColor;
@@ -16,11 +16,11 @@ public class Features {
         this.bodyType = bodyType;
     }
 
-    public String getEngine() {
+    public Engine getEngine() {
         return engine;
     }
 
-    public void setEngine(String engine) {
+    public void setEngine(Engine engine) {
         this.engine = engine;
     }
 

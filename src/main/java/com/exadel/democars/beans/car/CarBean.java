@@ -1,15 +1,17 @@
 package com.exadel.democars.beans.car;
 
-public class CarBean {
-    Integer id;
-    Model model;
-    Double price;
-    Integer mileage;
-    String vin;
-    Condition condition;
-    Features features;
+import com.exadel.democars.model.entities.LegalSeller;
+import com.exadel.democars.model.entities.Seller;
 
-    public CarBean() {}
+public class CarBean {
+    private Integer id;
+    private ModelBean model;
+    private Double price;
+    private Integer mileage;
+    private String vin;
+    private Condition condition;
+    private FeaturesBean features;
+    private Seller seller;
 
     public Condition getCondition() {
         return condition;
@@ -27,11 +29,11 @@ public class CarBean {
         this.id = id;
     }
 
-    public Model getModel() {
+    public ModelBean getModel() {
         return model;
     }
 
-    public void setModel(Model model) {
+    public void setModel(ModelBean model) {
         this.model = model;
     }
 
@@ -59,11 +61,19 @@ public class CarBean {
         this.price = price;
     }
 
-    public Features getFeatures() {
+    public FeaturesBean getFeatures() {
         return features;
     }
 
-    public void setFeatures(Features features) {
+    public void setFeatures(FeaturesBean features) {
         this.features = features;
+    }
+
+    public Seller getSeller() {
+        return seller;
+    }
+
+    public void setSeller(Seller seller) {
+        this.seller = seller;
     }
 }

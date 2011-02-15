@@ -32,6 +32,9 @@
                             <h:outputText value="Condition"/>
                         </rich:column>
                         <rich:column>
+                            <h:outputText value="Seller"/>
+                        </rich:column>
+                        <rich:column>
                             <h:outputText value="Features"/>
                         </rich:column>
                     </rich:columnGroup>
@@ -57,14 +60,17 @@
                     <h:outputText value="#{car.condition}"/>
                 </rich:column>
                 <rich:column>
+                    <h:outputText value="#{car.seller}"/>
+                </rich:column>
+                <rich:column>
                     <h:graphicImage id="listImage" url="images/list.jpeg" width="10px" height="14px"/>
                     <rich:tooltip>
-                        <h:outputText value="Body type: #{car.features.bodyType}"/>
-                        <h:outputText value="Engine: #{car.features.engine}"/>
-                        <h:outputText value="Fuel: #{car.features.fuel}"/>
-                        <h:outputText value="Transmission: #{car.features.transmission}"/>
-                        <h:outputText value="Exterior color: #{car.features.exteriorColor}"/>
-                        <h:outputText value="Interior color: #{car.features.interiorColor}"/>
+                        <h:outputText value="Body type: #{car.features.bodyType}; "/>
+                        <h:outputText value="Engine: #{car.features.engine}; "/>
+                        <h:outputText value="Fuel: #{car.features.fuel}; "/>
+                        <h:outputText value="Transmission: #{car.features.transmission}; "/>
+                        <h:outputText value="Exterior color: #{car.features.exteriorColor}; "/>
+                        <h:outputText value="Interior color: #{car.features.interiorColor}."/>
                     </rich:tooltip>
                 </rich:column>
                 <f:facet name="footer">
