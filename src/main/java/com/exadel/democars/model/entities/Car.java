@@ -1,9 +1,6 @@
 package com.exadel.democars.model.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
+import javax.persistence.*;
 
 @Entity
 @NamedQuery(name = "findAllCars", query = "select c from Car c")

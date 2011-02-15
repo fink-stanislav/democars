@@ -11,6 +11,7 @@ public class EntityManagerProvider {
     private static EntityManagerProvider instance = new EntityManagerProvider();
 
     private EntityManagerProvider() {
+        Persistence.getPersistenceUtil();
         entityManagerFactory = Persistence.createEntityManagerFactory("demoCars");
         entityManager = entityManagerFactory.createEntityManager();
     }

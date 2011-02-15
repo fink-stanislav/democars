@@ -1,15 +1,15 @@
 package com.exadel.democars.beans.car;
 
-public class Car {
+public class CarBean {
     Integer id;
     Model model;
-    Float price;
+    Double price;
     Integer mileage;
     String vin;
     Condition condition;
     Features features;
 
-    public Car() {}
+    public CarBean() {}
 
     public Condition getCondition() {
         return condition;
@@ -51,11 +51,11 @@ public class Car {
         this.vin = vin;
     }
 
-    public Float getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
