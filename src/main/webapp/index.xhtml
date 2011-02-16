@@ -1,7 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:rich="http://richfaces.org/rich">
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j">
 <f:view>
     <h:head>
         <title>Demo application</title>
@@ -61,8 +62,8 @@
                 </rich:column>
                 <rich:column>
                     <h:outputText value="#{car.price}">
-                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2" groupingUsed="true"
-                                         currencySymbol="$" maxIntegerDigits="7" type="currency"/>
+                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2" groupingUsed="false"
+                                         currencySymbol="$" maxIntegerDigits="7" type="currency" locale="us"/>
                     </h:outputText>
                 </rich:column>
                 <rich:column>
@@ -75,12 +76,16 @@
                     <h:outputText value="#{car.condition}"/>
                 </rich:column>
                 <rich:column>
-                    <h:outputText value="#{car.seller}"/>
+                    <a4j:commandLink value="#{car.seller}" oncomplete="#{rich:component('modalPanel')}.show()">
+                        <f:setPropertyActionListener target="#{sellerBean.seller}" value="#{car.seller}"/>
+                    </a4j:commandLink>
                 </rich:column>
                 <rich:column>
                     <h:graphicImage id="listImage" url="images/list.jpeg" width="10px" height="14px"/>
                     <rich:tooltip styleClass="tooltip" layout="block">
-                        <span class="tooltip"><h:outputText styleClass="tooltip-text" value="#{car.features}"/></span>
+                        <div class="tooltip-text">
+                            <h:outputText value="#{car.features}"/>
+                        </div>
                     </rich:tooltip>
                 </rich:column>
                 <f:facet name="footer">
@@ -94,6 +99,22 @@
                     </rich:dataScroller>
                 </f:facet>
             </rich:dataTable>
+            <a4j:region>
+                <rich:popupPanel modal="true" id="modalPanel" width="350" height="100">
+                    <f:facet name="header">
+                        <h:outputText value="Modal Panel"/>
+                    </f:facet>
+                    <f:facet name="controls">
+                        <h:graphicImage url="images/close.jpeg" width="14px" height="14px"
+                                        onclick="#{rich:component('modalPanel')}.hide()"/>
+                    </f:facet>
+                    <a4j:outputPanel ajaxRendered="true">
+                        <b><h:outputText value="#{sellerBean.seller}"/></b><br/>
+                        <h:outputText value="#{sellerBean.seller.address.city}, "/>
+                        <h:outputText value="#{sellerBean.seller.address.street}"/>
+                    </a4j:outputPanel>
+                </rich:popupPanel>
+            </a4j:region>
         </h:form>
     </h:body>
 </f:view>

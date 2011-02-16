@@ -1,5 +1,11 @@
 package com.exadel.democars.application;
 
+import com.exadel.democars.beans.car.*;
+import com.exadel.democars.model.entities.*;
+import com.exadel.democars.model.persistence.DataManager;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 

@@ -1,6 +1,6 @@
 package com.exadel.democars.view.beans;
 
-import com.exadel.democars.application.DataManager;
+import com.exadel.democars.model.persistence.DataManager;
 import com.exadel.democars.view.model.PagedListDataModel;
 
 import javax.faces.bean.ManagedBean;
@@ -14,7 +14,7 @@ import java.util.List;
 public class CarsCollectionBean implements Serializable {
     public DataModel getCars() {
         DataManager dataManager = new DataManager();
-        List pagedList = dataManager.getCarList();
-        return new PagedListDataModel(pagedList, 10, dataManager.getCarList().size());
+        List pagedList = dataManager.getEntityListByNamedQuery("findAllCars");
+        return new PagedListDataModel(pagedList, 10, pagedList.size());
     }
 }
