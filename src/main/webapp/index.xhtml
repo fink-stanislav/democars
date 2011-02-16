@@ -7,6 +7,11 @@
     <h:head>
         <title>Demo application</title>
         <style type="text/css">
+            .table {
+                width: auto;
+                height: auto;
+            }
+
             .tooltip {
                 width: 250px;
                 height: auto;
@@ -24,85 +29,85 @@
 
     <h:body>
         <h:form>
-            <rich:dataTable value="#{carsCollectionBean.cars}" var="car" rows="10">
-                <f:facet name="header">
-                    <h:outputText value="Cars Store"/>
-                    <rich:columnGroup>
-                        <rich:column>
+            <div class="table">
+                <rich:dataTable value="#{carsCollectionBean.cars}" var="car" rows="10">
+                    <f:facet name="header">
+                        <h:outputText value="Cars Store"/>
+                    </f:facet>
+                    <rich:column>
+                        <f:facet name="header">
                             <h:outputText value="Make"/>
-                        </rich:column>
-                        <rich:column>
+                        </f:facet>
+                        <h:outputText value="#{car.model.make}"/>
+                    </rich:column>
+                    <rich:column>
+                        <f:facet name="header">
                             <h:outputText value="Model"/>
-                        </rich:column>
-                        <rich:column>
+                        </f:facet>
+                        <h:outputText value="#{car.model.model}"/>
+                    </rich:column>
+                    <rich:column>
+                        <f:facet name="header">
                             <h:outputText value="Price"/>
-                        </rich:column>
-                        <rich:column>
+                        </f:facet>
+                        <h:outputText value="#{car.price}">
+                            <f:convertNumber minFractionDigits="2" maxFractionDigits="2" groupingUsed="false"
+                                             currencySymbol="$" maxIntegerDigits="7" type="currency" locale="us"/>
+                        </h:outputText>
+                    </rich:column>
+                    <rich:column>
+                        <f:facet name="header">
                             <h:outputText value="Mileage"/>
-                        </rich:column>
-                        <rich:column>
+                        </f:facet>
+                        <h:outputText value="#{car.mileage}"/>
+                    </rich:column>
+                    <rich:column>
+                        <f:facet name="header">
                             <h:outputText value="VIN"/>
-                        </rich:column>
-                        <rich:column>
+                        </f:facet>
+                        <h:outputText value="#{car.vin}"/>
+                    </rich:column>
+                    <rich:column>
+                        <f:facet name="header">
                             <h:outputText value="Condition"/>
-                        </rich:column>
-                        <rich:column>
+                        </f:facet>
+                        <h:outputText value="#{car.condition}"/>
+                    </rich:column>
+                    <rich:column>
+                        <f:facet name="header">
                             <h:outputText value="Seller"/>
-                        </rich:column>
-                        <rich:column>
+                        </f:facet>
+                        <a4j:commandLink value="#{car.seller}" oncomplete="#{rich:component('modalPanel')}.show()">
+                            <f:setPropertyActionListener target="#{sellerBean.seller}" value="#{car.seller}"/>
+                        </a4j:commandLink>
+                    </rich:column>
+                    <rich:column>
+                        <f:facet name="header">
                             <h:outputText value="Features"/>
-                        </rich:column>
-                    </rich:columnGroup>
-                </f:facet>
-                <rich:column>
-                    <h:outputText value="#{car.model.make}"/>
-                </rich:column>
-                <rich:column>
-                    <h:outputText value="#{car.model.model}"/>
-                </rich:column>
-                <rich:column>
-                    <h:outputText value="#{car.price}">
-                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2" groupingUsed="false"
-                                         currencySymbol="$" maxIntegerDigits="7" type="currency" locale="us"/>
-                    </h:outputText>
-                </rich:column>
-                <rich:column>
-                    <h:outputText value="#{car.mileage}"/>
-                </rich:column>
-                <rich:column>
-                    <h:outputText value="#{car.vin}"/>
-                </rich:column>
-                <rich:column>
-                    <h:outputText value="#{car.condition}"/>
-                </rich:column>
-                <rich:column>
-                    <a4j:commandLink value="#{car.seller}" oncomplete="#{rich:component('modalPanel')}.show()">
-                        <f:setPropertyActionListener target="#{sellerBean.seller}" value="#{car.seller}"/>
-                    </a4j:commandLink>
-                </rich:column>
-                <rich:column>
-                    <h:graphicImage id="listImage" url="images/list.jpeg" width="10px" height="14px"/>
-                    <rich:tooltip styleClass="tooltip" layout="block">
-                        <div class="tooltip-text">
-                            <h:outputText value="#{car.features}"/>
-                        </div>
-                    </rich:tooltip>
-                </rich:column>
-                <f:facet name="footer">
-                    <rich:dataScroller fastStep="3">
-                        <f:facet name="first">
-                            <h:outputText value="First"/>
                         </f:facet>
-                        <f:facet name="last">
-                            <h:outputText value="Last"/>
-                        </f:facet>
-                    </rich:dataScroller>
-                </f:facet>
-            </rich:dataTable>
+                        <h:graphicImage id="listImage" url="images/list.jpeg" width="10px" height="14px"/>
+                        <rich:tooltip styleClass="tooltip" layout="block">
+                            <div class="tooltip-text">
+                                <h:outputText value="#{car.features}"/>
+                            </div>
+                        </rich:tooltip>
+                    </rich:column>
+                    <f:facet name="footer">
+                        <rich:dataScroller fastStep="3">
+                            <f:facet name="first">
+                                <h:outputText value="First"/>
+                            </f:facet>
+                            <f:facet name="last">
+                                <h:outputText value="Last"/>
+                            </f:facet>
+                        </rich:dataScroller>
+                    </f:facet>
+                </rich:dataTable>
+            </div>
             <a4j:region>
                 <rich:popupPanel modal="true" id="modalPanel" width="350" height="100">
                     <f:facet name="header">
-                        <h:outputText value="Modal Panel"/>
+                        <h:outputText value="Seller Information"/>
                     </f:facet>
                     <f:facet name="controls">
                         <h:graphicImage url="images/close.jpeg" width="14px" height="14px"
