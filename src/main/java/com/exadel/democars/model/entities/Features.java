@@ -82,4 +82,16 @@ public class Features {
     public void setInteriorColor(String interiorColor) {
         this.interiorColor = interiorColor;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Body type: ").append(bodyType.toString().toLowerCase())
+                .append(" Engine: ").append(engine.toString().toLowerCase())
+                .append(" Fuel: ").append(fuel.toString().toLowerCase())
+                .append(" Transmission: ").append(transmission.toString().toLowerCase())
+                .append(" Exterior color: ").append(exteriorColor)
+                .append(" Interior color: ").append(interiorColor);
+        return sb.toString();
+    }
 }

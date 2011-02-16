@@ -12,12 +12,9 @@ import java.util.List;
 @ManagedBean(name = "carsCollectionBean")
 @RequestScoped
 public class CarsCollectionBean implements Serializable {
-    private DataModel model;
-
     public DataModel getCars() {
         DataManager dataManager = new DataManager();
         List pagedList = dataManager.getCarList();
-        model = new PagedListDataModel(pagedList, 10, dataManager.getCarList().size());
-        return model;
+        return new PagedListDataModel(pagedList, 10, dataManager.getCarList().size());
     }
 }

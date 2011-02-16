@@ -5,6 +5,20 @@
 <f:view>
     <h:head>
         <title>Demo application</title>
+        <style type="text/css">
+            .tooltip {
+                width: 250px;
+                height: auto;
+            }
+
+            .tooltip-text {
+                width: 250px;
+                height: 30px;
+                border-width: 2px;
+                text-align: center;
+                display: table-cell;
+            }
+        </style>
     </h:head>
 
     <h:body>
@@ -47,7 +61,8 @@
                 </rich:column>
                 <rich:column>
                     <h:outputText value="#{car.price}">
-                        <f:convertNumber type="currency"/>
+                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2" groupingUsed="true"
+                                         currencySymbol="$" maxIntegerDigits="7" type="currency"/>
                     </h:outputText>
                 </rich:column>
                 <rich:column>
@@ -64,13 +79,8 @@
                 </rich:column>
                 <rich:column>
                     <h:graphicImage id="listImage" url="images/list.jpeg" width="10px" height="14px"/>
-                    <rich:tooltip>
-                        <h:outputText value="Body type: #{car.features.bodyType}; "/>
-                        <h:outputText value="Engine: #{car.features.engine}; "/>
-                        <h:outputText value="Fuel: #{car.features.fuel}; "/>
-                        <h:outputText value="Transmission: #{car.features.transmission}; "/>
-                        <h:outputText value="Exterior color: #{car.features.exteriorColor}; "/>
-                        <h:outputText value="Interior color: #{car.features.interiorColor}."/>
+                    <rich:tooltip styleClass="tooltip" layout="block">
+                        <span class="tooltip"><h:outputText styleClass="tooltip-text" value="#{car.features}"/></span>
                     </rich:tooltip>
                 </rich:column>
                 <f:facet name="footer">
