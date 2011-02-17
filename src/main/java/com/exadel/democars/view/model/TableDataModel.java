@@ -4,17 +4,17 @@ import javax.faces.model.DataModel;
 import java.io.Serializable;
 import java.util.List;
 
-public class PagedListDataModel extends DataModel implements Serializable {
+public class TableDataModel extends DataModel implements Serializable {
     private List list;
     private int pagesize;
     private int rowIndex;
     private int totalListSize;
 
-    public PagedListDataModel() {
+    public TableDataModel() {
         super();
     }
 
-    public PagedListDataModel(List list, int pagesize, int totalListSize) {
+    public TableDataModel(List list, int pagesize, int totalListSize) {
         super();
         this.list = list;
         this.pagesize = pagesize;

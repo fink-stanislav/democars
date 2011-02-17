@@ -4,11 +4,10 @@ import com.exadel.democars.model.entities.Seller;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import java.io.Serializable;
 
-@ManagedBean(name = "sellerBean")
+@ManagedBean(name = "modalPanelBean")
 @RequestScoped
-public class SellerBean implements Serializable {
+public class ModalPanelBean {
     private Seller seller;
 
     public Seller getSeller() {
@@ -20,6 +19,6 @@ public class SellerBean implements Serializable {
     }
 
     public String outcome() {
-        return "modalPanel";
+        return "";
     }
 }

@@ -1,0 +1,21 @@
+.table {
+    width: 678px;
+    height: auto;
+}
+
+.tooltip {
+    width: 250px;
+    height: auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.tooltip-text {
+    width: 250px;
+    height: 30px;
+    border-width: 2px;
+    text-align: center;
+    display: table-cell;
+}

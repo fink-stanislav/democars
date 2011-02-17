@@ -19,7 +19,7 @@ public class DataManager {
     public void updateEntity(Object entity) {
     }
 
-    public List getEntityListByNamedQuery(String queryName) {
+    public static List getEntityListByNamedQuery(String queryName) {
         return getEntityManagerProvider().getEntityManager().createNamedQuery(queryName).getResultList();
     }
 }
