@@ -15,6 +15,7 @@ public class TableDataModel extends DataModel implements Serializable {
     public TableDataModel() {
         super();
         list = getEntityListByNamedQuery("findAllCars");
+        pageSize = 10;
     }
 
     public TableDataModel(int currentPage, int pageSize) {

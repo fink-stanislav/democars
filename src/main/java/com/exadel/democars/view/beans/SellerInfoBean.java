@@ -5,9 +5,9 @@ import com.exadel.democars.model.entities.Seller;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
-@ManagedBean(name = "modalPanelBean")
+@ManagedBean(name = "sellerInfoBean")
 @RequestScoped
-public class ModalPanelBean {
+public class SellerInfoBean {
     private Seller seller;
 
     public Seller getSeller() {

@@ -30,3 +30,16 @@
     text-align: center;
     display: table-cell;
 }
+
+.panel-text {
+    font-size: small;
+}
+
+.image {
+    border: 0;
+}
+
+.close-image {
+    width: 14px;
+    height: 14px;
+}
