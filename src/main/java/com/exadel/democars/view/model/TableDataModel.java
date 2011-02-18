@@ -4,21 +4,23 @@ import javax.faces.model.DataModel;
 import java.io.Serializable;
 import java.util.List;
 
+import static com.exadel.democars.model.persistence.DataManager.getEntityListByNamedQuery;
+import static com.exadel.democars.model.persistence.DataManager.getRangedEntityListByNamedQuery;
+
 public class TableDataModel extends DataModel implements Serializable {
     private List list;
-    private int pagesize;
+    private int pageSize;
     private int rowIndex;
-    private int totalListSize;
 
     public TableDataModel() {
         super();
+        list = getEntityListByNamedQuery("findAllCars");
     }
 
-    public TableDataModel(List list, int pagesize, int totalListSize) {
+    public TableDataModel(int currentPage, int pageSize) {
         super();
-        this.list = list;
-        this.pagesize = pagesize;
-        this.totalListSize = totalListSize;
+        this.pageSize = pageSize;
+        list = getRangedEntityListByNamedQuery("findAllCars", currentPage, pageSize);
     }
 
     @Override
@@ -28,7 +30,7 @@ public class TableDataModel extends DataModel implements Serializable {
 
     @Override
     public int getRowCount() {
-        return totalListSize;
+        return list.size();
     }
 
     @Override
@@ -38,7 +40,7 @@ public class TableDataModel extends DataModel implements Serializable {
 
     @Override
     public int getRowIndex() {
-        return rowIndex % pagesize;
+        return rowIndex % pageSize;
     }
 
     @Override

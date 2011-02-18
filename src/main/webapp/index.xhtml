@@ -13,7 +13,8 @@
         <h:form id="form">
             <rich:dataTable id="dataTable" value="#{tableBean.cars}" var="car"
                             rows="10" columnClasses="column-default, column-default,
-                            column-default, column-narrow, column-default, column-narrow, column-default, column-narrow">
+                            column-default, column-narrow, column-default,
+                            column-narrow, column-default, column-narrow">
                 <f:facet name="header">
                     <h:outputText value="Cars Store"/>
                 </f:facet>
@@ -121,7 +122,7 @@
                 </rich:column>
 
                 <f:facet name="footer">
-                    <rich:dataScroller fastStep="3">
+                    <rich:dataScroller fastStep="2">
                         <f:facet name="first">
                             <h:outputText value="First"/>
                         </f:facet>

@@ -90,8 +90,8 @@ public class Features {
                 .append(", Engine: ").append(engine.toString().toLowerCase())
                 .append(", Fuel: ").append(fuel.toString().toLowerCase())
                 .append(", Transmission: ").append(transmission.toString().toLowerCase())
-                .append(", Exterior color: ").append(exteriorColor)
-                .append(" Interior color: ").append(interiorColor);
+                .append(", Exterior color: ").append(exteriorColor.toLowerCase())
+                .append(" Interior color: ").append(interiorColor.toLowerCase());
         return sb.toString();
     }
 }
