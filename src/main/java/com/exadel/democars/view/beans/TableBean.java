@@ -21,7 +21,7 @@ public class TableBean implements Serializable {
     private final String desc = "descending";
     private String direction;
 
-    private Map<String, String> rowValues;
+    private Map<String, String> rowValue;
     private Filter<?> makeFilter;
     private Filter<?> modelFilter;
     private Filter<?> priceFilter;
@@ -33,7 +33,7 @@ public class TableBean implements Serializable {
 
     public TableBean() {
         this.direction = asc;
-        rowValues = new HashMap<String, String>();
+        rowValue = new HashMap<String, String>();
     }
 
     public void changeDirection() {
@@ -48,15 +48,26 @@ public class TableBean implements Serializable {
         this.direction = direction;
     }
 
-    public Map<String, String> getRowValues() {
-        return rowValues;
+    public Map<String, String> getRowValue() {
+        return rowValue;
+    }
+
+    private boolean filterString(String filterValue, String valueToFilter) {
+        return filterValue == null || valueToFilter.toUpperCase().startsWith(filterValue.toUpperCase());
+    }
+
+    private boolean filterNumber(String filterValue, Double valueToFilter) {
+        try {
+            return filterValue == null || Double.parseDouble(filterValue) >= valueToFilter;
+        } catch (NumberFormatException e) {
+            return true;
+        }
     }
 
     public Filter<?> getMakeFilter() {
         return new Filter<Car>() {
             public boolean accept(Car car) {
-                return rowValues.get("make") == null ||
-                        car.getModel().getMake().toUpperCase().startsWith(rowValues.get("make").toUpperCase());
+                return filterString(rowValue.get("make"), car.getModel().getMake());
             }
         };
     }
@@ -64,8 +75,7 @@ public class TableBean implements Serializable {
     public Filter<?> getModelFilter() {
         return new Filter<Car>() {
             public boolean accept(Car car) {
-                return rowValues.get("model") == null ||
-                        car.getModel().getModel().toUpperCase().startsWith(rowValues.get("model").toUpperCase());
+                return filterString(rowValue.get("model"), car.getModel().getModel());
             }
         };
     }
@@ -73,7 +83,7 @@ public class TableBean implements Serializable {
     public Filter<?> getPriceFilter() {
         return new Filter<Car>() {
             public boolean accept(Car car) {
-                return true;
+                return filterNumber(rowValue.get("price"), car.getPrice());
             }
         };
     }

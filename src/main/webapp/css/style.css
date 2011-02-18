@@ -1,5 +1,4 @@
 .table {
-    width: 678px;
     height: auto;
 }
 
@@ -8,8 +7,20 @@
     height: auto;
 }
 
+.column-default {
+    width: 90px;
+}
+
+.column-narrow {
+    width: 70px;
+}
+
 .text-center {
     text-align: center;
+}
+
+.text-bold {
+    font-weight: bold;
 }
 
 .tooltip-text {
