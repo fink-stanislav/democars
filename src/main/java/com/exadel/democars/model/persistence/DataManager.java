@@ -1,7 +1,5 @@
 package com.exadel.democars.model.persistence;
 
-import com.exadel.democars.model.entities.Car;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;

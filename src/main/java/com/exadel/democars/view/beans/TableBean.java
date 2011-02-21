@@ -16,16 +16,10 @@ import java.util.Set;
 @ManagedBean(name = "tableBean")
 @SessionScoped
 public class TableBean implements Serializable {
-    private Map<String, SortOrder> sortOrder;
-    private String makeValue;
-    private String modelValue;
-    private String priceValue;
-
-    private Filter<?> makeFilter;
-    private Filter<?> modelFilter;
-    private Filter<?> priceFilter;
+    private TableDataModel tableModel;
 
     public TableBean() {
+        tableModel = new TableDataModel();
         sortOrder = new HashMap<String, SortOrder>();
         sortOrder.put("make", SortOrder.unsorted);
         sortOrder.put("model", SortOrder.unsorted);
@@ -34,6 +28,20 @@ public class TableBean implements Serializable {
         sortOrder.put("mileage", SortOrder.unsorted);
         sortOrder.put("seller", SortOrder.unsorted);
     }
+
+    public DataModel getCars() {
+        return tableModel;
+    }
+
+
+    private Map<String, SortOrder> sortOrder;
+    private String makeValue;
+    private String modelValue;
+    private String priceValue;
+
+    private Filter<?> makeFilter;
+    private Filter<?> modelFilter;
+    private Filter<?> priceFilter;
 
     public void setMakeValue(String makeValue) {
         this.makeValue = makeValue;
@@ -61,10 +69,6 @@ public class TableBean implements Serializable {
 
     public Map<String, SortOrder> getSortOrder() {
         return sortOrder;
-    }
-
-    public DataModel getCars() {
-        return new TableDataModel();
     }
 
     private void resetSortOrder(String key) {
