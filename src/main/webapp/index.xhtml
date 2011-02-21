@@ -12,7 +12,7 @@
 <h:body>
 <h:form id="tableForm">
 <rich:dataTable id="dataTable" value="#{tableBean.cars}" var="car"
-                rows="10" columnClasses="column-default, column-default,
+                rows="#{tableBean.pageSize}" columnClasses="column-default, column-default,
                             column-default, column-narrow, column-default,
                             column-narrow, column-default, column-narrow">
     <f:facet name="header">
@@ -137,7 +137,7 @@
     </rich:column>
 
     <f:facet name="footer">
-        <rich:dataScroller fastStep="2">
+        <rich:dataScroller fastStep="2" page="#{tableBean.currentPage}">
             <f:facet name="first">
                 <h:outputText value="First"/>
             </f:facet>

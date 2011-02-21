@@ -43,7 +43,7 @@ public class DataManager {
         return entityManager.createNamedQuery(queryName).getResultList();
     }
 
-    public List getRangedEntityListByNamedQuery(String queryName, int rangeSize, int selectionNumber) {
+    public <T> List<T> getRangedEntityListByNamedQuery(String queryName, int rangeSize, int selectionNumber) {
         Query rangedQuery = entityManager.createNamedQuery(queryName);
         rangedQuery.setFirstResult(selectionNumber * rangeSize - rangeSize);
         rangedQuery.setMaxResults(rangeSize);

@@ -6,38 +6,42 @@ import javax.faces.model.DataModel;
 import java.io.Serializable;
 import java.util.List;
 
-public class TableDataModel extends DataModel implements Serializable {
-    private List list;
-    private int pageSize;
-    private int rowIndex;
+public class TableDataModel<T> extends DataModel<T> implements Serializable {
     private DataManager dataManager;
+    private Integer rowIndex = 0;
+    private List<T> rows;
+    private Integer pageSize = 10;
+    private Integer pageNumber = 1;
 
     public TableDataModel() {
-        super();
         dataManager = new DataManager();
-        list = dataManager.getEntityListByNamedQuery("findAllCars");
-        pageSize = 10;
+        rows = dataManager.getRangedEntityListByNamedQuery("findAllCars", pageSize, pageNumber);
     }
 
-    public TableDataModel(int currentPage, int pageSize) {
-        super();
+    public TableDataModel(Integer pageSize, Integer pageNumber) {
         this.pageSize = pageSize;
-        list = dataManager.getRangedEntityListByNamedQuery("findAllCars", currentPage, pageSize);
+        this.pageNumber = pageNumber;
+        dataManager = new DataManager();
+        rows = dataManager.getRangedEntityListByNamedQuery("findAllCars", pageSize, pageNumber);
+    }
+
+    public void updateRows() {
+        rows = dataManager.getRangedEntityListByNamedQuery("findAllCars", pageSize, pageNumber);
     }
 
     @Override
     public boolean isRowAvailable() {
-        return list != null;
+        return rows.get(getRowIndex()) != null;
     }
 
     @Override
     public int getRowCount() {
-        return list.size();
+        return dataManager.performCountQuery("countCars");
     }
 
     @Override
-    public Object getRowData() {
-        return list.get(rowIndex);
+    public T getRowData() {
+        return rows.get(getRowIndex());
     }
 
     @Override
@@ -52,11 +56,27 @@ public class TableDataModel extends DataModel implements Serializable {
 
     @Override
     public Object getWrappedData() {
-        return list;
+        return rows;
     }
 
     @Override
-    public void setWrappedData(Object o) {
-        this.list = (List) o;
+    public void setWrappedData(Object rows) {
+        this.rows = (List<T>) rows;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public Integer getPageNumber() {
+        return pageNumber;
+    }
+
+    public void setPageNumber(Integer pageNumber) {
+        this.pageNumber = pageNumber;
     }
 }

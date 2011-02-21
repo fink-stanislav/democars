@@ -16,10 +16,12 @@ import java.util.Set;
 @ManagedBean(name = "tableBean")
 @SessionScoped
 public class TableBean implements Serializable {
-    private TableDataModel tableModel;
+    private TableDataModel<Car> tableModel;
+    private Integer currentPage = 1;
+    private Integer pageSize = 10;
 
     public TableBean() {
-        tableModel = new TableDataModel();
+        tableModel = new TableDataModel<Car>(pageSize, currentPage);
         sortOrder = new HashMap<String, SortOrder>();
         sortOrder.put("make", SortOrder.unsorted);
         sortOrder.put("model", SortOrder.unsorted);
@@ -30,9 +32,26 @@ public class TableBean implements Serializable {
     }
 
     public DataModel getCars() {
+        tableModel.setPageNumber(currentPage);
+        tableModel.updateRows();
         return tableModel;
     }
 
+    public Integer getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(Integer currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
 
     private Map<String, SortOrder> sortOrder;
     private String makeValue;
