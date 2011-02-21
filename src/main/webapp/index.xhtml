@@ -22,7 +22,7 @@
     <rich:column id="make" sortBy="#{car.model.make}" sortOrder="#{tableBean.tableSort.sortOrder['make']}"
                  filterValue="#{tableBean.tableFilter.makeValue}" filter="#{tableBean.tableFilter.makeFilter}">
         <f:facet name="header">
-            <h:commandLink action="#{tableBean.tableSort.changeSortOrder('make')}">
+            <h:commandLink action="#{tableBean.sortRows}">
                 <h:outputText value="Make"/>
                 <f:ajax render="dataTable"/>
             </h:commandLink>

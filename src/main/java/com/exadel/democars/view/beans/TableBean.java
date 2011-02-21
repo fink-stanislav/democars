@@ -31,6 +31,10 @@ public class TableBean implements Serializable {
         return tableModel;
     }
 
+    public void sortRows() {
+        tableModel.sortRows("model.make");
+    }
+
     public Integer getCurrentPage() {
         return currentPage;
     }

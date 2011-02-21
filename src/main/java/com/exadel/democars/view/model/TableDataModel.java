@@ -15,18 +15,22 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
 
     public TableDataModel() {
         dataManager = new DataManager();
-        rows = dataManager.getRangedEntityListByNamedQuery("findAllCars", pageSize, pageNumber);
+        rows = dataManager.getRangedList("findAllCars", pageSize, pageNumber);
     }
 
     public TableDataModel(Integer pageSize, Integer pageNumber) {
         this.pageSize = pageSize;
         this.pageNumber = pageNumber;
         dataManager = new DataManager();
-        rows = dataManager.getRangedEntityListByNamedQuery("findAllCars", pageSize, pageNumber);
+        rows = dataManager.getRangedList("findAllCars", pageSize, pageNumber);
     }
 
     public void updateRows() {
-        rows = dataManager.getRangedEntityListByNamedQuery("findAllCars", pageSize, pageNumber);
+        rows = dataManager.getRangedList("findAllCars", pageSize, pageNumber);
+    }
+
+    public void sortRows(String sortParam) {
+        rows = dataManager.getRangedSortedList("allCarsSorted", pageSize, pageNumber, sortParam);
     }
 
     @Override
@@ -36,7 +40,7 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
 
     @Override
     public int getRowCount() {
-        return dataManager.performCountQuery("countCars");
+        return dataManager.getSingle("countCars");
     }
 
     @Override

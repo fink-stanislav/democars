@@ -39,18 +39,26 @@ public class DataManager {
         entityTransaction.commit();
     }
 
-    public List getEntityListByNamedQuery(String queryName) {
+    public List getList(String queryName) {
         return entityManager.createNamedQuery(queryName).getResultList();
     }
 
-    public <T> List<T> getRangedEntityListByNamedQuery(String queryName, int rangeSize, int selectionNumber) {
+    public <T> List<T> getRangedList(String queryName, int rangeSize, int selectionNumber) {
         Query rangedQuery = entityManager.createNamedQuery(queryName);
         rangedQuery.setFirstResult(selectionNumber * rangeSize - rangeSize);
         rangedQuery.setMaxResults(rangeSize);
         return rangedQuery.getResultList();
     }
 
-    public Integer performCountQuery(String queryName) {
+    public <T> List<T> getRangedSortedList(String queryName, int rangeSize, int selectionNumber, String sortParam) {
+        Query rangedQuery = entityManager.createNamedQuery(queryName);
+        rangedQuery.setFirstResult(selectionNumber * rangeSize - rangeSize);
+        rangedQuery.setMaxResults(rangeSize);
+        //rangedQuery.setParameter("sortParam", sortParam);
+        return rangedQuery.getResultList();
+    }
+
+    public Integer getSingle(String queryName) {
         Query countQuery = entityManager.createNamedQuery(queryName);
         Long result = (Long) countQuery.getSingleResult();
         return result.intValue();

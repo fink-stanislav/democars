@@ -7,7 +7,8 @@ import javax.persistence.*;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "findAllCars", query = "select c from Car c"),
-        @NamedQuery(name = "countCars", query = "select count(c) from Car c")
+        @NamedQuery(name = "countCars", query = "select count(c) from Car c"),
+        @NamedQuery(name = "allCarsSorted", query = "select count(c) from Car c order by model.make asc")
 })
 public class Car {
     @Id
