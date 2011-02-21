@@ -10,7 +10,7 @@
 </h:head>
 
 <h:body>
-<h:form id="form">
+<h:form id="tableForm">
 <rich:dataTable id="dataTable" value="#{tableBean.cars}" var="car"
                 rows="10" columnClasses="column-default, column-default,
                             column-default, column-narrow, column-default,
@@ -19,46 +19,46 @@
         <h:outputText value="Cars Store"/>
     </f:facet>
 
-    <rich:column sortBy="#{car.model.make}" sortOrder="#{tableBean.sortOrder['make']}"
+    <rich:column id="make" sortBy="#{car.model.make}" sortOrder="#{tableBean.sortOrder['make']}"
                  filterValue="#{tableBean.makeValue}" filter="#{tableBean.makeFilter}">
         <f:facet name="header">
             <h:commandLink action="#{tableBean.changeSortOrder('make')}">
                 <h:outputText value="Make"/>
-                <f:ajax render=":form:dataTable"/>
+                <f:ajax render="dataTable"/>
             </h:commandLink>
         </f:facet>
         <h:outputText value="#{car.model.make}"/>
         <f:facet name="footer">
             <h:outputText value="Filter by make:"/>
             <h:inputText value="#{tableBean.makeValue}">
-                <f:ajax event="blur" render=":form:dataTable"/>
+                <f:ajax event="blur" render="dataTable"/>
             </h:inputText>
         </f:facet>
     </rich:column>
 
-    <rich:column sortBy="#{car.model.model}" sortOrder="#{tableBean.sortOrder['model']}"
+    <rich:column id="model" sortBy="#{car.model.model}" sortOrder="#{tableBean.sortOrder['model']}"
                  filterValue="#{tableBean.modelValue}" filter="#{tableBean.modelFilter}">
         <f:facet name="header">
             <h:commandLink action="#{tableBean.changeSortOrder('model')}">
                 <h:outputText value="Model"/>
-                <f:ajax render=":form:dataTable"/>
+                <f:ajax render="dataTable"/>
             </h:commandLink>
         </f:facet>
         <h:outputText value="#{car.model.model}"/>
         <f:facet name="footer">
             <h:outputText value="Filter by model:"/>
             <h:inputText value="#{tableBean.modelValue}">
-                <f:ajax event="blur" render=":form:dataTable"/>
+                <f:ajax event="blur" render="dataTable"/>
             </h:inputText>
         </f:facet>
     </rich:column>
 
-    <rich:column sortBy="#{car.price}" sortOrder="#{tableBean.sortOrder['price']}"
+    <rich:column id="price" sortBy="#{car.price}" sortOrder="#{tableBean.sortOrder['price']}"
                  filterValue="#{tableBean.priceValue}" filter="#{tableBean.priceFilter}">
         <f:facet name="header">
             <h:commandLink action="#{tableBean.changeSortOrder('price')}">
                 <h:outputText value="Price"/>
-                <f:ajax render=":form:dataTable"/>
+                <f:ajax render="dataTable"/>
             </h:commandLink>
         </f:facet>
         <h:outputText value="#{car.price}">
@@ -68,39 +68,39 @@
         <f:facet name="footer">
             <h:outputText value="Filter by price:"/>
             <h:inputText value="#{tableBean.priceValue}">
-                <f:ajax event="blur" render=":form:dataTable"/>
+                <f:ajax event="blur" render="dataTable"/>
             </h:inputText>
         </f:facet>
     </rich:column>
 
-    <rich:column sortBy="#{car.mileage}" sortOrder="#{tableBean.sortOrder['mileage']}">
+    <rich:column id="mileage" sortBy="#{car.mileage}" sortOrder="#{tableBean.sortOrder['mileage']}">
         <f:facet name="header">
             <h:commandLink action="#{tableBean.changeSortOrder('mileage')}">
                 <h:outputText value="Mileage"/>
-                <f:ajax render=":form:dataTable"/>
+                <f:ajax render="dataTable"/>
             </h:commandLink>
         </f:facet>
         <h:outputText value="#{car.mileage}"/>
     </rich:column>
 
-    <rich:column>
+    <rich:column id="vin">
         <f:facet name="header">
             <h:outputText value="VIN"/>
         </f:facet>
         <h:outputText value="#{car.vin}"/>
     </rich:column>
 
-    <rich:column sortBy="#{car.condition}" sortOrder="#{tableBean.sortOrder['condition']}">
+    <rich:column id="condition" sortBy="#{car.condition}" sortOrder="#{tableBean.sortOrder['condition']}">
         <f:facet name="header">
             <h:commandLink action="#{tableBean.changeSortOrder('condition')}">
                 <h:outputText value="Condition"/>
-                <f:ajax render=":form:dataTable"/>
+                <f:ajax render="dataTable"/>
             </h:commandLink>
         </f:facet>
         <h:outputText value="#{car.condition}"/>
     </rich:column>
 
-    <rich:column width="200">
+    <rich:column id="seller" width="200">
         <f:facet name="header">
             <h:outputText value="Seller"/>
         </f:facet>
@@ -109,7 +109,7 @@
         </a4j:commandLink>
     </rich:column>
 
-    <rich:column id="featuresColumn">
+    <rich:column id="features">
         <f:facet name="header">
             <h:outputText value="Features"/>
         </f:facet>
@@ -122,7 +122,7 @@
         </rich:tooltip>
     </rich:column>
 
-    <rich:column>
+    <rich:column id="actions">
         <f:facet name="header">
             <h:outputText value="Actions"/>
         </f:facet>
@@ -185,8 +185,9 @@
                 <h:inputText value="#{carInfoBean.car.model.model}"/>
                 <h:outputText value="Price"/>
                 <h:inputText value="#{carInfoBean.car.price}"/>
-                <a4j:commandButton value="Apply changes"
-                                   oncomplete="#{rich:component('carEditPanel')}.hide()"/>
+                <a4j:commandButton value="Apply changes" action="#{carInfoBean.updateCar}" render="dataTable"
+                                   oncomplete="#{rich:component('carEditPanel')}.hide()">
+                </a4j:commandButton>
             </h:panelGrid>
         </a4j:outputPanel>
     </h:form>
@@ -207,8 +208,8 @@
                 <h:outputText value="#{carInfoBean.car.model.model}" styleClass="text-bold"/>
                 <h:outputText value="VIN"/>
                 <h:outputText value="#{carInfoBean.car.vin}"/>
-                <a4j:commandButton value="Delete"
-                                   oncomplete="#{rich:component('carDeletePanel')}.hide()"/>
+                <a4j:commandButton value="Delete" action="#{carInfoBean.deleteCar}"
+                                   oncomplete="#{rich:component('carDeletePanel')}.hide()" render="dataTable"/>
                 <a4j:commandButton value="Cancel"
                                    oncomplete="#{rich:component('carDeletePanel')}.hide()"/>
             </h:panelGrid>

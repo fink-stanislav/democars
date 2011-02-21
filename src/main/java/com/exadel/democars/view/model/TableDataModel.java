@@ -1,27 +1,28 @@
 package com.exadel.democars.view.model;
 
+import com.exadel.democars.model.persistence.DataManager;
+
 import javax.faces.model.DataModel;
 import java.io.Serializable;
 import java.util.List;
-
-import static com.exadel.democars.model.persistence.DataManager.getEntityListByNamedQuery;
-import static com.exadel.democars.model.persistence.DataManager.getRangedEntityListByNamedQuery;
 
 public class TableDataModel extends DataModel implements Serializable {
     private List list;
     private int pageSize;
     private int rowIndex;
+    private DataManager dataManager;
 
     public TableDataModel() {
         super();
-        list = getEntityListByNamedQuery("findAllCars");
+        dataManager = new DataManager();
+        list = dataManager.getEntityListByNamedQuery("findAllCars");
         pageSize = 10;
     }
 
     public TableDataModel(int currentPage, int pageSize) {
         super();
         this.pageSize = pageSize;
-        list = getRangedEntityListByNamedQuery("findAllCars", currentPage, pageSize);
+        list = dataManager.getRangedEntityListByNamedQuery("findAllCars", currentPage, pageSize);
     }
 
     @Override

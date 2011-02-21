@@ -1,34 +1,60 @@
 package com.exadel.democars.model.persistence;
 
+import com.exadel.democars.model.entities.Car;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import java.util.List;
 
 import static com.exadel.democars.model.persistence.EntityManagerProvider.getEntityManagerProvider;
 
 public class DataManager {
+    private EntityManager entityManager;
+
+    public DataManager() {
+        entityManager = getEntityManagerProvider().getEntityManager();
+    }
+
     public void persistEntity(Object entity) {
     }
 
+    public void detach(Object entity) {
+        if (entityManager.contains(entity)) {
+            entityManager.detach(entity);
+        }
+        entityManager.detach(entity);
+    }
+
     public void removeEntity(Object entity) {
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
+        entityManager.remove(entity);
+        entityTransaction.commit();
     }
 
-    public void updateEntity(Object entity) {
+    public <T> void updateEntity(T entity, Object primaryKey) {
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
+        T t = (T) entityManager.find(entity.getClass(), primaryKey);
+        t = entity;
+        entityTransaction.commit();
     }
 
-    public static List getEntityListByNamedQuery(String queryName) {
-        return getEntityManagerProvider().getEntityManager().createNamedQuery(queryName).getResultList();
+    public List getEntityListByNamedQuery(String queryName) {
+        return entityManager.createNamedQuery(queryName).getResultList();
     }
 
-    public static List getRangedEntityListByNamedQuery(String queryName, int rangeSize, int selectionNumber) {
-        Query rangedQuery = getEntityManagerProvider().getEntityManager().createNamedQuery(queryName);
+    public List getRangedEntityListByNamedQuery(String queryName, int rangeSize, int selectionNumber) {
+        Query rangedQuery = entityManager.createNamedQuery(queryName);
         rangedQuery.setFirstResult(selectionNumber * rangeSize - rangeSize);
         rangedQuery.setMaxResults(rangeSize);
         return rangedQuery.getResultList();
     }
 
-    public static Integer performCountQuery(String queryName) {
-        Query countQuery = getEntityManagerProvider().getEntityManager().createNamedQuery(queryName);
-        Long result = (Long) countQuery.getResultList().get(0);
+    public Integer performCountQuery(String queryName) {
+        Query countQuery = entityManager.createNamedQuery(queryName);
+        Long result = (Long) countQuery.getSingleResult();
         return result.intValue();
     }
 }
