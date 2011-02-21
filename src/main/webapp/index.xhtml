@@ -10,161 +10,212 @@
 </h:head>
 
 <h:body>
-    <h:form id="form">
-        <rich:dataTable id="dataTable" value="#{tableBean.cars}" var="car"
-                        rows="10" columnClasses="column-default, column-default,
+<h:form id="form">
+<rich:dataTable id="dataTable" value="#{tableBean.cars}" var="car"
+                rows="10" columnClasses="column-default, column-default,
                             column-default, column-narrow, column-default,
                             column-narrow, column-default, column-narrow">
-            <f:facet name="header">
-                <h:outputText value="Cars Store"/>
+    <f:facet name="header">
+        <h:outputText value="Cars Store"/>
+    </f:facet>
+
+    <rich:column sortBy="#{car.model.make}" sortOrder="#{tableBean.sortOrder['make']}"
+                 filterValue="#{tableBean.makeValue}" filter="#{tableBean.makeFilter}">
+        <f:facet name="header">
+            <h:commandLink action="#{tableBean.changeSortOrder('make')}">
+                <h:outputText value="Make"/>
+                <f:ajax render=":form:dataTable"/>
+            </h:commandLink>
+        </f:facet>
+        <h:outputText value="#{car.model.make}"/>
+        <f:facet name="footer">
+            <h:outputText value="Filter by make:"/>
+            <h:inputText value="#{tableBean.makeValue}">
+                <f:ajax event="blur" render=":form:dataTable"/>
+            </h:inputText>
+        </f:facet>
+    </rich:column>
+
+    <rich:column sortBy="#{car.model.model}" sortOrder="#{tableBean.sortOrder['model']}"
+                 filterValue="#{tableBean.modelValue}" filter="#{tableBean.modelFilter}">
+        <f:facet name="header">
+            <h:commandLink action="#{tableBean.changeSortOrder('model')}">
+                <h:outputText value="Model"/>
+                <f:ajax render=":form:dataTable"/>
+            </h:commandLink>
+        </f:facet>
+        <h:outputText value="#{car.model.model}"/>
+        <f:facet name="footer">
+            <h:outputText value="Filter by model:"/>
+            <h:inputText value="#{tableBean.modelValue}">
+                <f:ajax event="blur" render=":form:dataTable"/>
+            </h:inputText>
+        </f:facet>
+    </rich:column>
+
+    <rich:column sortBy="#{car.price}" sortOrder="#{tableBean.sortOrder['price']}"
+                 filterValue="#{tableBean.priceValue}" filter="#{tableBean.priceFilter}">
+        <f:facet name="header">
+            <h:commandLink action="#{tableBean.changeSortOrder('price')}">
+                <h:outputText value="Price"/>
+                <f:ajax render=":form:dataTable"/>
+            </h:commandLink>
+        </f:facet>
+        <h:outputText value="#{car.price}">
+            <f:convertNumber minFractionDigits="2" maxFractionDigits="2" groupingUsed="false"
+                             currencySymbol="$" maxIntegerDigits="7" type="currency" locale="us"/>
+        </h:outputText>
+        <f:facet name="footer">
+            <h:outputText value="Filter by price:"/>
+            <h:inputText value="#{tableBean.priceValue}">
+                <f:ajax event="blur" render=":form:dataTable"/>
+            </h:inputText>
+        </f:facet>
+    </rich:column>
+
+    <rich:column sortBy="#{car.mileage}" sortOrder="#{tableBean.sortOrder['mileage']}">
+        <f:facet name="header">
+            <h:commandLink action="#{tableBean.changeSortOrder('mileage')}">
+                <h:outputText value="Mileage"/>
+                <f:ajax render=":form:dataTable"/>
+            </h:commandLink>
+        </f:facet>
+        <h:outputText value="#{car.mileage}"/>
+    </rich:column>
+
+    <rich:column>
+        <f:facet name="header">
+            <h:outputText value="VIN"/>
+        </f:facet>
+        <h:outputText value="#{car.vin}"/>
+    </rich:column>
+
+    <rich:column sortBy="#{car.condition}" sortOrder="#{tableBean.sortOrder['condition']}">
+        <f:facet name="header">
+            <h:commandLink action="#{tableBean.changeSortOrder('condition')}">
+                <h:outputText value="Condition"/>
+                <f:ajax render=":form:dataTable"/>
+            </h:commandLink>
+        </f:facet>
+        <h:outputText value="#{car.condition}"/>
+    </rich:column>
+
+    <rich:column width="200">
+        <f:facet name="header">
+            <h:outputText value="Seller"/>
+        </f:facet>
+        <a4j:commandLink value="#{car.seller}" oncomplete="#{rich:component('sellerInfo')}.show()">
+            <f:setPropertyActionListener target="#{sellerInfoBean.seller}" value="#{car.seller}"/>
+        </a4j:commandLink>
+    </rich:column>
+
+    <rich:column id="featuresColumn">
+        <f:facet name="header">
+            <h:outputText value="Features"/>
+        </f:facet>
+
+        <div class="text-center">
+            <h:graphicImage id="listImage" url="images/list.jpeg" width="18px" height="24px"/>
+        </div>
+        <rich:tooltip mode="client" styleClass="tooltip" layout="block">
+            <h:outputText value="#{car.features}" styleClass="tooltip-text"/>
+        </rich:tooltip>
+    </rich:column>
+
+    <rich:column>
+        <f:facet name="header">
+            <h:outputText value="Actions"/>
+        </f:facet>
+        <a4j:commandLink oncomplete="#{rich:component('carEditPanel')}.show()">
+            <h:graphicImage url="images/edit.gif" styleClass="image"/>
+            <f:setPropertyActionListener target="#{carInfoBean.car}" value="#{car}"/>
+        </a4j:commandLink>
+        <a4j:commandLink oncomplete="#{rich:component('carDeletePanel')}.show()">
+            <h:graphicImage url="images/delete.gif" styleClass="image"/>
+            <f:setPropertyActionListener target="#{carInfoBean.car}" value="#{car}"/>
+        </a4j:commandLink>
+    </rich:column>
+
+    <f:facet name="footer">
+        <rich:dataScroller fastStep="2">
+            <f:facet name="first">
+                <h:outputText value="First"/>
             </f:facet>
-
-            <rich:column sortBy="#{car.model.make}" sortOrder="#{tableBean.sortOrder['make']}"
-                         filterValue="#{tableBean.makeValue}" filter="#{tableBean.makeFilter}">
-                <f:facet name="header">
-                    <h:commandLink action="#{tableBean.changeSortOrder('make')}">
-                        <h:outputText value="Make"/>
-                        <f:ajax render=":form:dataTable"/>
-                    </h:commandLink>
-                </f:facet>
-                <h:outputText value="#{car.model.make}"/>
-                <f:facet name="footer">
-                    <h:outputText value="Filter by make:"/>
-                    <h:inputText value="#{tableBean.makeValue}">
-                        <f:ajax event="blur" render=":form:dataTable"/>
-                    </h:inputText>
-                </f:facet>
-            </rich:column>
-
-            <rich:column sortBy="#{car.model.model}" sortOrder="#{tableBean.sortOrder['model']}"
-                         filterValue="#{tableBean.modelValue}" filter="#{tableBean.modelFilter}">
-                <f:facet name="header">
-                    <h:commandLink action="#{tableBean.changeSortOrder('model')}">
-                        <h:outputText value="Model"/>
-                        <f:ajax render=":form:dataTable"/>
-                    </h:commandLink>
-                </f:facet>
-                <h:outputText value="#{car.model.model}"/>
-                <f:facet name="footer">
-                    <h:outputText value="Filter by model:"/>
-                    <h:inputText value="#{tableBean.modelValue}">
-                        <f:ajax event="blur" render=":form:dataTable"/>
-                    </h:inputText>
-                </f:facet>
-            </rich:column>
-
-            <rich:column sortBy="#{car.price}" sortOrder="#{tableBean.sortOrder['price']}"
-                         filterValue="#{tableBean.priceValue}" filter="#{tableBean.priceFilter}">
-                <f:facet name="header">
-                    <h:commandLink action="#{tableBean.changeSortOrder('price')}">
-                        <h:outputText value="Price"/>
-                        <f:ajax render=":form:dataTable"/>
-                    </h:commandLink>
-                </f:facet>
-                <h:outputText value="#{car.price}">
-                    <f:convertNumber minFractionDigits="2" maxFractionDigits="2" groupingUsed="false"
-                                     currencySymbol="$" maxIntegerDigits="7" type="currency" locale="us"/>
-                </h:outputText>
-                <f:facet name="footer">
-                    <h:outputText value="Filter by price:"/>
-                    <h:inputText value="#{tableBean.priceValue}">
-                        <f:ajax event="blur" render=":form:dataTable"/>
-                    </h:inputText>
-                </f:facet>
-            </rich:column>
-
-            <rich:column sortBy="#{car.mileage}" sortOrder="#{tableBean.sortOrder['mileage']}">
-                <f:facet name="header">
-                    <h:commandLink action="#{tableBean.changeSortOrder('mileage')}">
-                        <h:outputText value="Mileage"/>
-                        <f:ajax render=":form:dataTable"/>
-                    </h:commandLink>
-                </f:facet>
-                <h:outputText value="#{car.mileage}"/>
-            </rich:column>
-
-            <rich:column>
-                <f:facet name="header">
-                    <h:outputText value="VIN"/>
-                </f:facet>
-                <h:outputText value="#{car.vin}"/>
-            </rich:column>
-
-            <rich:column sortBy="#{car.condition}" sortOrder="#{tableBean.sortOrder['condition']}">
-                <f:facet name="header">
-                    <h:commandLink action="#{tableBean.changeSortOrder('condition')}">
-                        <h:outputText value="Condition"/>
-                        <f:ajax render=":form:dataTable"/>
-                    </h:commandLink>
-                </f:facet>
-                <h:outputText value="#{car.condition}"/>
-            </rich:column>
-
-            <rich:column width="200">
-                <f:facet name="header">
-                    <h:outputText value="Seller"/>
-                </f:facet>
-                <a4j:commandLink value="#{car.seller}" oncomplete="#{rich:component('sellerInfo')}.show()">
-                    <f:setPropertyActionListener target="#{sellerInfoBean.seller}" value="#{car.seller}"/>
-                </a4j:commandLink>
-            </rich:column>
-
-            <rich:column id="featuresColumn">
-                <f:facet name="header">
-                    <h:outputText value="Features"/>
-                </f:facet>
-
-                <div class="text-center">
-                    <h:graphicImage id="listImage" url="images/list.jpeg" width="18px" height="24px"/>
-                </div>
-                <rich:tooltip mode="client" styleClass="tooltip" layout="block">
-                    <h:outputText value="#{car.features}" styleClass="tooltip-text"/>
-                </rich:tooltip>
-            </rich:column>
-
-            <rich:column>
-                <f:facet name="header">
-                    <h:outputText value="Actions"/>
-                </f:facet>
-                <a4j:commandLink oncomplete="#{rich:component('carEditPanel')}.show()">
-                    <h:graphicImage url="images/edit.gif" styleClass="image"/>
-                    <f:setPropertyActionListener target="#{carInfoBean.car}" value="#{car}"/>
-                </a4j:commandLink>
-                <a4j:commandLink oncomplete="#{rich:component('carDeletePanel')}.show()">
-                    <h:graphicImage url="images/delete.gif" styleClass="image"/>
-                    <f:setPropertyActionListener target="#{carInfoBean.car}" value="#{car}"/>
-                </a4j:commandLink>
-            </rich:column>
-
-            <f:facet name="footer">
-                <rich:dataScroller fastStep="2">
-                    <f:facet name="first">
-                        <h:outputText value="First"/>
-                    </f:facet>
-                    <f:facet name="last">
-                        <h:outputText value="Last"/>
-                    </f:facet>
-                </rich:dataScroller>
+            <f:facet name="last">
+                <h:outputText value="Last"/>
             </f:facet>
-        </rich:dataTable>
+        </rich:dataScroller>
+    </f:facet>
+</rich:dataTable>
 
-        <a4j:region>
-            <rich:popupPanel modal="true" id="sellerInfo" width="350" height="100">
-                <f:facet name="header">
-                    <h:outputText value="Seller Information"/>
-                </f:facet>
-                <f:facet name="controls">
-                    <h:graphicImage url="images/close.jpeg" styleClass="close-image"
-                                    onclick="#{rich:component('sellerInfo')}.hide()"/>
-                </f:facet>
-                <a4j:outputPanel ajaxRendered="true">
-                    <h:outputText styleClass="text-bold" value="#{sellerInfoBean.seller}"/><br/>
-                    <h:outputText value="#{sellerInfoBean.seller.address.city}, "/>
-                    <h:outputText value="#{sellerInfoBean.seller.address.street}"/>
-                </a4j:outputPanel>
-            </rich:popupPanel>
-        </a4j:region>
+<rich:popupPanel modal="true" id="sellerInfo" width="350" height="100">
+    <f:facet name="header">
+        <h:outputText value="Seller Information"/>
+    </f:facet>
+    <f:facet name="controls">
+        <h:graphicImage url="images/close.jpeg" styleClass="close-image"
+                        onclick="#{rich:component('sellerInfo')}.hide()"/>
+    </f:facet>
+    <h:form>
+        <a4j:outputPanel ajaxRendered="true">
+            <h:outputText styleClass="text-bold" value="#{sellerInfoBean.seller}"/><br/>
+            <h:outputText value="#{sellerInfoBean.seller.address.city}, "/>
+            <h:outputText value="#{sellerInfoBean.seller.address.street}"/>
+        </a4j:outputPanel>
     </h:form>
+</rich:popupPanel>
+
+<rich:popupPanel modal="true" id="carEditPanel" width="350" height="180">
+    <f:facet name="header">
+        <h:outputText value="Edit Car Information"/>
+    </f:facet>
+    <f:facet name="controls">
+        <h:graphicImage url="images/close.jpeg" styleClass="close-image"
+                        onclick="#{rich:component('carEditPanel')}.hide()"/>
+    </f:facet>
+    <h:form>
+        <a4j:outputPanel ajaxRendered="true">
+            <h:panelGrid columns="2" styleClass="panel-text">
+                <f:facet name="header">
+                    <h:outputText value="Data to change"/>
+                </f:facet>
+                <h:outputText value="Make"/>
+                <h:inputText value="#{carInfoBean.car.model.make}"/>
+                <h:outputText value="Model"/>
+                <h:inputText value="#{carInfoBean.car.model.model}"/>
+                <h:outputText value="Price"/>
+                <h:inputText value="#{carInfoBean.car.price}"/>
+                <a4j:commandButton value="Apply changes"
+                                   oncomplete="#{rich:component('carEditPanel')}.hide()"/>
+            </h:panelGrid>
+        </a4j:outputPanel>
+    </h:form>
+</rich:popupPanel>
+
+<rich:popupPanel modal="true" id="carDeletePanel" width="350" height="180">
+    <f:facet name="header">
+        <h:outputText value="Delete Car"/>
+    </f:facet>
+    <f:facet name="controls">
+        <h:graphicImage url="images/close.jpeg" styleClass="close-image"
+                        onclick="#{rich:component('carDeletePanel')}.hide()"/>
+    </f:facet>
+    <h:form>
+        <a4j:outputPanel ajaxRendered="true">
+            <h:panelGrid columns="2" styleClass="panel-text">
+                <h:outputText value="#{carInfoBean.car.model.make}" styleClass="text-bold"/>
+                <h:outputText value="#{carInfoBean.car.model.model}" styleClass="text-bold"/>
+                <h:outputText value="VIN"/>
+                <h:outputText value="#{carInfoBean.car.vin}"/>
+                <a4j:commandButton value="Delete"
+                                   oncomplete="#{rich:component('carDeletePanel')}.hide()"/>
+                <a4j:commandButton value="Cancel"
+                                   oncomplete="#{rich:component('carDeletePanel')}.hide()"/>
+            </h:panelGrid>
+        </a4j:outputPanel>
+    </h:form>
+</rich:popupPanel>
+</h:form>
 </h:body>
 </f:view>
 </html>
