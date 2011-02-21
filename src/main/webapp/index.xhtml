@@ -19,10 +19,10 @@
         <h:outputText value="Cars Store"/>
     </f:facet>
 
-    <rich:column id="make" sortBy="#{car.model.make}" sortOrder="#{tableBean.sortOrder['make']}"
-                 filterValue="#{tableBean.makeValue}" filter="#{tableBean.makeFilter}">
+    <rich:column id="make" sortBy="#{car.model.make}" sortOrder="#{tableBean.tableSort.sortOrder['make']}"
+                 filterValue="#{tableBean.tableFilter.makeValue}" filter="#{tableBean.tableFilter.makeFilter}">
         <f:facet name="header">
-            <h:commandLink action="#{tableBean.changeSortOrder('make')}">
+            <h:commandLink action="#{tableBean.tableSort.changeSortOrder('make')}">
                 <h:outputText value="Make"/>
                 <f:ajax render="dataTable"/>
             </h:commandLink>
@@ -30,16 +30,16 @@
         <h:outputText value="#{car.model.make}"/>
         <f:facet name="footer">
             <h:outputText value="Filter by make:"/>
-            <h:inputText value="#{tableBean.makeValue}">
+            <h:inputText value="#{tableBean.tableFilter.makeValue}">
                 <f:ajax event="blur" render="dataTable"/>
             </h:inputText>
         </f:facet>
     </rich:column>
 
-    <rich:column id="model" sortBy="#{car.model.model}" sortOrder="#{tableBean.sortOrder['model']}"
-                 filterValue="#{tableBean.modelValue}" filter="#{tableBean.modelFilter}">
+    <rich:column id="model" sortBy="#{car.model.model}" sortOrder="#{tableBean.tableSort.sortOrder['model']}"
+                 filterValue="#{tableBean.tableFilter.modelValue}" filter="#{tableBean.tableFilter.modelFilter}">
         <f:facet name="header">
-            <h:commandLink action="#{tableBean.changeSortOrder('model')}">
+            <h:commandLink action="#{tableBean.tableSort.changeSortOrder('model')}">
                 <h:outputText value="Model"/>
                 <f:ajax render="dataTable"/>
             </h:commandLink>
@@ -47,16 +47,16 @@
         <h:outputText value="#{car.model.model}"/>
         <f:facet name="footer">
             <h:outputText value="Filter by model:"/>
-            <h:inputText value="#{tableBean.modelValue}">
+            <h:inputText value="#{tableBean.tableFilter.modelValue}">
                 <f:ajax event="blur" render="dataTable"/>
             </h:inputText>
         </f:facet>
     </rich:column>
 
-    <rich:column id="price" sortBy="#{car.price}" sortOrder="#{tableBean.sortOrder['price']}"
-                 filterValue="#{tableBean.priceValue}" filter="#{tableBean.priceFilter}">
+    <rich:column id="price" sortBy="#{car.price}" sortOrder="#{tableBean.tableSort.sortOrder['price']}"
+                 filterValue="#{tableBean.tableFilter.priceValue}" filter="#{tableBean.tableFilter.priceFilter}">
         <f:facet name="header">
-            <h:commandLink action="#{tableBean.changeSortOrder('price')}">
+            <h:commandLink action="#{tableBean.tableSort.changeSortOrder('price')}">
                 <h:outputText value="Price"/>
                 <f:ajax render="dataTable"/>
             </h:commandLink>
@@ -67,15 +67,15 @@
         </h:outputText>
         <f:facet name="footer">
             <h:outputText value="Filter by price:"/>
-            <h:inputText value="#{tableBean.priceValue}">
+            <h:inputText value="#{tableBean.tableFilter.priceValue}">
                 <f:ajax event="blur" render="dataTable"/>
             </h:inputText>
         </f:facet>
     </rich:column>
 
-    <rich:column id="mileage" sortBy="#{car.mileage}" sortOrder="#{tableBean.sortOrder['mileage']}">
+    <rich:column id="mileage" sortBy="#{car.mileage}" sortOrder="#{tableBean.tableSort.sortOrder['mileage']}">
         <f:facet name="header">
-            <h:commandLink action="#{tableBean.changeSortOrder('mileage')}">
+            <h:commandLink action="#{tableBean.tableSort.changeSortOrder('mileage')}">
                 <h:outputText value="Mileage"/>
                 <f:ajax render="dataTable"/>
             </h:commandLink>
@@ -90,9 +90,9 @@
         <h:outputText value="#{car.vin}"/>
     </rich:column>
 
-    <rich:column id="condition" sortBy="#{car.condition}" sortOrder="#{tableBean.sortOrder['condition']}">
+    <rich:column id="condition" sortBy="#{car.condition}" sortOrder="#{tableBean.tableSort.sortOrder['condition']}">
         <f:facet name="header">
-            <h:commandLink action="#{tableBean.changeSortOrder('condition')}">
+            <h:commandLink action="#{tableBean.tableSort.changeSortOrder('condition')}">
                 <h:outputText value="Condition"/>
                 <f:ajax render="dataTable"/>
             </h:commandLink>
