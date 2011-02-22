@@ -1,19 +1,23 @@
 package com.exadel.democars.view.model;
 
-import com.exadel.democars.model.entities.Car;
-import org.richfaces.model.Filter;
+import org.apache.commons.lang.StringUtils;
 
-public class TableFilter {
+import static org.apache.commons.lang.StringUtils.isBlank;
+import static org.apache.commons.lang.StringUtils.isNotBlank;
+
+public class TableFilter<T> {
+    private TableDataModel tableDataModel;
     private String makeValue;
     private String modelValue;
     private String priceValue;
 
-    private Filter<?> makeFilter;
-    private Filter<?> modelFilter;
-    private Filter<?> priceFilter;
+    public TableFilter(TableDataModel tableDataModel) {
+        this.tableDataModel = tableDataModel;
+    }
 
     public void setMakeValue(String makeValue) {
         this.makeValue = makeValue;
+        makeFilter("model.make");
     }
 
     public void setModelValue(String modelValue) {
@@ -36,39 +40,24 @@ public class TableFilter {
         return priceValue;
     }
 
-    public Filter<?> getMakeFilter() {
-        return new Filter<Car>() {
-            public boolean accept(Car car) {
-                return filterString(makeValue, car.getModel().getMake());
-            }
-        };
-    }
-
-    public Filter<?> getModelFilter() {
-        return new Filter<Car>() {
-            public boolean accept(Car car) {
-                return filterString(modelValue, car.getModel().getModel());
-            }
-        };
-    }
-
-    public Filter<?> getPriceFilter() {
-        return new Filter<Car>() {
-            public boolean accept(Car car) {
-                return filterNumber(priceValue, car.getPrice());
-            }
-        };
-    }
-
-    private boolean filterString(String filterValue, String valueToFilter) {
-        return filterValue == null || valueToFilter.toUpperCase().startsWith(filterValue.toUpperCase());
-    }
-
-    private boolean filterNumber(String filterValue, Double valueToFilter) {
-        try {
-            return filterValue == null || Double.parseDouble(filterValue) >= valueToFilter;
-        } catch (NumberFormatException e) {
-            return true;
+    private boolean isFilterable() {
+        if (isBlank(makeValue) && isBlank(modelValue) && isBlank(priceValue)) {
+            DefaultDataSource defaultDataSource = new DefaultDataSource("allCars",
+                    tableDataModel.getPageSize(), tableDataModel.getCurrentPage());
+            defaultDataSource.setDataManager(tableDataModel.getDataManager());
+            tableDataModel.setCurrentDataSource(defaultDataSource);
+            return false;
         }
+        return true;
+    }
+
+    public void makeFilter(String columnName) {
+        if (!isFilterable()) return;
+        FilterableDataSource<T> filterableDataSource =
+                new FilterableDataSource<T>("filtered", tableDataModel.getPageSize(), tableDataModel.getCurrentPage());
+        filterableDataSource.setColumn(columnName);
+        filterableDataSource.setExpression(makeValue);
+        filterableDataSource.setDataManager(tableDataModel.getDataManager());
+        tableDataModel.setCurrentDataSource(filterableDataSource);
     }
 }

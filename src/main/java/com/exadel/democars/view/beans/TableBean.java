@@ -22,7 +22,7 @@ public class TableBean implements Serializable {
     public TableBean() {
         tableModel = new TableDataModel<Car>(pageSize, currentPage);
         tableSort = new TableSort(tableModel);
-        tableFilter = new TableFilter();
+        tableFilter = new TableFilter(tableModel);
     }
 
     public DataModel getCars() {

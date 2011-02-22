@@ -2,7 +2,7 @@ package com.exadel.democars.view.model;
 
 import java.util.List;
 
-public class SortableDataSource<T> extends PagedDataSource<T> {
+public class SortableDataSource<T> extends PageableDataSource<T> {
     private String sortParam;
     private String sortOrder;
     private String tableName;

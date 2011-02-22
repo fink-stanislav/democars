@@ -20,7 +20,7 @@
     </f:facet>
 
     <rich:column id="make" sortOrder="#{tableBean.tableSort.sortOrder}"
-                 filterValue="#{tableBean.tableFilter.makeValue}" filter="#{tableBean.tableFilter.makeFilter}">
+                 filterValue="#{tableBean.tableFilter.makeValue}">
         <f:facet name="header">
             <h:commandLink action="#{tableBean.tableSort.sortColumn('model.make')}">
                 <h:outputText value="Make"/>
@@ -37,7 +37,7 @@
     </rich:column>
 
     <rich:column id="model" sortOrder="#{tableBean.tableSort.sortOrder}"
-                 filterValue="#{tableBean.tableFilter.modelValue}" filter="#{tableBean.tableFilter.modelFilter}">
+                 filterValue="#{tableBean.tableFilter.modelValue}">
         <f:facet name="header">
             <h:commandLink action="#{tableBean.tableSort.sortColumn('model.model')}">
                 <h:outputText value="Model"/>
@@ -54,7 +54,7 @@
     </rich:column>
 
     <rich:column id="price" sortOrder="#{tableBean.tableSort.sortOrder}"
-                 filterValue="#{tableBean.tableFilter.priceValue}" filter="#{tableBean.tableFilter.priceFilter}">
+                 filterValue="#{tableBean.tableFilter.priceValue}">
         <f:facet name="header">
             <h:commandLink action="#{tableBean.tableSort.sortColumn('price')}">
                 <h:outputText value="Price"/>

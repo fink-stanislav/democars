@@ -32,11 +32,15 @@ public class DataManager {
         return entityManager.createNamedQuery(queryName).getResultList();
     }
 
-    public List getRangedList(String queryName, int rangeSize, int selectionNumber) {
+    private Query getRangedQuery(String queryName, int rangeSize, int selectionNumber) {
         Query rangedQuery = entityManager.createNamedQuery(queryName);
         rangedQuery.setFirstResult(selectionNumber * rangeSize - rangeSize);
         rangedQuery.setMaxResults(rangeSize);
-        return rangedQuery.getResultList();
+        return rangedQuery;
+    }
+
+    public List getRangedList(String queryName, int rangeSize, int selectionNumber) {
+        return getRangedQuery(queryName, rangeSize, selectionNumber).getResultList();
     }
 
     public List getRangedSortedList(String tableName, int rangeSize, int selectionNumber, String sortParam, String sortOrder) {
@@ -47,6 +51,11 @@ public class DataManager {
         rangedQuery.setFirstResult(selectionNumber * rangeSize - rangeSize);
         rangedQuery.setMaxResults(rangeSize);
         return rangedQuery.getResultList();
+    }
+
+    public List getRangedFilteredList(String queryName, int rangeSize, int selectionNumber, String column, String expression) {
+        String q = "select c from Car c where upper(c." + column + " ) like '" + expression.toUpperCase() + "%'";
+        return entityManager.createQuery(q).getResultList();
     }
 
     public Integer getSingle(String queryName) {

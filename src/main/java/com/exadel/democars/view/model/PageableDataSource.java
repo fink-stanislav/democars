@@ -2,7 +2,7 @@ package com.exadel.democars.view.model;
 
 import com.exadel.democars.model.persistence.DataManager;
 
-public abstract class PagedDataSource<T> implements DataSource<T> {
+public abstract class PageableDataSource<T> implements DataSource<T> {
     protected Integer pageSize = 10;
     protected Integer currentPage = 1;
     protected DataManager dataManager;
