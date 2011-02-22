@@ -19,10 +19,10 @@
         <h:outputText value="Cars Store"/>
     </f:facet>
 
-    <rich:column id="make" sortBy="#{car.model.make}" sortOrder="#{tableBean.tableSort.sortOrder['make']}"
+    <rich:column id="make" sortOrder="#{tableBean.tableSort.sortOrder}"
                  filterValue="#{tableBean.tableFilter.makeValue}" filter="#{tableBean.tableFilter.makeFilter}">
         <f:facet name="header">
-            <h:commandLink action="#{tableBean.sortRows}">
+            <h:commandLink action="#{tableBean.tableSort.sortColumn('model.make')}">
                 <h:outputText value="Make"/>
                 <f:ajax render="dataTable"/>
             </h:commandLink>
@@ -36,10 +36,10 @@
         </f:facet>
     </rich:column>
 
-    <rich:column id="model" sortBy="#{car.model.model}" sortOrder="#{tableBean.tableSort.sortOrder['model']}"
+    <rich:column id="model" sortOrder="#{tableBean.tableSort.sortOrder}"
                  filterValue="#{tableBean.tableFilter.modelValue}" filter="#{tableBean.tableFilter.modelFilter}">
         <f:facet name="header">
-            <h:commandLink action="#{tableBean.tableSort.changeSortOrder('model')}">
+            <h:commandLink action="#{tableBean.tableSort.sortColumn('model.model')}">
                 <h:outputText value="Model"/>
                 <f:ajax render="dataTable"/>
             </h:commandLink>
@@ -53,10 +53,10 @@
         </f:facet>
     </rich:column>
 
-    <rich:column id="price" sortBy="#{car.price}" sortOrder="#{tableBean.tableSort.sortOrder['price']}"
+    <rich:column id="price" sortOrder="#{tableBean.tableSort.sortOrder}"
                  filterValue="#{tableBean.tableFilter.priceValue}" filter="#{tableBean.tableFilter.priceFilter}">
         <f:facet name="header">
-            <h:commandLink action="#{tableBean.tableSort.changeSortOrder('price')}">
+            <h:commandLink action="#{tableBean.tableSort.sortColumn('price')}">
                 <h:outputText value="Price"/>
                 <f:ajax render="dataTable"/>
             </h:commandLink>
@@ -73,9 +73,9 @@
         </f:facet>
     </rich:column>
 
-    <rich:column id="mileage" sortBy="#{car.mileage}" sortOrder="#{tableBean.tableSort.sortOrder['mileage']}">
+    <rich:column id="mileage" sortOrder="#{tableBean.tableSort.sortOrder}">
         <f:facet name="header">
-            <h:commandLink action="#{tableBean.tableSort.changeSortOrder('mileage')}">
+            <h:commandLink action="#{tableBean.tableSort.sortColumn('mileage')}">
                 <h:outputText value="Mileage"/>
                 <f:ajax render="dataTable"/>
             </h:commandLink>
@@ -90,9 +90,9 @@
         <h:outputText value="#{car.vin}"/>
     </rich:column>
 
-    <rich:column id="condition" sortBy="#{car.condition}" sortOrder="#{tableBean.tableSort.sortOrder['condition']}">
+    <rich:column id="condition" sortOrder="#{tableBean.tableSort.sortOrder}">
         <f:facet name="header">
-            <h:commandLink action="#{tableBean.tableSort.changeSortOrder('condition')}">
+            <h:commandLink action="#{tableBean.tableSort.sortColumn('condition')}">
                 <h:outputText value="Condition"/>
                 <f:ajax render="dataTable"/>
             </h:commandLink>

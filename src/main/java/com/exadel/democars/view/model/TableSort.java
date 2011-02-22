@@ -2,42 +2,40 @@ package com.exadel.democars.view.model;
 
 import org.richfaces.component.SortOrder;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import static org.richfaces.component.SortOrder.ascending;
+import static org.richfaces.component.SortOrder.descending;
 
-public class TableSort {
-    private Map<String, SortOrder> sortOrder;
+public class TableSort<T> {
+    private SortOrder sortOrder;
+    private TableDataModel tableDataModel;
+    private String queryName;
 
-    public TableSort() {
-        sortOrder = new HashMap<String, SortOrder>();
-        sortOrder.put("make", SortOrder.unsorted);
-        sortOrder.put("model", SortOrder.unsorted);
-        sortOrder.put("price", SortOrder.unsorted);
-        sortOrder.put("condition", SortOrder.unsorted);
-        sortOrder.put("mileage", SortOrder.unsorted);
-        sortOrder.put("seller", SortOrder.unsorted);
+    public TableSort(TableDataModel tableDataModel) {
+        this.tableDataModel = tableDataModel;
+        sortOrder = SortOrder.unsorted;
     }
 
-    public Map<String, SortOrder> getSortOrder() {
+    public SortOrder getSortOrder() {
         return sortOrder;
     }
 
-    private void resetSortOrder(String key) {
-        Set<Map.Entry<String, SortOrder>> entrySet = this.sortOrder.entrySet();
-        for (Map.Entry<String, SortOrder> entry : entrySet) {
-            if (!entry.getKey().equals(key)) {
-                entry.setValue(SortOrder.unsorted);
-            }
-        }
+    public void sortColumn(String columnName) {
+        changeSortOrder();
+        SortableDataSource<T> sortableDataSource =
+                new SortableDataSource<T>(queryName, tableDataModel.getPageSize(), tableDataModel.getCurrentPage());
+        sortableDataSource.setSortParam(columnName);
+        sortableDataSource.setDataManager(tableDataModel.getDataManager());
+        tableDataModel.setCurrentDataSource(sortableDataSource);
     }
 
-    public void changeSortOrder(String key) {
-        resetSortOrder(key);
-        if (sortOrder.get(key).equals(SortOrder.ascending)) {
-            sortOrder.put(key, SortOrder.descending);
+    public void changeSortOrder() {
+        if (sortOrder == ascending) {
+            sortOrder = descending;
+            queryName = "allCarsDesc";
+
         } else {
-            sortOrder.put(key, SortOrder.ascending);
+            sortOrder = ascending;
+            queryName = "allCarsAsc";
         }
     }
 }

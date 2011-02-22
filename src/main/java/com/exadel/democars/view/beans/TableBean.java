@@ -14,25 +14,22 @@ import java.io.Serializable;
 @SessionScoped
 public class TableBean implements Serializable {
     private TableDataModel<Car> tableModel;
-    private TableFilter tableFilter;
-    private TableSort tableSort;
     private Integer currentPage = 1;
     private Integer pageSize = 10;
+    private TableFilter tableFilter;
+    private TableSort tableSort;
 
     public TableBean() {
         tableModel = new TableDataModel<Car>(pageSize, currentPage);
+        tableSort = new TableSort(tableModel);
         tableFilter = new TableFilter();
-        tableSort = new TableSort();
     }
 
     public DataModel getCars() {
-        tableModel.setPageNumber(currentPage);
+        tableModel.setCurrentPage(currentPage);
+        tableModel.setPageSize(pageSize);
         tableModel.updateRows();
         return tableModel;
-    }
-
-    public void sortRows() {
-        tableModel.sortRows("model.make");
     }
 
     public Integer getCurrentPage() {
@@ -51,11 +48,11 @@ public class TableBean implements Serializable {
         this.pageSize = pageSize;
     }
 
-    public TableSort getTableSort() {
-        return tableSort;
-    }
-
     public TableFilter getTableFilter() {
         return tableFilter;
+    }
+
+    public TableSort getTableSort() {
+        return tableSort;
     }
 }

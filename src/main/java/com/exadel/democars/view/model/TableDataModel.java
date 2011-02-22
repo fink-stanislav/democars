@@ -11,26 +11,27 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
     private Integer rowIndex = 0;
     private List<T> rows;
     private Integer pageSize = 10;
-    private Integer pageNumber = 1;
+    private Integer currentPage = 1;
+    private DataSource<T> currentDataSource;
 
     public TableDataModel() {
         dataManager = new DataManager();
-        rows = dataManager.getRangedList("findAllCars", pageSize, pageNumber);
+        currentDataSource = new DefaultDataSource<T>("allCars", pageSize, currentPage);
+        currentDataSource.setDataManager(dataManager);
     }
 
-    public TableDataModel(Integer pageSize, Integer pageNumber) {
+    public TableDataModel(Integer pageSize, Integer currentPage) {
         this.pageSize = pageSize;
-        this.pageNumber = pageNumber;
+        this.currentPage = currentPage;
         dataManager = new DataManager();
-        rows = dataManager.getRangedList("findAllCars", pageSize, pageNumber);
+        currentDataSource = new DefaultDataSource<T>("allCars", pageSize, currentPage);
+        currentDataSource.setDataManager(dataManager);
     }
 
     public void updateRows() {
-        rows = dataManager.getRangedList("findAllCars", pageSize, pageNumber);
-    }
-
-    public void sortRows(String sortParam) {
-        rows = dataManager.getRangedSortedList("allCarsSorted", pageSize, pageNumber, sortParam);
+        ((PagedDataSource)currentDataSource).setCurrentPage(currentPage);
+        ((PagedDataSource)currentDataSource).setPageSize(pageSize);
+        rows = currentDataSource.updateRows();
     }
 
     @Override
@@ -68,6 +69,14 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
         this.rows = (List<T>) rows;
     }
 
+    public void setCurrentPage(Integer currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    public Integer getCurrentPage() {
+        return currentPage;
+    }
+
     public Integer getPageSize() {
         return pageSize;
     }
@@ -76,11 +85,15 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
         this.pageSize = pageSize;
     }
 
-    public Integer getPageNumber() {
-        return pageNumber;
+    public DataManager getDataManager() {
+        return dataManager;
     }
 
-    public void setPageNumber(Integer pageNumber) {
-        this.pageNumber = pageNumber;
+    public DataSource getCurrentDataSource() {
+        return currentDataSource;
+    }
+
+    public void setCurrentDataSource(DataSource<T> currentDataSource) {
+        this.currentDataSource = currentDataSource;
     }
 }

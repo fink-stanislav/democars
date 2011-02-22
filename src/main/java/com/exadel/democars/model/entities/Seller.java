@@ -1,6 +1,7 @@
 package com.exadel.democars.model.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
@@ -14,7 +15,7 @@ public abstract class Seller {
     @Id
     @GeneratedValue
     protected Integer id;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "address")
     protected Address address;
 

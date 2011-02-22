@@ -14,28 +14,17 @@ public class DataManager {
         entityManager = getEntityManagerProvider().getEntityManager();
     }
 
-    public void persistEntity(Object entity) {
-    }
-
-    public void detach(Object entity) {
-        if (entityManager.contains(entity)) {
-            entityManager.detach(entity);
-        }
-        entityManager.detach(entity);
-    }
-
-    public void removeEntity(Object entity) {
+    public <T> void removeEntity(T entity) {
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
         entityManager.remove(entity);
         entityTransaction.commit();
     }
 
-    public <T> void updateEntity(T entity, Object primaryKey) {
+    public <T> void updateEntity(T entity) {
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
-        T t = (T) entityManager.find(entity.getClass(), primaryKey);
-        t = entity;
+        entityManager.merge(entity);
         entityTransaction.commit();
     }
 
@@ -43,18 +32,18 @@ public class DataManager {
         return entityManager.createNamedQuery(queryName).getResultList();
     }
 
-    public <T> List<T> getRangedList(String queryName, int rangeSize, int selectionNumber) {
+    public List getRangedList(String queryName, int rangeSize, int selectionNumber) {
         Query rangedQuery = entityManager.createNamedQuery(queryName);
         rangedQuery.setFirstResult(selectionNumber * rangeSize - rangeSize);
         rangedQuery.setMaxResults(rangeSize);
         return rangedQuery.getResultList();
     }
 
-    public <T> List<T> getRangedSortedList(String queryName, int rangeSize, int selectionNumber, String sortParam) {
+    public List getRangedSortedList(String queryName, int rangeSize, int selectionNumber, String sortParam) {
         Query rangedQuery = entityManager.createNamedQuery(queryName);
         rangedQuery.setFirstResult(selectionNumber * rangeSize - rangeSize);
         rangedQuery.setMaxResults(rangeSize);
-        //rangedQuery.setParameter("sortParam", sortParam);
+        rangedQuery.setParameter("sortParam", sortParam);
         return rangedQuery.getResultList();
     }
 

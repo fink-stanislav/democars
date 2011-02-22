@@ -2,7 +2,6 @@ package com.exadel.democars.view.beans;
 
 import com.exadel.democars.model.entities.Car;
 import com.exadel.democars.model.persistence.DataManager;
-import com.exadel.democars.model.persistence.EntityManagerProvider;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -31,6 +30,6 @@ public class CarInfoBean implements Serializable {
     }
 
     public void updateCar() {
-        dataManager.updateEntity(car, car.getId());
+        dataManager.updateEntity(car);
     }
 }
