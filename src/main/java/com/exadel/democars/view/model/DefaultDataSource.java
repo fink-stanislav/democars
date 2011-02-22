@@ -3,6 +3,7 @@ package com.exadel.democars.view.model;
 import java.util.List;
 
 public class DefaultDataSource<T> extends PagedDataSource<T> {
+    private String queryName;
 
     public DefaultDataSource(String queryName) {
         this.queryName = queryName;

@@ -8,7 +8,6 @@ import static org.richfaces.component.SortOrder.descending;
 public class TableSort<T> {
     private SortOrder sortOrder;
     private TableDataModel tableDataModel;
-    private String queryName;
 
     public TableSort(TableDataModel tableDataModel) {
         this.tableDataModel = tableDataModel;
@@ -22,20 +21,18 @@ public class TableSort<T> {
     public void sortColumn(String columnName) {
         changeSortOrder();
         SortableDataSource<T> sortableDataSource =
-                new SortableDataSource<T>(queryName, tableDataModel.getPageSize(), tableDataModel.getCurrentPage());
+                new SortableDataSource<T>("Car", tableDataModel.getPageSize(), tableDataModel.getCurrentPage());
         sortableDataSource.setSortParam(columnName);
+        sortableDataSource.setSortOrder(sortOrderToQl());
         sortableDataSource.setDataManager(tableDataModel.getDataManager());
         tableDataModel.setCurrentDataSource(sortableDataSource);
     }
 
     public void changeSortOrder() {
-        if (sortOrder == ascending) {
-            sortOrder = descending;
-            queryName = "allCarsDesc";
+        sortOrder = sortOrder == ascending ? descending : ascending;
+    }
 
-        } else {
-            sortOrder = ascending;
-            queryName = "allCarsAsc";
-        }
+    private String sortOrderToQl() {
+        return sortOrder == SortOrder.descending ? "desc" : "asc";
     }
 }

@@ -12,7 +12,7 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
     private List<T> rows;
     private Integer pageSize = 10;
     private Integer currentPage = 1;
-    private DataSource<T> currentDataSource;
+    private PagedDataSource<T> currentDataSource;
 
     public TableDataModel() {
         dataManager = new DataManager();
@@ -29,8 +29,8 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
     }
 
     public void updateRows() {
-        ((PagedDataSource)currentDataSource).setCurrentPage(currentPage);
-        ((PagedDataSource)currentDataSource).setPageSize(pageSize);
+        currentDataSource.setCurrentPage(currentPage);
+        currentDataSource.setPageSize(pageSize);
         rows = currentDataSource.updateRows();
     }
 
@@ -89,11 +89,11 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
         return dataManager;
     }
 
-    public DataSource getCurrentDataSource() {
+    public PagedDataSource getCurrentDataSource() {
         return currentDataSource;
     }
 
-    public void setCurrentDataSource(DataSource<T> currentDataSource) {
+    public void setCurrentDataSource(PagedDataSource currentDataSource) {
         this.currentDataSource = currentDataSource;
     }
 }

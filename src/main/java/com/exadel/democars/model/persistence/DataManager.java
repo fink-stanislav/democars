@@ -39,11 +39,13 @@ public class DataManager {
         return rangedQuery.getResultList();
     }
 
-    public List getRangedSortedList(String queryName, int rangeSize, int selectionNumber, String sortParam) {
-        Query rangedQuery = entityManager.createNamedQuery(queryName);
+    public List getRangedSortedList(String tableName, int rangeSize, int selectionNumber, String sortParam, String sortOrder) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("select c from ").append(tableName)
+                .append(" c order by ").append(sortParam).append(" ").append(sortOrder);
+        Query rangedQuery = entityManager.createQuery(sb.toString());
         rangedQuery.setFirstResult(selectionNumber * rangeSize - rangeSize);
         rangedQuery.setMaxResults(rangeSize);
-        rangedQuery.setParameter("sortParam", sortParam);
         return rangedQuery.getResultList();
     }
 

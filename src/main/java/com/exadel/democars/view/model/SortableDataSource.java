@@ -4,19 +4,17 @@ import java.util.List;
 
 public class SortableDataSource<T> extends PagedDataSource<T> {
     private String sortParam;
+    private String sortOrder;
+    private String tableName;
 
-    public SortableDataSource(String queryName) {
-        this.queryName = queryName;
-    }
-
-    public SortableDataSource(String queryName, Integer pageSize, Integer currentPage) {
-        this.queryName = queryName;
+    public SortableDataSource(String tableName, Integer pageSize, Integer currentPage) {
+        this.tableName = tableName;
         this.pageSize = pageSize;
         this.currentPage = currentPage;
     }
 
     public List<T> updateRows() {
-        return dataManager.getRangedSortedList(queryName, pageSize, currentPage, sortParam);
+        return dataManager.getRangedSortedList(tableName, pageSize, currentPage, sortParam, sortOrder);
     }
 
     public String getSortParam() {
@@ -25,5 +23,13 @@ public class SortableDataSource<T> extends PagedDataSource<T> {
 
     public void setSortParam(String sortParam) {
         this.sortParam = sortParam;
+    }
+
+    public String getSortOrder() {
+        return sortOrder;
+    }
+
+    public void setSortOrder(String sortOrder) {
+        this.sortOrder = sortOrder;
     }
 }
