@@ -1,63 +1,54 @@
 package com.exadel.democars.view.model;
 
-import org.apache.commons.lang.StringUtils;
-
-import static org.apache.commons.lang.StringUtils.isBlank;
-import static org.apache.commons.lang.StringUtils.isNotBlank;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TableFilter<T> {
     private TableDataModel tableDataModel;
-    private String makeValue;
-    private String modelValue;
-    private String priceValue;
+    private Map<String, String> filterParams;
+
+    private String make = "";
+    private String model = "";
+    private String price = "";
 
     public TableFilter(TableDataModel tableDataModel) {
         this.tableDataModel = tableDataModel;
+        this.filterParams = new HashMap<String, String>();
     }
 
-    public void setMakeValue(String makeValue) {
-        this.makeValue = makeValue;
-        makeFilter("model.make");
+    public Map<String, String> getFilterParams() {
+        return filterParams;
     }
 
-    public void setModelValue(String modelValue) {
-        this.modelValue = modelValue;
+    public String getMake() {
+        return make;
     }
 
-    public void setPriceValue(String priceValue) {
-        this.priceValue = priceValue;
+    public void setMake(String make) {
+        this.make = make;
     }
 
-    public String getMakeValue() {
-        return makeValue;
+    public String getModel() {
+        return model;
     }
 
-    public String getModelValue() {
-        return modelValue;
+    public void setModel(String model) {
+        this.model = model;
     }
 
-    public String getPriceValue() {
-        return priceValue;
+    public String getPrice() {
+        return price;
     }
 
-    private boolean isFilterable() {
-        if (isBlank(makeValue) && isBlank(modelValue) && isBlank(priceValue)) {
-            DefaultDataSource defaultDataSource = new DefaultDataSource("allCars",
-                    tableDataModel.getPageSize(), tableDataModel.getCurrentPage());
-            defaultDataSource.setDataManager(tableDataModel.getDataManager());
-            tableDataModel.setCurrentDataSource(defaultDataSource);
-            return false;
-        }
-        return true;
+    public void setPrice(String price) {
+        this.price = price;
     }
 
-    public void makeFilter(String columnName) {
-        if (!isFilterable()) return;
-        FilterableDataSource<T> filterableDataSource =
-                new FilterableDataSource<T>("filtered", tableDataModel.getPageSize(), tableDataModel.getCurrentPage());
-        filterableDataSource.setColumn(columnName);
-        filterableDataSource.setExpression(makeValue);
-        filterableDataSource.setDataManager(tableDataModel.getDataManager());
+    public void filter() {
+        filterParams.put("model.make", make);
+        filterParams.put("model.model", model);
+        FilterableDataSource<T> filterableDataSource = new FilterableDataSource<T>(tableDataModel);
+        filterableDataSource.setFilterParams(filterParams);
         tableDataModel.setCurrentDataSource(filterableDataSource);
     }
 }

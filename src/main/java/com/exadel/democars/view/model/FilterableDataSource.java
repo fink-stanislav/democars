@@ -1,27 +1,34 @@
 package com.exadel.democars.view.model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class FilterableDataSource<T> extends PageableDataSource<T> {
-    private String queryName;
-    private String column;
-    private String expression;
+public class FilterableDataSource<T> extends PagebleDataSource<T> {
+    private String tableName;
+    Map<String, String> filterParams;
 
-    public FilterableDataSource(String queryName, Integer pageSize, Integer currentPage) {
-        this.queryName = queryName;
-        this.pageSize = pageSize;
-        this.currentPage = currentPage;
+    public FilterableDataSource(TableDataModel tableDataModel) {
+        this.tableName = "Car";
+        this.pageSize = tableDataModel.getPageSize();
+        this.currentPage = tableDataModel.getCurrentPage();
+        this.tableDataModel = tableDataModel;
+        this.filterParams = new HashMap<String, String>();
     }
 
-    public void setColumn(String column) {
-        this.column = column;
+    public void setFilterParams(Map<String, String> filterParams) {
+        this.filterParams = filterParams;
     }
 
-    public void setExpression(String expression) {
-        this.expression = expression;
+    public Map<String, String> getFilterParams() {
+        return filterParams;
+    }
+
+    public String getTableName() {
+        return tableName;
     }
 
     public List<T> updateRows() {
-        return dataManager.getRangedFilteredList(queryName, pageSize, currentPage, column, expression);
+        return tableDataModel.getDataManager().getRangedFilteredList(this);
     }
 }

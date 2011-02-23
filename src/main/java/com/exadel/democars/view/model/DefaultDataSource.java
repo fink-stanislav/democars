@@ -2,20 +2,21 @@ package com.exadel.democars.view.model;
 
 import java.util.List;
 
-public class DefaultDataSource<T> extends PageableDataSource<T> {
+public class DefaultDataSource<T> extends PagebleDataSource<T> {
     private String queryName;
 
-    public DefaultDataSource(String queryName) {
-        this.queryName = queryName;
+    public DefaultDataSource(TableDataModel tableDataModel) {
+        this.tableDataModel = tableDataModel;
+        this.pageSize = tableDataModel.getPageSize();
+        this.currentPage = tableDataModel.getCurrentPage();
+        this.queryName = "allCars";
     }
 
-    public DefaultDataSource(String queryName, Integer pageSize, Integer currentPage) {
-        this.queryName = queryName;
-        this.pageSize = pageSize;
-        this.currentPage = currentPage;
+    public String getQueryName() {
+        return queryName;
     }
 
     public List<T> updateRows() {
-        return dataManager.getRangedList(queryName, pageSize, currentPage);
+        return tableDataModel.getDataManager().getRangedList(this);
     }
 }

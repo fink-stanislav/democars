@@ -20,7 +20,7 @@
     </f:facet>
 
     <rich:column id="make" sortOrder="#{tableBean.tableSort.sortOrder}"
-                 filterValue="#{tableBean.tableFilter.makeValue}">
+                 filterValue="#{tableBean.tableFilter.make}">
         <f:facet name="header">
             <h:commandLink action="#{tableBean.tableSort.sortColumn('model.make')}">
                 <h:outputText value="Make"/>
@@ -29,15 +29,17 @@
         </f:facet>
         <h:outputText value="#{car.model.make}"/>
         <f:facet name="footer">
-            <h:outputText value="Filter by make:"/>
-            <h:inputText value="#{tableBean.tableFilter.makeValue}">
-                <f:ajax event="blur" render="dataTable"/>
-            </h:inputText>
+            <h:form>
+                <a4j:commandLink action="#{tableBean.tableFilter.filter()}">
+                    <h:outputText value="Filter by make:"/>
+                </a4j:commandLink>
+                <h:inputText value="#{tableBean.tableFilter.make}"/>
+            </h:form>
         </f:facet>
     </rich:column>
 
     <rich:column id="model" sortOrder="#{tableBean.tableSort.sortOrder}"
-                 filterValue="#{tableBean.tableFilter.modelValue}">
+                 filterValue="#{tableBean.tableFilter.model}">
         <f:facet name="header">
             <h:commandLink action="#{tableBean.tableSort.sortColumn('model.model')}">
                 <h:outputText value="Model"/>
@@ -47,14 +49,12 @@
         <h:outputText value="#{car.model.model}"/>
         <f:facet name="footer">
             <h:outputText value="Filter by model:"/>
-            <h:inputText value="#{tableBean.tableFilter.modelValue}">
-                <f:ajax event="blur" render="dataTable"/>
-            </h:inputText>
+            <h:inputText value="#{tableBean.tableFilter.model}"/>
         </f:facet>
     </rich:column>
 
     <rich:column id="price" sortOrder="#{tableBean.tableSort.sortOrder}"
-                 filterValue="#{tableBean.tableFilter.priceValue}">
+                 filterValue="#{tableBean.tableFilter.price}">
         <f:facet name="header">
             <h:commandLink action="#{tableBean.tableSort.sortColumn('price')}">
                 <h:outputText value="Price"/>
@@ -67,9 +67,7 @@
         </h:outputText>
         <f:facet name="footer">
             <h:outputText value="Filter by price:"/>
-            <h:inputText value="#{tableBean.tableFilter.priceValue}">
-                <f:ajax event="blur" render="dataTable"/>
-            </h:inputText>
+            <h:inputText value="#{tableBean.tableFilter.price}"/>
         </f:facet>
     </rich:column>
 

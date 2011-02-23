@@ -2,19 +2,20 @@ package com.exadel.democars.view.model;
 
 import java.util.List;
 
-public class SortableDataSource<T> extends PageableDataSource<T> {
+public class SortableDataSource<T> extends PagebleDataSource<T> {
     private String sortParam;
     private String sortOrder;
     private String tableName;
 
-    public SortableDataSource(String tableName, Integer pageSize, Integer currentPage) {
-        this.tableName = tableName;
-        this.pageSize = pageSize;
-        this.currentPage = currentPage;
+    public SortableDataSource(TableDataModel tableDataModel) {
+        this.tableDataModel = tableDataModel;
+        this.tableName = "Car";
+        this.pageSize = tableDataModel.getPageSize();
+        this.currentPage = tableDataModel.getCurrentPage();
     }
 
     public List<T> updateRows() {
-        return dataManager.getRangedSortedList(tableName, pageSize, currentPage, sortParam, sortOrder);
+        return tableDataModel.getDataManager().getRangedSortedList(this);
     }
 
     public String getSortParam() {
@@ -31,5 +32,9 @@ public class SortableDataSource<T> extends PageableDataSource<T> {
 
     public void setSortOrder(String sortOrder) {
         this.sortOrder = sortOrder;
+    }
+
+    public String getTableName() {
+        return tableName;
     }
 }

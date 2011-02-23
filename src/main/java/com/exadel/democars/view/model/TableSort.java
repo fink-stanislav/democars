@@ -18,17 +18,18 @@ public class TableSort<T> {
         return sortOrder;
     }
 
+    public void sort() {}
+
     public void sortColumn(String columnName) {
         changeSortOrder();
         SortableDataSource<T> sortableDataSource =
-                new SortableDataSource<T>("Car", tableDataModel.getPageSize(), tableDataModel.getCurrentPage());
+                new SortableDataSource<T>(tableDataModel);
         sortableDataSource.setSortParam(columnName);
         sortableDataSource.setSortOrder(sortOrderToQl());
-        sortableDataSource.setDataManager(tableDataModel.getDataManager());
         tableDataModel.setCurrentDataSource(sortableDataSource);
     }
 
-    public void changeSortOrder() {
+    private void changeSortOrder() {
         sortOrder = sortOrder == ascending ? descending : ascending;
     }
 

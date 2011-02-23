@@ -1,9 +1,15 @@
 package com.exadel.democars.model.persistence;
 
+import com.exadel.democars.view.model.DefaultDataSource;
+import com.exadel.democars.view.model.FilterableDataSource;
+import com.exadel.democars.view.model.SortableDataSource;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import static com.exadel.democars.model.persistence.EntityManagerProvider.getEntityManagerProvider;
 
@@ -32,30 +38,57 @@ public class DataManager {
         return entityManager.createNamedQuery(queryName).getResultList();
     }
 
-    private Query getRangedQuery(String queryName, int rangeSize, int selectionNumber) {
-        Query rangedQuery = entityManager.createNamedQuery(queryName);
-        rangedQuery.setFirstResult(selectionNumber * rangeSize - rangeSize);
-        rangedQuery.setMaxResults(rangeSize);
+    private Query getRangedQuery(DefaultDataSource source) {
+        Query rangedQuery = entityManager.createNamedQuery(source.getQueryName());
+        rangedQuery.setFirstResult(source.getCurrentPage() * source.getPageSize() - source.getPageSize());
+        rangedQuery.setMaxResults(source.getPageSize());
         return rangedQuery;
     }
 
-    public List getRangedList(String queryName, int rangeSize, int selectionNumber) {
-        return getRangedQuery(queryName, rangeSize, selectionNumber).getResultList();
+    public List getRangedList(DefaultDataSource source) {
+        return getRangedQuery(source).getResultList();
     }
 
-    public List getRangedSortedList(String tableName, int rangeSize, int selectionNumber, String sortParam, String sortOrder) {
+    public List getRangedSortedList(SortableDataSource source) {
         StringBuilder sb = new StringBuilder();
-        sb.append("select c from ").append(tableName)
-                .append(" c order by ").append(sortParam).append(" ").append(sortOrder);
+        sb.append("select c from ")
+                .append(source.getTableName())
+                .append(" c order by ")
+                .append(source.getSortParam()).append(" ")
+                .append(source.getSortOrder());
         Query rangedQuery = entityManager.createQuery(sb.toString());
-        rangedQuery.setFirstResult(selectionNumber * rangeSize - rangeSize);
-        rangedQuery.setMaxResults(rangeSize);
+        rangedQuery.setFirstResult(source.getCurrentPage() * source.getPageSize() - source.getPageSize());
+        rangedQuery.setMaxResults(source.getPageSize());
         return rangedQuery.getResultList();
     }
 
-    public List getRangedFilteredList(String queryName, int rangeSize, int selectionNumber, String column, String expression) {
-        String q = "select c from Car c where upper(c." + column + " ) like '" + expression.toUpperCase() + "%'";
-        return entityManager.createQuery(q).getResultList();
+    public List getRangedFilteredList(FilterableDataSource source) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("select c from ")
+                .append(source.getTableName())
+                .append(" c ");
+
+        Set<Map.Entry<String, String>> entrySet = source.getFilterParams().entrySet();
+        if (!entrySet.isEmpty()) {
+            sb.append("where ");
+        }
+        int counter = 0;
+        for (Map.Entry<String, String> entry : entrySet) {
+            counter++;
+            sb.append("upper(c.")
+                    .append(entry.getKey())
+                    .append(") like '")
+                    .append(entry.getValue().toUpperCase())
+                    .append("%'");
+
+            if (entrySet.size() > 1 && counter <= entrySet.size() - 1) {
+                sb.append(" and ");
+            }
+        }
+        Query rangedQuery = entityManager.createQuery(sb.toString());
+        rangedQuery.setFirstResult(source.getCurrentPage() * source.getPageSize() - source.getPageSize());
+        rangedQuery.setMaxResults(source.getPageSize());
+        return rangedQuery.getResultList();
     }
 
     public Integer getSingle(String queryName) {
