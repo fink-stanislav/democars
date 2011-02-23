@@ -20,4 +20,6 @@ public abstract class PagebleDataSource<T> implements DataSource<T> {
     public Integer getCurrentPage() {
         return currentPage;
     }
+
+    public abstract Integer rowCount();
 }

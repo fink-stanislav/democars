@@ -31,4 +31,8 @@ public class FilterableDataSource<T> extends PagebleDataSource<T> {
     public List<T> updateRows() {
         return tableDataModel.getDataManager().getRangedFilteredList(this);
     }
+
+    public Integer rowCount() {
+        return tableDataModel.getDataManager().getRowCount();
+    }
 }

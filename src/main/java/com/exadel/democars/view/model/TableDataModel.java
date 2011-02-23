@@ -37,7 +37,7 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
 
     @Override
     public int getRowCount() {
-        return dataManager.getSingle("countCars");
+        return currentDataSource.rowCount();
     }
 
     @Override

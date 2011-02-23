@@ -19,4 +19,8 @@ public class DefaultDataSource<T> extends PagebleDataSource<T> {
     public List<T> updateRows() {
         return tableDataModel.getDataManager().getRangedList(this);
     }
+
+    public Integer rowCount() {
+        return tableDataModel.getDataManager().getSingle("countCars");
+    }
 }

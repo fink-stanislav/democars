@@ -1,5 +1,6 @@
 package com.exadel.democars.model.persistence;
 
+import com.exadel.democars.model.entities.Car;
 import com.exadel.democars.view.model.DefaultDataSource;
 import com.exadel.democars.view.model.FilterableDataSource;
 import com.exadel.democars.view.model.SortableDataSource;
@@ -7,6 +8,7 @@ import com.exadel.democars.view.model.SortableDataSource;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -15,6 +17,7 @@ import static com.exadel.democars.model.persistence.EntityManagerProvider.getEnt
 
 public class DataManager {
     private EntityManager entityManager;
+    private Integer rowCount;
 
     public DataManager() {
         entityManager = getEntityManagerProvider().getEntityManager();
@@ -86,6 +89,10 @@ public class DataManager {
             }
         }
         Query rangedQuery = entityManager.createQuery(sb.toString());
+
+        // Another query to DB
+        rowCount = rangedQuery.getResultList().size();
+
         rangedQuery.setFirstResult(source.getCurrentPage() * source.getPageSize() - source.getPageSize());
         rangedQuery.setMaxResults(source.getPageSize());
         return rangedQuery.getResultList();
@@ -95,5 +102,9 @@ public class DataManager {
         Query countQuery = entityManager.createNamedQuery(queryName);
         Long result = (Long) countQuery.getSingleResult();
         return result.intValue();
+    }
+
+    public Integer getRowCount() {
+        return rowCount;
     }
 }

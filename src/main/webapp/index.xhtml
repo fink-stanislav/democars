@@ -29,12 +29,10 @@
         </f:facet>
         <h:outputText value="#{car.model.make}"/>
         <f:facet name="footer">
-            <h:form>
-                <a4j:commandLink action="#{tableBean.tableFilter.filter()}">
-                    <h:outputText value="Filter by make:"/>
-                </a4j:commandLink>
-                <h:inputText value="#{tableBean.tableFilter.make}"/>
-            </h:form>
+            <a4j:commandLink action="#{tableBean.tableFilter.filter()}" render="dataTable">
+                <h:outputText value="Filter by make:"/>
+            </a4j:commandLink>
+            <h:inputText value="#{tableBean.tableFilter.make}"/>
         </f:facet>
     </rich:column>
 
@@ -48,7 +46,9 @@
         </f:facet>
         <h:outputText value="#{car.model.model}"/>
         <f:facet name="footer">
-            <h:outputText value="Filter by model:"/>
+            <a4j:commandLink action="#{tableBean.tableFilter.filter()}" render="dataTable">
+                <h:outputText value="Filter by model:"/>
+            </a4j:commandLink>
             <h:inputText value="#{tableBean.tableFilter.model}"/>
         </f:facet>
     </rich:column>
