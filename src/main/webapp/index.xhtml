@@ -20,7 +20,7 @@
     </f:facet>
 
     <rich:column id="make" sortOrder="#{tableBean.tableSort.sortOrder}"
-                 filterValue="#{tableBean.tableFilter.make}">
+                 filterValue="#{tableBean.tableFilter.filterParams['model.make']}">
         <f:facet name="header">
             <h:commandLink action="#{tableBean.tableSort.sortColumn('model.make')}">
                 <h:outputText value="Make"/>
@@ -32,12 +32,11 @@
             <a4j:commandLink action="#{tableBean.tableFilter.filter()}" render="dataTable">
                 <h:outputText value="Filter by make:"/>
             </a4j:commandLink>
-            <h:inputText value="#{tableBean.tableFilter.make}"/>
+            <h:inputText value="#{tableBean.tableFilter.filterParams['model.make']}"/>
         </f:facet>
     </rich:column>
 
-    <rich:column id="model" sortOrder="#{tableBean.tableSort.sortOrder}"
-                 filterValue="#{tableBean.tableFilter.model}">
+    <rich:column id="model" sortOrder="#{tableBean.tableSort.sortOrder}">
         <f:facet name="header">
             <h:commandLink action="#{tableBean.tableSort.sortColumn('model.model')}">
                 <h:outputText value="Model"/>
@@ -49,12 +48,12 @@
             <a4j:commandLink action="#{tableBean.tableFilter.filter()}" render="dataTable">
                 <h:outputText value="Filter by model:"/>
             </a4j:commandLink>
-            <h:inputText value="#{tableBean.tableFilter.model}"/>
+            <h:inputText value="#{tableBean.tableFilter.filterParams['model.model']}"/>
         </f:facet>
     </rich:column>
 
     <rich:column id="price" sortOrder="#{tableBean.tableSort.sortOrder}"
-                 filterValue="#{tableBean.tableFilter.price}">
+                 filterValue="#{tableBean.tableFilter.filterParams['price']}">
         <f:facet name="header">
             <h:commandLink action="#{tableBean.tableSort.sortColumn('price')}">
                 <h:outputText value="Price"/>
@@ -66,8 +65,10 @@
                              currencySymbol="$" maxIntegerDigits="7" type="currency" locale="us"/>
         </h:outputText>
         <f:facet name="footer">
-            <h:outputText value="Filter by price:"/>
-            <h:inputText value="#{tableBean.tableFilter.price}"/>
+            <!--<a4j:commandLink action="#{tableBean.tableFilter.filter()}" render="dataTable">-->
+                <h:outputText value="Filter by price:"/>
+            <!--</a4j:commandLink>-->
+            <!--<h:inputText value="#{tableBean.tableFilter.filterParams['price']}"/>-->
         </f:facet>
     </rich:column>
 

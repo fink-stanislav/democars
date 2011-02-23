@@ -6,22 +6,32 @@ import java.util.Map;
 
 public class FilterableDataSource<T> extends PagebleDataSource<T> {
     private String tableName;
-    Map<String, String> filterParams;
+    Map<String, Object> filterParams;
+    Map<String, String> filterExpressions;
 
     public FilterableDataSource(TableDataModel tableDataModel) {
         this.tableName = "Car";
         this.pageSize = tableDataModel.getPageSize();
         this.currentPage = tableDataModel.getCurrentPage();
         this.tableDataModel = tableDataModel;
-        this.filterParams = new HashMap<String, String>();
+        this.filterParams = new HashMap<String, Object>();
+        this.filterExpressions = new HashMap<String, String>();
     }
 
-    public void setFilterParams(Map<String, String> filterParams) {
+    public void setFilterParams(Map<String, Object> filterParams) {
         this.filterParams = filterParams;
     }
 
-    public Map<String, String> getFilterParams() {
+    public void setFilterExpressions(Map<String, String> filterExpressions) {
+        this.filterExpressions = filterExpressions;
+    }
+
+    public Map<String, Object> getFilterParams() {
         return filterParams;
+    }
+
+    public Map<String, String> getFilterExpressions() {
+        return filterExpressions;
     }
 
     public String getTableName() {

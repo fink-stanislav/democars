@@ -39,6 +39,6 @@ public class SortableDataSource<T> extends PagebleDataSource<T> {
     }
 
     public Integer rowCount() {
-        return tableDataModel.getDataManager().getSingle("countCars");
+        return tableDataModel.getDataManager().getRowCount();
     }
 }

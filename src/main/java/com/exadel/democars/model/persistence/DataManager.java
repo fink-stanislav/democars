@@ -1,6 +1,5 @@
 package com.exadel.democars.model.persistence;
 
-import com.exadel.democars.model.entities.Car;
 import com.exadel.democars.view.model.DefaultDataSource;
 import com.exadel.democars.view.model.FilterableDataSource;
 import com.exadel.democars.view.model.SortableDataSource;
@@ -8,7 +7,6 @@ import com.exadel.democars.view.model.SortableDataSource;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -17,7 +15,7 @@ import static com.exadel.democars.model.persistence.EntityManagerProvider.getEnt
 
 public class DataManager {
     private EntityManager entityManager;
-    private Integer rowCount;
+    private Integer rowCount = 0;
 
     public DataManager() {
         entityManager = getEntityManagerProvider().getEntityManager();
@@ -37,10 +35,6 @@ public class DataManager {
         entityTransaction.commit();
     }
 
-    public List getList(String queryName) {
-        return entityManager.createNamedQuery(queryName).getResultList();
-    }
-
     private Query getRangedQuery(DefaultDataSource source) {
         Query rangedQuery = entityManager.createNamedQuery(source.getQueryName());
         rangedQuery.setFirstResult(source.getCurrentPage() * source.getPageSize() - source.getPageSize());
@@ -49,6 +43,7 @@ public class DataManager {
     }
 
     public List getRangedList(DefaultDataSource source) {
+        rowCount = getRangedQuery(source).getResultList().size();
         return getRangedQuery(source).getResultList();
     }
 
@@ -60,6 +55,10 @@ public class DataManager {
                 .append(source.getSortParam()).append(" ")
                 .append(source.getSortOrder());
         Query rangedQuery = entityManager.createQuery(sb.toString());
+
+        // Another query to DB
+        rowCount = rangedQuery.getResultList().size();
+
         rangedQuery.setFirstResult(source.getCurrentPage() * source.getPageSize() - source.getPageSize());
         rangedQuery.setMaxResults(source.getPageSize());
         return rangedQuery.getResultList();
@@ -71,18 +70,17 @@ public class DataManager {
                 .append(source.getTableName())
                 .append(" c ");
 
-        Set<Map.Entry<String, String>> entrySet = source.getFilterParams().entrySet();
+        Set<Map.Entry<String, Object>> entrySet = source.getFilterParams().entrySet();
         if (!entrySet.isEmpty()) {
             sb.append("where ");
         }
         int counter = 0;
-        for (Map.Entry<String, String> entry : entrySet) {
+        for (Map.Entry<String, Object> entry : entrySet) {
             counter++;
             sb.append("upper(c.")
                     .append(entry.getKey())
-                    .append(") like '")
-                    .append(entry.getValue().toUpperCase())
-                    .append("%'");
+                    .append(") ")
+                    .append(source.getFilterExpressions().get(entry.getKey()));
 
             if (entrySet.size() > 1 && counter <= entrySet.size() - 1) {
                 sb.append(" and ");
