@@ -32,4 +32,8 @@ public class CarInfoBean implements Serializable {
     public void updateCar() {
         dataManager.updateEntity(car);
     }
+
+    public void createCar() {
+        return;
+    }
 }

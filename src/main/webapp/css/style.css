@@ -39,7 +39,8 @@
     border: 0;
 }
 
-.close-image {
+.square-image {
     width: 14px;
     height: 14px;
+    border: 0;
 }

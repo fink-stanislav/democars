@@ -29,7 +29,7 @@
         </f:facet>
         <h:outputText value="#{car.model.make}"/>
         <f:facet name="footer">
-            <a4j:commandLink action="#{tableBean.tableFilter.filter()}" render="dataTable">
+            <a4j:commandLink id="filterByMakeLink" action="#{tableBean.tableFilter.filter()}" render="dataTable">
                 <h:outputText value="Filter by make:"/>
             </a4j:commandLink>
             <h:inputText value="#{tableBean.tableFilter.filterParams['model.make']}"/>
@@ -45,7 +45,7 @@
         </f:facet>
         <h:outputText value="#{car.model.model}"/>
         <f:facet name="footer">
-            <a4j:commandLink action="#{tableBean.tableFilter.filter()}" render="dataTable">
+            <a4j:commandLink id="filterByModelLink" action="#{tableBean.tableFilter.filter()}" render="dataTable">
                 <h:outputText value="Filter by model:"/>
             </a4j:commandLink>
             <h:inputText value="#{tableBean.tableFilter.filterParams['model.model']}"/>
@@ -65,7 +65,7 @@
                              currencySymbol="$" maxIntegerDigits="7" type="currency" locale="us"/>
         </h:outputText>
         <f:facet name="footer">
-            <a4j:commandLink action="#{tableBean.tableFilter.filter()}" render="dataTable">
+            <a4j:commandLink id="filterByPriceLink" action="#{tableBean.tableFilter.filter()}" render="dataTable">
                 <h:outputText value="Filter by price:"/>
             </a4j:commandLink>
             <h:inputText converter="javax.faces.Double" value="#{tableBean.tableFilter.filterParams['price']}"/>
@@ -133,6 +133,12 @@
             <h:graphicImage url="images/delete.gif" styleClass="image"/>
             <f:setPropertyActionListener target="#{carInfoBean.car}" value="#{car}"/>
         </a4j:commandLink>
+        <f:facet name="footer">
+            <a4j:commandLink oncomplete="#{rich:component('carCreatePanel')}.show()">
+                <h:graphicImage url="images/plus.jpg" styleClass="square-image"/>
+                <f:setPropertyActionListener target="#{carInfoBean.car}" value=""/>
+            </a4j:commandLink>
+        </f:facet>
     </rich:column>
 
     <f:facet name="footer">
@@ -152,7 +158,7 @@
         <h:outputText value="Seller Information"/>
     </f:facet>
     <f:facet name="controls">
-        <h:graphicImage url="images/close.jpeg" styleClass="close-image"
+        <h:graphicImage url="images/close.jpeg" styleClass="square-image"
                         onclick="#{rich:component('sellerInfo')}.hide()"/>
     </f:facet>
     <h:form>
@@ -169,7 +175,7 @@
         <h:outputText value="Edit Car Information"/>
     </f:facet>
     <f:facet name="controls">
-        <h:graphicImage url="images/close.jpeg" styleClass="close-image"
+        <h:graphicImage url="images/close.jpeg" styleClass="square-image"
                         onclick="#{rich:component('carEditPanel')}.hide()"/>
     </f:facet>
     <h:form>
@@ -197,7 +203,7 @@
         <h:outputText value="Delete Car"/>
     </f:facet>
     <f:facet name="controls">
-        <h:graphicImage url="images/close.jpeg" styleClass="close-image"
+        <h:graphicImage url="images/close.jpeg" styleClass="square-image"
                         onclick="#{rich:component('carDeletePanel')}.hide()"/>
     </f:facet>
     <h:form>
@@ -211,6 +217,33 @@
                                    oncomplete="#{rich:component('carDeletePanel')}.hide()" render="dataTable"/>
                 <a4j:commandButton value="Cancel"
                                    oncomplete="#{rich:component('carDeletePanel')}.hide()"/>
+            </h:panelGrid>
+        </a4j:outputPanel>
+    </h:form>
+</rich:popupPanel>
+
+<rich:popupPanel modal="true" id="carCreatePanel" width="350" height="180">
+    <f:facet name="header">
+        <h:outputText value="Add new car"/>
+    </f:facet>
+    <f:facet name="controls">
+        <h:graphicImage url="images/close.jpeg" styleClass="square-image"
+                        onclick="#{rich:component('carCreatePanel')}.hide()"/>
+    </f:facet>
+    <h:form>
+        <a4j:outputPanel ajaxRendered="true">
+            <h:panelGrid columns="2" styleClass="panel-text">
+                <f:facet name="header">
+                    <h:outputText value="Create new record"/>
+                </f:facet>
+                <h:outputText value="Make"/>
+                <h:inputText value="#{carInfoBean.car.model.make}"/>
+                <h:outputText value="Model"/>
+                <h:inputText value="#{carInfoBean.car.model.model}"/>
+                <h:outputText value="Price"/>
+                <h:inputText value="#{carInfoBean.car.price}"/>
+                <a4j:commandButton value="Create" action="#{carInfoBean.createCar()}"
+                                   oncomplete="#{rich:component('carCreatePanel')}.hide()"/>
             </h:panelGrid>
         </a4j:outputPanel>
     </h:form>
