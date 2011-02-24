@@ -1,4 +1,4 @@
-package com.exadel.democars.view.beans;
+package com.exadel.democars.view.beans.table;
 
 import com.exadel.democars.model.entities.Car;
 import com.exadel.democars.model.persistence.DataManager;

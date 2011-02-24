@@ -1,8 +1,10 @@
 package com.exadel.democars.model.persistence;
 
-import com.exadel.democars.view.model.DefaultDataSource;
-import com.exadel.democars.view.model.FilterableDataSource;
-import com.exadel.democars.view.model.SortableDataSource;
+import com.exadel.democars.util.JpqlExpressionBuilder;
+import com.exadel.democars.view.model.datasource.DefaultDataSource;
+import com.exadel.democars.view.model.datasource.FilterableDataSource;
+import com.exadel.democars.view.model.datasource.JpqlDataSource;
+import com.exadel.democars.view.model.datasource.SortableDataSource;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -35,71 +37,54 @@ public class DataManager {
         entityTransaction.commit();
     }
 
-    private Query getRangedQuery(DefaultDataSource source) {
-        Query rangedQuery = entityManager.createNamedQuery(source.getQueryName());
+    private Query buildRangedQuery(JpqlExpressionBuilder builder, JpqlDataSource source) {
+        Query rangedQuery = entityManager.createQuery(builder.getExpression());
+
+        // ! bad thing
+        rowCount = rangedQuery.getResultList().size();
+
         rangedQuery.setFirstResult(source.getCurrentPage() * source.getPageSize() - source.getPageSize());
         rangedQuery.setMaxResults(source.getPageSize());
         return rangedQuery;
     }
 
     public List getRangedList(DefaultDataSource source) {
-        rowCount = getRangedQuery(source).getResultList().size();
-        return getRangedQuery(source).getResultList();
+        JpqlExpressionBuilder builder = new JpqlExpressionBuilder(source);
+        builder.buildSelectExpression();
+        return buildRangedQuery(builder, source).getResultList();
     }
 
     public List getRangedSortedList(SortableDataSource source) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("select c from ")
-                .append(source.getTableName())
-                .append(" c order by ")
-                .append(source.getSortParam()).append(" ")
-                .append(source.getSortOrder());
-        Query rangedQuery = entityManager.createQuery(sb.toString());
-
-        // Another query to DB
-        rowCount = rangedQuery.getResultList().size();
-
-        rangedQuery.setFirstResult(source.getCurrentPage() * source.getPageSize() - source.getPageSize());
-        rangedQuery.setMaxResults(source.getPageSize());
-        return rangedQuery.getResultList();
+        JpqlExpressionBuilder builder = new JpqlExpressionBuilder(source);
+        builder.buildSelectExpression();
+        builder.buildOrderByExpression(source.getSortParam(), source.getSortOrder());
+        return buildRangedQuery(builder, source).getResultList();
     }
 
     public List getRangedFilteredList(FilterableDataSource source) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("select c from ")
-                .append(source.getTableName())
-                .append(" c ");
+        JpqlExpressionBuilder builder = new JpqlExpressionBuilder(source);
+        builder.buildSelectExpression();
 
         Set<Map.Entry<String, Object>> entrySet = source.getFilterParams().entrySet();
         if (!entrySet.isEmpty()) {
-            sb.append("where ");
+            builder.addWhere();
         }
         int counter = 0;
         for (Map.Entry<String, Object> entry : entrySet) {
             counter++;
-            sb.append("upper(c.")
-                    .append(entry.getKey())
-                    .append(") ")
-                    .append(source.getFilterExpressions().get(entry.getKey()));
-
-            if (entrySet.size() > 1 && counter <= entrySet.size() - 1) {
-                sb.append(" and ");
+            if (entry.getValue() instanceof String) {
+                builder.buildLikeExpression(entry.getKey(), entry.getValue());
+                if (entrySet.size() > 1 && counter <= entrySet.size() - 1) {
+                    builder.addAnd();
+                }
+            } else if (entry.getValue() instanceof Number) {
+                builder.buildComparsionExpression(entry.getKey(), entry.getValue(), "<=");
+                if (entrySet.size() > 1 && counter <= entrySet.size() - 1) {
+                    builder.addAnd();
+                }
             }
         }
-        Query rangedQuery = entityManager.createQuery(sb.toString());
-
-        // Another query to DB
-        rowCount = rangedQuery.getResultList().size();
-
-        rangedQuery.setFirstResult(source.getCurrentPage() * source.getPageSize() - source.getPageSize());
-        rangedQuery.setMaxResults(source.getPageSize());
-        return rangedQuery.getResultList();
-    }
-
-    public Integer getSingle(String queryName) {
-        Query countQuery = entityManager.createNamedQuery(queryName);
-        Long result = (Long) countQuery.getSingleResult();
-        return result.intValue();
+        return buildRangedQuery(builder, source).getResultList();
     }
 
     public Integer getRowCount() {

@@ -1,5 +1,6 @@
-package com.exadel.democars.view.model;
+package com.exadel.democars.view.model.table;
 
+import com.exadel.democars.view.model.datasource.SortableDataSource;
 import org.richfaces.component.SortOrder;
 
 import static org.richfaces.component.SortOrder.ascending;

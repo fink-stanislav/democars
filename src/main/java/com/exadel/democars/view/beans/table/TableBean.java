@@ -1,9 +1,9 @@
-package com.exadel.democars.view.beans;
+package com.exadel.democars.view.beans.table;
 
 import com.exadel.democars.model.entities.Car;
-import com.exadel.democars.view.model.TableDataModel;
-import com.exadel.democars.view.model.TableFilter;
-import com.exadel.democars.view.model.TableSort;
+import com.exadel.democars.view.model.table.TableDataModel;
+import com.exadel.democars.view.model.table.TableFilter;
+import com.exadel.democars.view.model.table.TableSort;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;

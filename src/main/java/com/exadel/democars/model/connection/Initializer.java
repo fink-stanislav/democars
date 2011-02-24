@@ -1,4 +1,4 @@
-package com.exadel.democars.application;
+package com.exadel.democars.model.connection;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;

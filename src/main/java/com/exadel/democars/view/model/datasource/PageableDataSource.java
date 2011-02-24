@@ -1,6 +1,8 @@
-package com.exadel.democars.view.model;
+package com.exadel.democars.view.model.datasource;
 
-public abstract class PagebleDataSource<T> implements DataSource<T> {
+import com.exadel.democars.view.model.table.TableDataModel;
+
+public abstract class PageableDataSource<T> implements DataSource<T> {
     protected Integer pageSize = 10;
     protected Integer currentPage = 1;
     protected TableDataModel tableDataModel;

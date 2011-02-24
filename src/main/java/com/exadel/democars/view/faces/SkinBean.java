@@ -1,4 +1,4 @@
-package com.exadel.democars.beans.faces;
+package com.exadel.democars.view.faces;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;

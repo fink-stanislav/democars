@@ -65,10 +65,10 @@
                              currencySymbol="$" maxIntegerDigits="7" type="currency" locale="us"/>
         </h:outputText>
         <f:facet name="footer">
-            <!--<a4j:commandLink action="#{tableBean.tableFilter.filter()}" render="dataTable">-->
+            <a4j:commandLink action="#{tableBean.tableFilter.filter()}" render="dataTable">
                 <h:outputText value="Filter by price:"/>
-            <!--</a4j:commandLink>-->
-            <!--<h:inputText value="#{tableBean.tableFilter.filterParams['price']}"/>-->
+            </a4j:commandLink>
+            <h:inputText converter="javax.faces.Double" value="#{tableBean.tableFilter.filterParams['price']}"/>
         </f:facet>
     </rich:column>
 

@@ -2,12 +2,15 @@ package com.exadel.democars.model.entities;
 
 import com.exadel.democars.beans.car.Condition;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
-@NamedQueries({
-        @NamedQuery(name = "allCars", query = "select c from Car c")
-})
 public class Car {
     @Id
     @GeneratedValue

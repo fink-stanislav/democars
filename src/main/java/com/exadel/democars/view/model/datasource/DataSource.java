@@ -1,4 +1,4 @@
-package com.exadel.democars.view.model;
+package com.exadel.democars.view.model.datasource;
 
 import java.util.List;
 

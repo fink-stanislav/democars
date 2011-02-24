@@ -1,6 +1,8 @@
-package com.exadel.democars.view.model;
+package com.exadel.democars.view.model.table;
 
 import com.exadel.democars.model.persistence.DataManager;
+import com.exadel.democars.view.model.datasource.DefaultDataSource;
+import com.exadel.democars.view.model.datasource.PageableDataSource;
 
 import javax.faces.model.DataModel;
 import java.io.Serializable;
@@ -12,7 +14,7 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
     private List<T> rows;
     private Integer pageSize = 10;
     private Integer currentPage = 1;
-    private PagebleDataSource<T> currentDataSource;
+    private PageableDataSource<T> currentDataSource;
 
     public TableDataModel(Integer pageSize, Integer currentPage) {
         this.pageSize = pageSize;
@@ -85,11 +87,11 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
         return dataManager;
     }
 
-    public PagebleDataSource getCurrentDataSource() {
+    public PageableDataSource getCurrentDataSource() {
         return currentDataSource;
     }
 
-    public void setCurrentDataSource(PagebleDataSource currentDataSource) {
+    public void setCurrentDataSource(PageableDataSource currentDataSource) {
         this.currentDataSource = currentDataSource;
     }
 }
