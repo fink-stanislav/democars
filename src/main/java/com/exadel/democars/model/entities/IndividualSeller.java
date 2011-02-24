@@ -1,6 +1,7 @@
 package com.exadel.democars.model.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.OrderBy;
 
 @Entity
 public class IndividualSeller extends Seller {
