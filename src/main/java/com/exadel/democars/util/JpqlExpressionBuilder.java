@@ -43,9 +43,18 @@ public class JpqlExpressionBuilder {
         expression.append(sb);
     }
 
-    public void buildOrderByExpression(String paramName, String sortOrder) {
+    public void buildOrderByExpression() {
+        expression.append(" order by ");
+    }
+
+    public void addComma() {
+        expression.append(" , ");
+    }
+
+    public void addOrderParams(String paramName, String sortOrder) {
         StringBuilder sb = new StringBuilder();
-        sb.append(" order by ")
+        sb.append(" ")
+                .append(sqlTableAlias).append(".")
                 .append(paramName).append(" ")
                 .append(sortOrder);
         expression.append(sb);

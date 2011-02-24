@@ -1,12 +1,13 @@
 package com.exadel.democars.view.model.datasource;
 
 import com.exadel.democars.view.model.table.TableDataModel;
+import org.richfaces.component.SortOrder;
 
 import java.util.List;
+import java.util.Map;
 
 public class SortableDataSource<T> extends JpqlDataSource<T> {
-    private String sortParam;
-    private String sortOrder;
+    private Map<String, SortOrder> sortParams;
 
     public SortableDataSource(TableDataModel tableDataModel) {
         this.tableDataModel = tableDataModel;
@@ -24,19 +25,11 @@ public class SortableDataSource<T> extends JpqlDataSource<T> {
         return tableDataModel.getDataManager().getRowCount();
     }
 
-    public String getSortParam() {
-        return sortParam;
+    public Map<String, SortOrder> getSortParams() {
+        return sortParams;
     }
 
-    public void setSortParam(String sortParam) {
-        this.sortParam = sortParam;
-    }
-
-    public String getSortOrder() {
-        return sortOrder;
-    }
-
-    public void setSortOrder(String sortOrder) {
-        this.sortOrder = sortOrder;
+    public void setSortParams(Map<String, SortOrder> sortParams) {
+        this.sortParams = sortParams;
     }
 }

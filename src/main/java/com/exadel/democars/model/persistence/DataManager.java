@@ -5,6 +5,7 @@ import com.exadel.democars.view.model.datasource.DefaultDataSource;
 import com.exadel.democars.view.model.datasource.FilterableDataSource;
 import com.exadel.democars.view.model.datasource.JpqlDataSource;
 import com.exadel.democars.view.model.datasource.SortableDataSource;
+import org.richfaces.component.SortOrder;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -57,7 +58,28 @@ public class DataManager {
     public List getRangedSortedList(SortableDataSource source) {
         JpqlExpressionBuilder builder = new JpqlExpressionBuilder(source);
         builder.buildSelectExpression();
-        builder.buildOrderByExpression(source.getSortParam(), source.getSortOrder());
+
+        Set<Map.Entry<String, SortOrder>> entrySet = source.getSortParams().entrySet();
+        if (entrySet.isEmpty()) {
+            return buildRangedQuery(builder, source).getResultList();
+        }
+
+        builder.buildOrderByExpression();
+        int counter = 0;
+        for (Map.Entry<String, SortOrder> entry : entrySet) {
+            counter++;
+            if (entry.getValue() == SortOrder.ascending) {
+                builder.addOrderParams(entry.getKey(), "asc");
+                if (isRangeOk(entrySet.size(), counter)) {
+                    builder.addComma();
+                }
+            } else if (entry.getValue() == SortOrder.descending) {
+                builder.addOrderParams(entry.getKey(), "desc");
+                if (isRangeOk(entrySet.size(), counter)) {
+                    builder.addComma();
+                }
+            }
+        }
         return buildRangedQuery(builder, source).getResultList();
     }
 
@@ -66,25 +88,31 @@ public class DataManager {
         builder.buildSelectExpression();
 
         Set<Map.Entry<String, Object>> entrySet = source.getFilterParams().entrySet();
-        if (!entrySet.isEmpty()) {
-            builder.addWhere();
+        if (entrySet.isEmpty()) {
+            return buildRangedQuery(builder, source).getResultList();
         }
+
+        builder.addWhere();
         int counter = 0;
         for (Map.Entry<String, Object> entry : entrySet) {
             counter++;
             if (entry.getValue() instanceof String) {
                 builder.buildLikeExpression(entry.getKey(), entry.getValue());
-                if (entrySet.size() > 1 && counter <= entrySet.size() - 1) {
+                if (isRangeOk(entrySet.size(), counter)) {
                     builder.addAnd();
                 }
             } else if (entry.getValue() instanceof Number) {
                 builder.buildComparsionExpression(entry.getKey(), entry.getValue(), "<=");
-                if (entrySet.size() > 1 && counter <= entrySet.size() - 1) {
+                if (isRangeOk(entrySet.size(), counter)) {
                     builder.addAnd();
                 }
             }
         }
         return buildRangedQuery(builder, source).getResultList();
+    }
+
+    private boolean isRangeOk(Integer size, Integer position) {
+        return size > 1 && position <= size - 1;
     }
 
     public Integer getRowCount() {
