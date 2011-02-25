@@ -43,6 +43,11 @@ public class JpqlExpressionBuilder {
         expression.append(sb);
     }
 
+    public JpqlExpressionBuilder append(String expression) {
+        this.expression.append(" ").append(expression);
+        return this;
+    }
+
     public void buildOrderByExpression() {
         expression.append(" order by ");
     }

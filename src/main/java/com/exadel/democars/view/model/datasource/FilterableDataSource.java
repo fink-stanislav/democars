@@ -22,7 +22,7 @@ public class FilterableDataSource<T> extends JpqlDataSource<T> {
 
     public JpqlExpressionBuilder evaluateFilterExpression() {
         JpqlExpressionBuilder builder = new JpqlExpressionBuilder(this);
-        builder.buildSelectExpression();
+        // builder.buildSelectExpression();
 
         Set<Map.Entry<String, Object>> entrySet = filterParams.entrySet();
         if (entrySet.isEmpty()) {
@@ -49,7 +49,10 @@ public class FilterableDataSource<T> extends JpqlDataSource<T> {
     }
 
     public List<T> updateRows() {
-        return tableDataModel.getDataManager().executeQuery(evaluateFilterExpression(), this);
+        JpqlExpressionBuilder builder = new JpqlExpressionBuilder(this);
+        builder.buildSelectExpression();
+        builder.append(evaluateFilterExpression().getExpression());
+        return tableDataModel.getDataManager().executeQuery(builder, this);
     }
 
     public Integer rowCount() {

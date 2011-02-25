@@ -3,6 +3,7 @@ package com.exadel.democars.view.beans.table;
 import com.exadel.democars.model.entities.Car;
 import com.exadel.democars.view.model.table.TableDataModel;
 import com.exadel.democars.view.model.table.TableFilter;
+import com.exadel.democars.view.model.table.TableFilterSort;
 import com.exadel.democars.view.model.table.TableSort;
 
 import javax.faces.bean.ManagedBean;
@@ -16,13 +17,11 @@ public class TableBean implements Serializable {
     private TableDataModel<Car> tableModel;
     private Integer currentPage = 1;
     private Integer pageSize = 10;
-    private TableFilter tableFilter;
-    private TableSort tableSort;
+    private TableFilterSort<Car> tableFilterSort;
 
     public TableBean() {
         tableModel = new TableDataModel<Car>(pageSize, currentPage);
-        tableSort = new TableSort(tableModel);
-        tableFilter = new TableFilter(tableModel);
+        tableFilterSort = new TableFilterSort<Car>(tableModel);
     }
 
     public DataModel getCars() {
@@ -49,10 +48,10 @@ public class TableBean implements Serializable {
     }
 
     public TableFilter getTableFilter() {
-        return tableFilter;
+        return tableFilterSort.getTableFilter();
     }
 
     public TableSort getTableSort() {
-        return tableSort;
+        return tableFilterSort.getTableSort();
     }
 }

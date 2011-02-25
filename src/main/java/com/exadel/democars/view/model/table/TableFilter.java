@@ -18,9 +18,9 @@ public class TableFilter<T> {
         return filterParams;
     }
 
-    public void filter() {
+    public FilterableDataSource filter() {
         FilterableDataSource<T> filterableDataSource = new FilterableDataSource<T>(tableDataModel);
         filterableDataSource.setFilterParams(filterParams);
-        tableDataModel.setCurrentDataSource(filterableDataSource);
+        return filterableDataSource;
     }
 }

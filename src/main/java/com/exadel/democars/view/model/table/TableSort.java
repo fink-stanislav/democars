@@ -47,7 +47,7 @@ public class TableSort<T> {
         sort();
     }
 
-    public void sort() {
+    public SortableDataSource sort() {
         Map<String, SortOrder> sortParams = new HashMap<String, SortOrder>();
         sortParams.putAll(this.sortParams);
         Set<Map.Entry<String, SortOrder>> entrySet = this.sortParams.entrySet();
@@ -58,6 +58,6 @@ public class TableSort<T> {
         }
         SortableDataSource sortableDataSource = new SortableDataSource(tableDataModel);
         sortableDataSource.setSortParams(sortParams);
-        tableDataModel.setCurrentDataSource(sortableDataSource);
+        return sortableDataSource;
     }
 }

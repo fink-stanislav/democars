@@ -21,7 +21,7 @@ public class SortableDataSource<T> extends JpqlDataSource<T> {
 
     public JpqlExpressionBuilder evaluateSortExpression() {
         JpqlExpressionBuilder builder = new JpqlExpressionBuilder(this);
-        builder.buildSelectExpression();
+        // builder.buildSelectExpression();
 
         Set<Map.Entry<String, SortOrder>> entrySet = sortParams.entrySet();
         if (entrySet.isEmpty()) {
@@ -48,7 +48,10 @@ public class SortableDataSource<T> extends JpqlDataSource<T> {
     }
 
     public List<T> updateRows() {
-        return tableDataModel.getDataManager().executeQuery(evaluateSortExpression(), this);
+        JpqlExpressionBuilder builder = new JpqlExpressionBuilder(this);
+        builder.buildSelectExpression();
+        builder.append(evaluateSortExpression().getExpression());
+        return tableDataModel.getDataManager().executeQuery(builder, this);
     }
 
     public Integer rowCount() {
