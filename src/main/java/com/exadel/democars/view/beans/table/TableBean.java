@@ -47,11 +47,7 @@ public class TableBean implements Serializable {
         this.pageSize = pageSize;
     }
 
-    public TableFilter getTableFilter() {
-        return tableFilterSort.getTableFilter();
-    }
-
-    public TableSort getTableSort() {
-        return tableFilterSort.getTableSort();
+    public TableFilterSort<Car> getTableFilterSort() {
+        return tableFilterSort;
     }
 }

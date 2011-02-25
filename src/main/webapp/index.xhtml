@@ -25,27 +25,27 @@
             <f:facet name="label">
                 <h:outputText value="Make"/>
             </f:facet>
-            <rich:menuItem action="#{tableBean.tableSort.sortAscending('model.make')}"
+            <rich:menuItem action="#{tableBean.tableFilterSort.sortAscending('model.make')}"
                            render="dataTable" mode="ajax" styleClass="menuItem">
                 <f:facet name="icon">
                     <h:selectBooleanCheckbox disabled="true"
-                                             value="#{tableBean.tableSort.isAscending('model.make')}"/>
+                                             value="#{tableBean.tableFilterSort.isAscending('model.make')}"/>
                 </f:facet>
                 <h:outputText value="Ascending sort"/>
             </rich:menuItem>
-            <rich:menuItem action="#{tableBean.tableSort.sortDescending('model.make')}"
+            <rich:menuItem action="#{tableBean.tableFilterSort.sortDescending('model.make')}"
                            render="dataTable" mode="ajax" styleClass="menuItem">
                 <f:facet name="icon">
                     <h:selectBooleanCheckbox disabled="true"
-                                             value="#{tableBean.tableSort.isDescending('model.make')}"/>
+                                             value="#{tableBean.tableFilterSort.isDescending('model.make')}"/>
                 </f:facet>
                 <h:outputText value="Descending sort"/>
             </rich:menuItem>
-            <rich:menuItem action="#{tableBean.tableSort.makeUnsorted('model.make')}"
+            <rich:menuItem action="#{tableBean.tableFilterSort.makeUnsorted('model.make')}"
                            render="dataTable" mode="ajax" styleClass="menuItem">
                 <f:facet name="icon">
                     <h:selectBooleanCheckbox disabled="true"
-                                             value="#{tableBean.tableSort.isUnsorted('model.make')}"/>
+                                             value="#{tableBean.tableFilterSort.isUnsorted('model.make')}"/>
                 </f:facet>
                 <h:outputText value="Unsorted"/>
             </rich:menuItem>
@@ -53,10 +53,10 @@
     </f:facet>
     <h:outputText value="#{car.model.make}"/>
     <f:facet name="footer">
-        <a4j:commandLink id="filterByMakeLink" action="#{tableBean.tableFilter.filter()}" render="dataTable">
+        <a4j:commandLink id="filterByMakeLink" action="#{tableBean.tableFilterSort.filter()}" render="dataTable">
             <h:outputText value="Filter by make:"/>
         </a4j:commandLink>
-        <h:inputText value="#{tableBean.tableFilter.filterParams['model.make']}"/>
+        <h:inputText value="#{tableBean.tableFilterSort.filterParams['model.make']}"/>
     </f:facet>
 </rich:column>
 
@@ -66,27 +66,27 @@
             <f:facet name="label">
                 <h:outputText value="Model"/>
             </f:facet>
-            <rich:menuItem action="#{tableBean.tableSort.sortAscending('model.model')}"
+            <rich:menuItem action="#{tableBean.tableFilterSort.sortAscending('model.model')}"
                            render="dataTable" mode="ajax" styleClass="menuItem">
                 <f:facet name="icon">
                     <h:selectBooleanCheckbox disabled="true"
-                                             value="#{tableBean.tableSort.isAscending('model.model')}"/>
+                                             value="#{tableBean.tableFilterSort.isAscending('model.model')}"/>
                 </f:facet>
                 <h:outputText value="Ascending sort"/>
             </rich:menuItem>
-            <rich:menuItem action="#{tableBean.tableSort.sortDescending('model.model')}"
+            <rich:menuItem action="#{tableBean.tableFilterSort.sortDescending('model.model')}"
                            render="dataTable" mode="ajax" styleClass="menuItem">
                 <f:facet name="icon">
                     <h:selectBooleanCheckbox disabled="true"
-                                             value="#{tableBean.tableSort.isDescending('model.model')}"/>
+                                             value="#{tableBean.tableFilterSort.isDescending('model.model')}"/>
                 </f:facet>
                 <h:outputText value="Descending sort"/>
             </rich:menuItem>
-            <rich:menuItem action="#{tableBean.tableSort.makeUnsorted('model.model')}"
+            <rich:menuItem action="#{tableBean.tableFilterSort.makeUnsorted('model.model')}"
                            render="dataTable" mode="ajax" styleClass="menuItem">
                 <f:facet name="icon">
                     <h:selectBooleanCheckbox disabled="true"
-                                             value="#{tableBean.tableSort.isUnsorted('model.model')}"/>
+                                             value="#{tableBean.tableFilterSort.isUnsorted('model.model')}"/>
                 </f:facet>
                 <h:outputText value="Unsorted"/>
             </rich:menuItem>
@@ -94,10 +94,10 @@
     </f:facet>
     <h:outputText value="#{car.model.model}"/>
     <f:facet name="footer">
-        <a4j:commandLink id="filterByModelLink" action="#{tableBean.tableFilter.filter()}" render="dataTable">
+        <a4j:commandLink id="filterByModelLink" action="#{tableBean.tableFilterSort.filter()}" render="dataTable">
             <h:outputText value="Filter by model:"/>
         </a4j:commandLink>
-        <h:inputText value="#{tableBean.tableFilter.filterParams['model.model']}"/>
+        <h:inputText value="#{tableBean.tableFilterSort.filterParams['model.model']}"/>
     </f:facet>
 </rich:column>
 
@@ -107,27 +107,27 @@
             <f:facet name="label">
                 <h:outputText value="Price"/>
             </f:facet>
-            <rich:menuItem action="#{tableBean.tableSort.sortAscending('price')}"
+            <rich:menuItem action="#{tableBean.tableFilterSort.sortAscending('price')}"
                            render="dataTable" mode="ajax" styleClass="menuItem">
                 <f:facet name="icon">
                     <h:selectBooleanCheckbox disabled="true"
-                                             value="#{tableBean.tableSort.isAscending('price')}"/>
+                                             value="#{tableBean.tableFilterSort.isAscending('price')}"/>
                 </f:facet>
                 <h:outputText value="Ascending sort"/>
             </rich:menuItem>
-            <rich:menuItem action="#{tableBean.tableSort.sortDescending('price')}"
+            <rich:menuItem action="#{tableBean.tableFilterSort.sortDescending('price')}"
                            render="dataTable" mode="ajax" styleClass="menuItem">
                 <f:facet name="icon">
                     <h:selectBooleanCheckbox disabled="true"
-                                             value="#{tableBean.tableSort.isDescending('price')}"/>
+                                             value="#{tableBean.tableFilterSort.isDescending('price')}"/>
                 </f:facet>
                 <h:outputText value="Descending sort"/>
             </rich:menuItem>
-            <rich:menuItem action="#{tableBean.tableSort.makeUnsorted('price')}"
+            <rich:menuItem action="#{tableBean.tableFilterSort.makeUnsorted('price')}"
                            render="dataTable" mode="ajax" styleClass="menuItem">
                 <f:facet name="icon">
                     <h:selectBooleanCheckbox disabled="true"
-                                             value="#{tableBean.tableSort.isUnsorted('price')}"/>
+                                             value="#{tableBean.tableFilterSort.isUnsorted('price')}"/>
                 </f:facet>
                 <h:outputText value="Unsorted"/>
             </rich:menuItem>
@@ -138,10 +138,10 @@
                          currencySymbol="$" maxIntegerDigits="7" type="currency" locale="us"/>
     </h:outputText>
     <f:facet name="footer">
-        <a4j:commandLink id="filterByPriceLink" action="#{tableBean.tableFilter.filter()}" render="dataTable">
+        <a4j:commandLink id="filterByPriceLink" action="#{tableBean.tableFilterSort.filter()}" render="dataTable">
             <h:outputText value="Filter by price:"/>
         </a4j:commandLink>
-        <h:inputText converter="javax.faces.Double" value="#{tableBean.tableFilter.filterParams['price']}"/>
+        <h:inputText converter="javax.faces.Double" value="#{tableBean.tableFilterSort.filterParams['price']}"/>
     </f:facet>
 </rich:column>
 
@@ -172,27 +172,27 @@
             <f:facet name="label">
                 <h:outputText value="Seller"/>
             </f:facet>
-            <rich:menuItem action="#{tableBean.tableSort.sortAscending('seller.address.city')}"
+            <rich:menuItem action="#{tableBean.tableFilterSort.sortAscending('seller.address.city')}"
                            render="dataTable" mode="ajax" styleClass="menuItem">
                 <f:facet name="icon">
                     <h:selectBooleanCheckbox disabled="true"
-                                             value="#{tableBean.tableSort.isAscending('seller.address.city')}"/>
+                                             value="#{tableBean.tableFilterSort.isAscending('seller.address.city')}"/>
                 </f:facet>
                 <h:outputText value="Ascending sort"/>
             </rich:menuItem>
-            <rich:menuItem action="#{tableBean.tableSort.sortDescending('seller.address.city')}"
+            <rich:menuItem action="#{tableBean.tableFilterSort.sortDescending('seller.address.city')}"
                            render="dataTable" mode="ajax" styleClass="menuItem">
                 <f:facet name="icon">
                     <h:selectBooleanCheckbox disabled="true"
-                                             value="#{tableBean.tableSort.isDescending('seller.address.city')}"/>
+                                             value="#{tableBean.tableFilterSort.isDescending('seller.address.city')}"/>
                 </f:facet>
                 <h:outputText value="Descending sort"/>
             </rich:menuItem>
-            <rich:menuItem action="#{tableBean.tableSort.makeUnsorted('seller.address.city')}"
+            <rich:menuItem action="#{tableBean.tableFilterSort.makeUnsorted('seller.address.city')}"
                            render="dataTable" mode="ajax" styleClass="menuItem">
                 <f:facet name="icon">
                     <h:selectBooleanCheckbox disabled="true"
-                                             value="#{tableBean.tableSort.isUnsorted('seller.address.city')}"/>
+                                             value="#{tableBean.tableFilterSort.isUnsorted('seller.address.city')}"/>
                 </f:facet>
                 <h:outputText value="Unsorted"/>
             </rich:menuItem>
