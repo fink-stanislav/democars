@@ -12,13 +12,13 @@
         <h:outputText value="Seller Type"/>
         <h:inputText/>
         <h:outputText value="City"/>
-        <h:inputText value="#{carCreationBean.seller.address.city}"/>
+        <h:inputText/>
         <h:outputText value="Street"/>
-        <h:inputText value="#{carCreationBean.seller.address.street}"/>
+        <h:inputText/>
         <a4j:commandButton value="Previous">
             <rich:toggleControl disableDefault="true" targetItem="@prev" event="click"/>
         </a4j:commandButton>
-        <a4j:commandButton value="Create" render="dataTable"
+        <a4j:commandButton value="Create" action="#{carCreationBean.createCar}" render="dataTable"
                            oncomplete="#{rich:component('carCreatePanel')}.hide()"/>
     </h:panelGrid>
 

@@ -4,11 +4,11 @@ import com.exadel.democars.model.entities.Car;
 import com.exadel.democars.model.persistence.DataManager;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
 
 @ManagedBean(name = "carBean")
-@RequestScoped
+@SessionScoped
 public class CarBean implements Serializable {
     private Car car;
     private DataManager dataManager;
@@ -31,9 +31,5 @@ public class CarBean implements Serializable {
 
     public void updateCar() {
         dataManager.updateEntity(car);
-    }
-
-    public void createCar() {
-        return;
     }
 }

@@ -11,17 +11,23 @@
             <h:outputText value="Common Car Information"/>
         </f:facet>
         <h:outputText value="Make"/>
-        <h:inputText value="#{carCreationBean.car.model.make}"/>
+        <h:inputText value="#{carCreationBean.property}" required="true">
+            <rich:validator/>
+        </h:inputText>
+
         <h:outputText value="Model"/>
-        <h:inputText value="#{carCreationBean.car.model.model}"/>
+        <h:inputText required="true">
+            <rich:validator/>
+        </h:inputText>
+
         <h:outputText value="Price"/>
-        <h:inputText value="#{carCreationBean.car.price}"/>
+        <h:inputText required="true"/>
         <h:outputText value="Mileage"/>
-        <h:inputText value="#{carCreationBean.car.mileage}"/>
+        <h:inputText required="true"/>
         <h:outputText value="Vin"/>
-        <h:inputText value="#{carCreationBean.car.vin}"/>
+        <h:inputText required="true"/>
         <h:outputText value="Condition"/>
-        <h:inputText value="#{carCreationBean.car.condition}"/>
+        <h:inputText required="true"/>
         <a4j:commandButton value="Next">
             <rich:toggleControl disableDefault="true" targetItem="@next" event="click"/>
         </a4j:commandButton>
