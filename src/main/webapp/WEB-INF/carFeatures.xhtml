@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j">
+
+    <h:panelGrid columns="2" styleClass="panel-text">
+        <f:facet name="header">
+            <h:outputText value="Car Features"/>
+        </f:facet>
+        <h:outputText value="Body Type"/>
+        <h:inputText value="#{carCreationBean.features.bodyType}"/>
+        <h:outputText value="Engine"/>
+        <h:inputText value="#{carCreationBean.features.engine}"/>
+        <h:outputText value="Fuel"/>
+        <h:inputText value="#{carCreationBean.features.fuel}"/>
+        <h:outputText value="Transmission"/>
+        <h:inputText value="#{carCreationBean.features.transmission}"/>
+        <h:outputText value="Exterior Color"/>
+        <h:inputText value="#{carCreationBean.features.exteriorColor}"/>
+        <h:outputText value="Interior Color"/>
+        <h:inputText value="#{carCreationBean.features.interiorColor}"/>
+        <a4j:commandButton value="Previous">
+            <rich:toggleControl disableDefault="true" targetItem="@prev" event="click"/>
+        </a4j:commandButton>
+        <a4j:commandButton value="Next">
+            <rich:toggleControl disableDefault="true" targetItem="@next" event="click"/>
+        </a4j:commandButton>
+    </h:panelGrid>
+
+</ui:composition>

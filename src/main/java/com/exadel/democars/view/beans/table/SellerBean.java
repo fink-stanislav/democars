@@ -4,10 +4,11 @@ import com.exadel.democars.model.entities.Seller;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import java.io.Serializable;
 
-@ManagedBean(name = "sellerInfoBean")
+@ManagedBean(name = "sellerBean")
 @RequestScoped
-public class SellerInfoBean {
+public class SellerBean implements Serializable {
     private Seller seller;
 
     public Seller getSeller() {

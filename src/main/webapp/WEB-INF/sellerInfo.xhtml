@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j">
+
+    <h:panelGrid columns="2" styleClass="panel-text">
+        <f:facet name="header">
+            <h:outputText value="Seller Information"/>
+        </f:facet>
+        <h:outputText value="Seller Type"/>
+        <h:inputText/>
+        <h:outputText value="City"/>
+        <h:inputText value="#{carCreationBean.seller.address.city}"/>
+        <h:outputText value="Street"/>
+        <h:inputText value="#{carCreationBean.seller.address.street}"/>
+        <a4j:commandButton value="Previous">
+            <rich:toggleControl disableDefault="true" targetItem="@prev" event="click"/>
+        </a4j:commandButton>
+        <a4j:commandButton value="Create" render="dataTable"
+                           oncomplete="#{rich:component('carCreatePanel')}.hide()"/>
+    </h:panelGrid>
+
+</ui:composition>
