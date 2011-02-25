@@ -38,7 +38,7 @@ public class DataManager {
         entityTransaction.commit();
     }
 
-    private Query buildRangedQuery(JpqlExpressionBuilder builder, JpqlDataSource source) {
+    public List executeQuery(JpqlExpressionBuilder builder, JpqlDataSource source) {
         Query rangedQuery = entityManager.createQuery(builder.getExpression());
 
         // ! bad thing
@@ -46,73 +46,7 @@ public class DataManager {
 
         rangedQuery.setFirstResult(source.getCurrentPage() * source.getPageSize() - source.getPageSize());
         rangedQuery.setMaxResults(source.getPageSize());
-        return rangedQuery;
-    }
-
-    public List getRangedList(DefaultDataSource source) {
-        JpqlExpressionBuilder builder = new JpqlExpressionBuilder(source);
-        builder.buildSelectExpression();
-        return buildRangedQuery(builder, source).getResultList();
-    }
-
-    public List getRangedSortedList(SortableDataSource source) {
-        JpqlExpressionBuilder builder = new JpqlExpressionBuilder(source);
-        builder.buildSelectExpression();
-
-        Set<Map.Entry<String, SortOrder>> entrySet = source.getSortParams().entrySet();
-        if (entrySet.isEmpty()) {
-            return buildRangedQuery(builder, source).getResultList();
-        }
-
-        builder.buildOrderByExpression();
-        int counter = 0;
-        for (Map.Entry<String, SortOrder> entry : entrySet) {
-            counter++;
-            if (entry.getValue() == SortOrder.ascending) {
-                builder.addOrderParams(entry.getKey(), "asc");
-                if (isRangeOk(entrySet.size(), counter)) {
-                    builder.addComma();
-                }
-            } else if (entry.getValue() == SortOrder.descending) {
-                builder.addOrderParams(entry.getKey(), "desc");
-                if (isRangeOk(entrySet.size(), counter)) {
-                    builder.addComma();
-                }
-            }
-        }
-        return buildRangedQuery(builder, source).getResultList();
-    }
-
-    public List getRangedFilteredList(FilterableDataSource source) {
-        JpqlExpressionBuilder builder = new JpqlExpressionBuilder(source);
-        builder.buildSelectExpression();
-
-        Set<Map.Entry<String, Object>> entrySet = source.getFilterParams().entrySet();
-        if (entrySet.isEmpty()) {
-            return buildRangedQuery(builder, source).getResultList();
-        }
-
-        builder.addWhere();
-        int counter = 0;
-        for (Map.Entry<String, Object> entry : entrySet) {
-            counter++;
-            if (entry.getValue() instanceof String) {
-                builder.buildLikeExpression(entry.getKey(), entry.getValue());
-                if (isRangeOk(entrySet.size(), counter)) {
-                    builder.addAnd();
-                }
-            } else if (entry.getValue() instanceof Number) {
-                builder.buildComparsionExpression(entry.getKey(), entry.getValue(), "<=");
-                if (isRangeOk(entrySet.size(), counter)) {
-                    builder.addAnd();
-                }
-            }
-        }
-        return buildRangedQuery(builder, source).getResultList();
-    }
-
-    private boolean isRangeOk(Integer size, Integer position) {
-        return size > 1 && position <= size - 1;
+        return rangedQuery.getResultList();
     }
 
     public Integer getRowCount() {

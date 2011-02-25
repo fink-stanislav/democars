@@ -1,10 +1,12 @@
 package com.exadel.democars.view.model.datasource;
 
+import com.exadel.democars.util.JpqlExpressionBuilder;
 import com.exadel.democars.view.model.table.TableDataModel;
 import org.richfaces.component.SortOrder;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class SortableDataSource<T> extends JpqlDataSource<T> {
     private Map<String, SortOrder> sortParams;
@@ -17,8 +19,36 @@ public class SortableDataSource<T> extends JpqlDataSource<T> {
         this.tableAlias = "c";
     }
 
+    public JpqlExpressionBuilder evaluateSortExpression() {
+        JpqlExpressionBuilder builder = new JpqlExpressionBuilder(this);
+        builder.buildSelectExpression();
+
+        Set<Map.Entry<String, SortOrder>> entrySet = sortParams.entrySet();
+        if (entrySet.isEmpty()) {
+            return builder;
+        }
+
+        builder.buildOrderByExpression();
+        int counter = 0;
+        for (Map.Entry<String, SortOrder> entry : entrySet) {
+            counter++;
+            if (entry.getValue() == SortOrder.ascending) {
+                builder.addOrderParams(entry.getKey(), "asc");
+                if (builder.isRangeOk(entrySet.size(), counter)) {
+                    builder.addComma();
+                }
+            } else if (entry.getValue() == SortOrder.descending) {
+                builder.addOrderParams(entry.getKey(), "desc");
+                if (builder.isRangeOk(entrySet.size(), counter)) {
+                    builder.addComma();
+                }
+            }
+        }
+        return builder;
+    }
+
     public List<T> updateRows() {
-        return tableDataModel.getDataManager().getRangedSortedList(this);
+        return tableDataModel.getDataManager().executeQuery(evaluateSortExpression(), this);
     }
 
     public Integer rowCount() {

@@ -71,4 +71,8 @@ public class JpqlExpressionBuilder {
     public String getExpression() {
         return expression.toString();
     }
+
+    public boolean isRangeOk(Integer size, Integer position) {
+        return size > 1 && position <= size - 1;
+    }
 }
