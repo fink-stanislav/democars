@@ -9,10 +9,6 @@ public class DefaultDataSource<T> extends JpqlDataSource<T> {
 
     public DefaultDataSource(TableDataModel tableDataModel) {
         this.tableDataModel = tableDataModel;
-        this.pageSize = tableDataModel.getPageSize();
-        this.currentPage = tableDataModel.getCurrentPage();
-        this.tableName = "Car";
-        this.tableAlias = "c";
     }
 
     public JpqlExpressionBuilder evaluateExpression() {

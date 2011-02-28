@@ -18,15 +18,14 @@ public class TableFilterSort<T> {
 
     public TableFilterSort(TableDataModel tableDataModel) {
         this.tableDataModel = tableDataModel;
+
         filterParams = new HashMap<String, Object>();
-        sortableDataSource = new SortableDataSource<T>(tableDataModel);
         filterableDataSource = new FilterableDataSource<T>(tableDataModel);
+        filterableDataSource.setFilterParams(filterParams);
+
         sortParams = new HashMap<String, SortOrder>();
+        sortableDataSource = new SortableDataSource<T>(tableDataModel);
         sortableDataSource.setSortParams(sortParams);
-        sortParams.put("model.make", SortOrder.unsorted);
-        sortParams.put("model.model", SortOrder.unsorted);
-        sortParams.put("price", SortOrder.unsorted);
-        sortParams.put("seller.address.city", SortOrder.unsorted);
     }
 
     public boolean isUnsorted(String key) {
@@ -56,25 +55,25 @@ public class TableFilterSort<T> {
         sort();
     }
 
+    public Map<String, Object> getFilterParams() {
+        return filterParams;
+    }
+
     public void sort() {
         SortableDataSource<T> sortableDataSource = new SortableDataSource<T>(tableDataModel);
         sortableDataSource.setSortParams(sortParams);
         this.sortableDataSource = sortableDataSource;
-        execute();
-    }
-
-    public Map<String, Object> getFilterParams() {
-        return filterParams;
+        updateModelDataSource();
     }
 
     public void filter() {
         FilterableDataSource<T> filterableDataSource = new FilterableDataSource<T>(tableDataModel);
         filterableDataSource.setFilterParams(filterParams);
         this.filterableDataSource = filterableDataSource;
-        execute();
+        updateModelDataSource();
     }
 
-    private void execute() {
+    private void updateModelDataSource() {
         FilterableSortableDataSource<T> filterableSortableDataSource =
                 new FilterableSortableDataSource<T>(sortableDataSource, filterableDataSource);
         tableDataModel.setCurrentDataSource(filterableSortableDataSource);

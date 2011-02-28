@@ -3,24 +3,22 @@ package com.exadel.democars.view.model.datasource;
 import com.exadel.democars.view.model.table.TableDataModel;
 
 public abstract class PageableDataSource<T> implements DataSource<T> {
-    protected Integer pageSize = 10;
-    protected Integer currentPage = 1;
     protected TableDataModel tableDataModel;
 
     public void setPageSize(Integer pageSize) {
-        this.pageSize = pageSize;
+        tableDataModel.setPageSize(pageSize);
     }
 
     public void setCurrentPage(Integer currentPage) {
-        this.currentPage = currentPage;
+        tableDataModel.setCurrentPage(currentPage);
     }
 
     public Integer getPageSize() {
-        return pageSize;
+        return tableDataModel.getPageSize();
     }
 
     public Integer getCurrentPage() {
-        return currentPage;
+        return tableDataModel.getCurrentPage();
     }
 
     public abstract Integer rowCount();

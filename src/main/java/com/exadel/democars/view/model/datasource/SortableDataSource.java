@@ -14,10 +14,7 @@ public class SortableDataSource<T> extends JpqlDataSource<T> {
 
     public SortableDataSource(TableDataModel tableDataModel) {
         this.tableDataModel = tableDataModel;
-        this.tableName = "Car";
-        this.pageSize = tableDataModel.getPageSize();
-        this.currentPage = tableDataModel.getCurrentPage();
-        this.tableAlias = "c";
+        sortParams = new HashMap<String, SortOrder>();
     }
 
     public JpqlExpressionBuilder evaluateSortExpression() {
@@ -32,7 +29,6 @@ public class SortableDataSource<T> extends JpqlDataSource<T> {
         }
 
         JpqlExpressionBuilder builder = new JpqlExpressionBuilder(this);
-        // builder.buildSelectExpression();
 
         Set<Map.Entry<String, SortOrder>> entrySet = sortParams.entrySet();
         if (entrySet.isEmpty()) {

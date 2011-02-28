@@ -15,11 +15,15 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
     private Integer pageSize = 10;
     private Integer currentPage = 1;
     private PageableDataSource<T> currentDataSource;
+    private String dbTableName;
+    private String dbTableAlias;
 
     public TableDataModel(Integer pageSize, Integer currentPage) {
         this.pageSize = pageSize;
         this.currentPage = currentPage;
         dataManager = new DataManager();
+        dbTableName = "Car";
+        dbTableAlias = "c";
         currentDataSource = new DefaultDataSource<T>(this);
     }
 
@@ -93,5 +97,21 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
 
     public void setCurrentDataSource(PageableDataSource currentDataSource) {
         this.currentDataSource = currentDataSource;
+    }
+
+    public String getDbTableName() {
+        return dbTableName;
+    }
+
+    public void setDbTableName(String dbTableName) {
+        this.dbTableName = dbTableName;
+    }
+
+    public String getDbTableAlias() {
+        return dbTableAlias;
+    }
+
+    public void setDbTableAlias(String dbTableAlias) {
+        this.dbTableAlias = dbTableAlias;
     }
 }

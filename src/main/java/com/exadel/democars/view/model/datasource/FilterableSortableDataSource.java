@@ -10,11 +10,7 @@ public class FilterableSortableDataSource<T> extends JpqlDataSource<T> {
 
     public FilterableSortableDataSource(SortableDataSource sortableDataSource,
                                         FilterableDataSource filterableDataSource) {
-        this.tableName = "Car";
         tableDataModel = sortableDataSource.tableDataModel;
-        this.pageSize = tableDataModel.getPageSize();
-        this.currentPage = tableDataModel.getCurrentPage();
-        this.tableAlias = "c";
         this.sortableDataSource = sortableDataSource;
         this.filterableDataSource = filterableDataSource;
     }

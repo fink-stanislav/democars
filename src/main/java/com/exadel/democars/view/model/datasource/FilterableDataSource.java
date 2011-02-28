@@ -12,17 +12,12 @@ public class FilterableDataSource<T> extends JpqlDataSource<T> {
     private Map<String, Object> filterParams;
 
     public FilterableDataSource(TableDataModel tableDataModel) {
-        this.tableName = "Car";
-        this.pageSize = tableDataModel.getPageSize();
-        this.currentPage = tableDataModel.getCurrentPage();
         this.tableDataModel = tableDataModel;
         this.filterParams = new HashMap<String, Object>();
-        this.tableAlias = "c";
     }
 
     public JpqlExpressionBuilder evaluateFilterExpression() {
         JpqlExpressionBuilder builder = new JpqlExpressionBuilder(this);
-        // builder.buildSelectExpression();
 
         Set<Map.Entry<String, Object>> entrySet = filterParams.entrySet();
         if (entrySet.isEmpty()) {
