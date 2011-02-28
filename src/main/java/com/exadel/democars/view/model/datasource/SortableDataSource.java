@@ -4,6 +4,7 @@ import com.exadel.democars.util.JpqlExpressionBuilder;
 import com.exadel.democars.view.model.table.TableDataModel;
 import org.richfaces.component.SortOrder;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -20,6 +21,16 @@ public class SortableDataSource<T> extends JpqlDataSource<T> {
     }
 
     public JpqlExpressionBuilder evaluateSortExpression() {
+
+        Map<String, SortOrder> sortParams = new HashMap<String, SortOrder>();
+        sortParams.putAll(this.sortParams);
+        Set<Map.Entry<String, SortOrder>> sortParamEntrySet = this.sortParams.entrySet();
+        for (Map.Entry<String, SortOrder> entry : sortParamEntrySet) {
+            if (entry.getValue() == SortOrder.unsorted) {
+                sortParams.remove(entry.getKey());
+            }
+        }
+
         JpqlExpressionBuilder builder = new JpqlExpressionBuilder(this);
         // builder.buildSelectExpression();
 

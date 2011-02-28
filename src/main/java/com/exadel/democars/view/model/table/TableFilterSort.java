@@ -18,10 +18,11 @@ public class TableFilterSort<T> {
 
     public TableFilterSort(TableDataModel tableDataModel) {
         this.tableDataModel = tableDataModel;
-        this.filterParams = new HashMap<String, Object>();
+        filterParams = new HashMap<String, Object>();
         sortableDataSource = new SortableDataSource<T>(tableDataModel);
         filterableDataSource = new FilterableDataSource<T>(tableDataModel);
         sortParams = new HashMap<String, SortOrder>();
+        sortableDataSource.setSortParams(sortParams);
         sortParams.put("model.make", SortOrder.unsorted);
         sortParams.put("model.model", SortOrder.unsorted);
         sortParams.put("price", SortOrder.unsorted);
@@ -56,14 +57,6 @@ public class TableFilterSort<T> {
     }
 
     public void sort() {
-        Map<String, SortOrder> sortParams = new HashMap<String, SortOrder>();
-        sortParams.putAll(this.sortParams);
-        Set<Map.Entry<String, SortOrder>> entrySet = this.sortParams.entrySet();
-        for (Map.Entry<String, SortOrder> entry : entrySet) {
-            if (entry.getValue() == SortOrder.unsorted) {
-                sortParams.remove(entry.getKey());
-            }
-        }
         SortableDataSource<T> sortableDataSource = new SortableDataSource<T>(tableDataModel);
         sortableDataSource.setSortParams(sortParams);
         this.sortableDataSource = sortableDataSource;

@@ -36,27 +36,27 @@ public class CarCreationBean {
     }
 
     public Integer getMileage() {
-        return mileage;
+        return car.getMileage();
     }
 
     public void setMileage(Integer mileage) {
-        this.mileage = mileage;
+        car.setMileage(mileage);
     }
 
     public String getVin() {
-        return vin;
+        return car.getVin();
     }
 
     public void setVin(String vin) {
-        this.vin = vin;
+        car.setVin(vin);
     }
 
     public Condition getCondition() {
-        return condition;
+        return car.getCondition();
     }
 
     public void setCondition(Condition condition) {
-        this.condition = condition;
+        car.setCondition(condition);
     }
 
     public String getModel() {
