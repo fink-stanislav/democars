@@ -5,29 +5,28 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:a4j="http://richfaces.org/a4j">
 
-
     <h:panelGrid columns="2" styleClass="panel-text">
         <f:facet name="header">
             <h:outputText value="Common Car Information"/>
         </f:facet>
         <h:outputText value="Make"/>
-        <h:inputText value="#{carCreationBean.property}" required="true">
-            <rich:validator/>
+        <h:inputText value="#{carCreationBean.make}">
         </h:inputText>
 
         <h:outputText value="Model"/>
-        <h:inputText required="true">
-            <rich:validator/>
+        <h:inputText value="#{carCreationBean.model}">
         </h:inputText>
 
         <h:outputText value="Price"/>
-        <h:inputText required="true"/>
+        <h:inputText value="#{carCreationBean.price}"/>
         <h:outputText value="Mileage"/>
-        <h:inputText required="true"/>
+        <h:inputText value="#{carCreationBean.mileage}"/>
         <h:outputText value="Vin"/>
-        <h:inputText required="true"/>
+        <h:inputText value="#{carCreationBean.vin}"/>
         <h:outputText value="Condition"/>
-        <h:inputText required="true"/>
+        <h:inputText value="#{carCreationBean.condition}">
+            <f:converter converterId="ConditionConverter"/>
+        </h:inputText>
         <a4j:commandButton value="Next">
             <rich:toggleControl disableDefault="true" targetItem="@next" event="click"/>
         </a4j:commandButton>

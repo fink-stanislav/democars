@@ -1,18 +1,12 @@
 package com.exadel.democars.model.persistence;
 
 import com.exadel.democars.util.JpqlExpressionBuilder;
-import com.exadel.democars.view.model.datasource.DefaultDataSource;
-import com.exadel.democars.view.model.datasource.FilterableDataSource;
 import com.exadel.democars.view.model.datasource.JpqlDataSource;
-import com.exadel.democars.view.model.datasource.SortableDataSource;
-import org.richfaces.component.SortOrder;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import static com.exadel.democars.model.persistence.EntityManagerProvider.getEntityManagerProvider;
 

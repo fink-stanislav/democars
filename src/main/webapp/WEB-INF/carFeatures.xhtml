@@ -10,17 +10,29 @@
             <h:outputText value="Car Features"/>
         </f:facet>
         <h:outputText value="Body Type"/>
-        <h:inputText />
+        <h:inputText value="#{carCreationBean.bodyType}">
+            <f:converter converterId="BodyTypeConverter"/>
+        </h:inputText>
+
         <h:outputText value="Engine"/>
-        <h:inputText />
+        <h:inputText value="#{carCreationBean.engine}">
+            <f:converter converterId="EngineConverter"/>
+        </h:inputText>
+
         <h:outputText value="Fuel"/>
-        <h:inputText />
+        <h:inputText value="#{carCreationBean.fuel}">
+            <f:converter converterId="FuelConverter"/>
+        </h:inputText>
+
         <h:outputText value="Transmission"/>
-        <h:inputText />
+        <h:inputText value="#{carCreationBean.transmission}">
+            <f:converter converterId="TransmissionConverter"/>
+        </h:inputText>
+
         <h:outputText value="Exterior Color"/>
-        <h:inputText />
+        <h:inputText value="#{carCreationBean.exteriorColor}"/>
         <h:outputText value="Interior Color"/>
-        <h:inputText />
+        <h:inputText value="#{carCreationBean.interiorColor}"/>
         <a4j:commandButton value="Previous">
             <rich:toggleControl disableDefault="true" targetItem="@prev" event="click"/>
         </a4j:commandButton>

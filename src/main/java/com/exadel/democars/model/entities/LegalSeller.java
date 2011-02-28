@@ -1,10 +1,10 @@
 package com.exadel.democars.model.entities;
 
 import javax.persistence.Entity;
-import javax.persistence.OrderBy;
+import java.io.Serializable;
 
 @Entity
-public class LegalSeller extends Seller {
+public class LegalSeller extends Seller implements Serializable {
     private String companyName;
 
     public String getCompanyName() {

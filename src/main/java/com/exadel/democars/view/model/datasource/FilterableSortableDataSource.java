@@ -1,9 +1,7 @@
 package com.exadel.democars.view.model.datasource;
 
 import com.exadel.democars.util.JpqlExpressionBuilder;
-import com.exadel.democars.view.model.table.TableDataModel;
 
-import java.util.HashMap;
 import java.util.List;
 
 public class FilterableSortableDataSource<T> extends JpqlDataSource<T> {

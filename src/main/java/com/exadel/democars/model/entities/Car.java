@@ -2,16 +2,11 @@ package com.exadel.democars.model.entities;
 
 import com.exadel.democars.beans.car.Condition;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Car {
+public class Car implements Serializable {
     @Id
     @GeneratedValue
     private Integer id;
