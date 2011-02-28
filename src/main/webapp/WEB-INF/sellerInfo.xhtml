@@ -5,16 +5,49 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:a4j="http://richfaces.org/a4j">
 
+    <script type="text/javascript">
+        function showHide(elementId) {
+            var elementStyle = document.getElementById(elementId).style;
+            if (elementStyle.display == "") {
+                elementStyle.display = "none";
+            } else {
+                elementStyle.display = "";
+            }
+        }
+    </script>
+
     <h:panelGrid columns="2" styleClass="panel-text">
         <f:facet name="header">
             <h:outputText value="Seller Information"/>
         </f:facet>
         <h:outputText value="Seller Type"/>
-        <h:inputText/>
+        <h:selectOneRadio value="#{carCreationBean.sellerType}" styleClass="panel-text">
+            <f:selectItem id="individualSeller" itemLabel="Individual seller" itemValue="individualSeller"/>
+            <f:selectItem id="legalSeller" itemLabel="Legal seller" itemValue="legalSeller"/>
+        </h:selectOneRadio>
         <h:outputText value="City"/>
-        <h:inputText/>
+        <h:inputText value="#{carCreationBean.city}"/>
         <h:outputText value="Street"/>
-        <h:inputText/>
+        <h:inputText value="#{carCreationBean.street}"/>
+
+        <rich:panel id="legalSellerPanel">
+            <f:facet name="header">
+                <h:outputText value="Legal seller information"/>
+            </f:facet>
+            <h:outputText value="Company name"/>
+            <h:inputText value="#{carCreationBean.companyName}"/>
+        </rich:panel>
+
+        <rich:panel id="individualSellerPanel">
+            <f:facet name="header">
+                <h:outputText value="Individual seller information"/>
+            </f:facet>
+            <h:outputText value="Seller first name"/>
+            <h:inputText value="#{carCreationBean.firstName}"/>
+            <h:outputText value="Seller last name"/>
+            <h:inputText value="#{carCreationBean.lastName}"/>
+        </rich:panel>
+
         <a4j:commandButton value="Previous">
             <rich:toggleControl disableDefault="true" targetItem="@prev" event="click"/>
         </a4j:commandButton>

@@ -14,7 +14,7 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
     private List<T> rows;
     private Integer pageSize = 10;
     private Integer currentPage = 1;
-    private PageableDataSource<T> currentDataSource;
+    private PageableDataSource currentDataSource;
     private String dbTableName;
     private String dbTableAlias;
 
@@ -24,7 +24,7 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
         dataManager = new DataManager();
         dbTableName = "Car";
         dbTableAlias = "c";
-        currentDataSource = new DefaultDataSource<T>(this);
+        currentDataSource = new DefaultDataSource(this);
     }
 
     public void updateRows() {

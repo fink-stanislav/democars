@@ -20,9 +20,10 @@
         <h:outputText value="Vin"/>
         <h:inputText value="#{carCreationBean.vin}"/>
         <h:outputText value="Condition"/>
-        <h:inputText value="#{carCreationBean.condition}">
-            <f:converter converterId="ConditionConverter"/>
-        </h:inputText>
+        <rich:select value="#{carCreationBean.condition}" defaultLabel="Select value from list">
+            <f:selectItem itemLabel="New" itemValue="NEW"/>
+            <f:selectItem itemLabel="Used" itemValue="USED"/>
+        </rich:select>
         <a4j:commandButton value="Next">
             <rich:toggleControl disableDefault="true" targetItem="@next" event="click"/>
         </a4j:commandButton>

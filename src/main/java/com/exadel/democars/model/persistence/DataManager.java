@@ -32,6 +32,13 @@ public class DataManager {
         entityTransaction.commit();
     }
 
+    public <T> void persistEntity(T entity) {
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
+        entityManager.persist(entity);
+        entityTransaction.commit();
+    }
+
     public List executeQuery(JpqlExpressionBuilder builder, JpqlDataSource source) {
         Query rangedQuery = entityManager.createQuery(builder.getExpression());
 

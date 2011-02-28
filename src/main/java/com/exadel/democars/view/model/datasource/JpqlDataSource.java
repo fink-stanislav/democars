@@ -2,7 +2,7 @@ package com.exadel.democars.view.model.datasource;
 
 import com.exadel.democars.util.JpqlExpressionBuilder;
 
-public abstract class JpqlDataSource<T> extends PageableDataSource<T> {
+public abstract class JpqlDataSource extends PageableDataSource {
 
     public String getTableName() {
         return tableDataModel.getDbTableName();

@@ -1,7 +1,8 @@
 package com.exadel.democars.view.beans.table;
 
 import com.exadel.democars.beans.car.*;
-import com.exadel.democars.model.entities.Car;
+import com.exadel.democars.model.entities.*;
+import com.exadel.democars.model.persistence.DataManager;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -9,22 +10,55 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean(name = "carCreationBean")
 @SessionScoped
 public class CarCreationBean {
+    private DataManager dataManager;
     private Car car;
-    private Double price;
-    private Integer mileage;
-    private String vin;
-    private Condition condition;
-    private String model;
-    private String make;
-    private BodyType bodyType;
-    private Fuel fuel;
-    private Engine engine;
-    private Transmission transmission;
-    private String exteriorColor;
-    private String interiorColor;
+    private Features features;
+    private Address address;
+    private Seller seller;
+    private IndividualSeller individualSeller;
+    private LegalSeller legalSeller;
+    private Model carModel;
+    private String sellerType;
 
     public CarCreationBean() {
         car = new Car();
+        features = new Features();
+        address = new Address();
+        individualSeller = new IndividualSeller();
+        legalSeller = new LegalSeller();
+        carModel = new Model();
+        dataManager = new DataManager();
+    }
+
+    private void reinit() {
+        car = new Car();
+        features = new Features();
+        address = new Address();
+        individualSeller = new IndividualSeller();
+        legalSeller = new LegalSeller();
+        carModel = new Model();
+    }
+
+    private void createSeller() {
+        if (sellerType.equals("individualSeller")) {
+            seller = individualSeller;
+        } else if (sellerType.equals("legalSeller")) {
+            seller = legalSeller;
+        }
+    }
+
+    public void createCar() {
+        createSeller();
+        car.setModel(carModel);
+        car.setFeatures(features);
+        seller.setAddress(address);
+        car.setSeller(seller);
+        dataManager.persistEntity(features);
+        dataManager.persistEntity(address);
+        dataManager.persistEntity(carModel);
+        dataManager.persistEntity(seller);
+        dataManager.persistEntity(car);
+        reinit();
     }
 
     public Double getPrice() {
@@ -60,69 +94,114 @@ public class CarCreationBean {
     }
 
     public String getModel() {
-        return model;
+        return carModel.getModel();
     }
 
     public void setModel(String model) {
-        this.model = model;
+        carModel.setModel(model);
     }
 
     public String getMake() {
-        return make;
+        return carModel.getMake();
     }
 
     public void setMake(String make) {
-        this.make = make;
+        carModel.setMake(make);
     }
 
     public String getInteriorColor() {
-        return interiorColor;
+        return features.getInteriorColor();
     }
 
     public void setInteriorColor(String interiorColor) {
-        this.interiorColor = interiorColor;
+        features.setInteriorColor(interiorColor);
     }
 
     public String getExteriorColor() {
-        return exteriorColor;
+        return features.getExteriorColor();
     }
 
     public void setExteriorColor(String exteriorColor) {
-        this.exteriorColor = exteriorColor;
+        features.setExteriorColor(exteriorColor);
     }
 
     public Transmission getTransmission() {
-        return transmission;
+        return features.getTransmission();
     }
 
     public void setTransmission(Transmission transmission) {
-        this.transmission = transmission;
+        features.setTransmission(transmission);
     }
 
     public Engine getEngine() {
-        return engine;
+        return features.getEngine();
     }
 
     public void setEngine(Engine engine) {
-        this.engine = engine;
+        features.setEngine(engine);
     }
 
     public Fuel getFuel() {
-        return fuel;
+        return features.getFuel();
     }
 
     public void setFuel(Fuel fuel) {
-        this.fuel = fuel;
+        features.setFuel(fuel);
     }
 
     public BodyType getBodyType() {
-        return bodyType;
+        return features.getBodyType();
     }
 
     public void setBodyType(BodyType bodyType) {
-        this.bodyType = bodyType;
+        features.setBodyType(bodyType);
     }
 
-    public void createCar() {
+    public String getStreet() {
+        return address.getStreet();
+    }
+
+    public void setStreet(String street) {
+        address.setStreet(street);
+    }
+
+    public String getCity() {
+        return address.getCity();
+    }
+
+    public void setCity(String city) {
+        address.setCity(city);
+    }
+
+    public String getSellerType() {
+        return sellerType;
+    }
+
+    public void setSellerType(String sellerType) {
+        this.sellerType = sellerType;
+    }
+
+    public String getCompanyName() {
+        return legalSeller.getCompanyName();
+    }
+
+    public void setCompanyName(String companyName) {
+        legalSeller.setCompanyName(companyName);
+    }
+
+    public String getLastName() {
+        return individualSeller.getLastname();
+    }
+
+    public void setLastName(String lastName) {
+        individualSeller.setLastname(lastName);
+    }
+
+    public String getFirstName() {
+        return individualSeller.getFirstname();
+    }
+
+    public void setFirstName(String firstName) {
+        individualSeller.setFirstname(firstName);
     }
 }

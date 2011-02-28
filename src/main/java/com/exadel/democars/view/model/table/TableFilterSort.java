@@ -7,24 +7,23 @@ import org.richfaces.component.SortOrder;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
-public class TableFilterSort<T> {
+public class TableFilterSort {
     private TableDataModel tableDataModel;
     private Map<String, SortOrder> sortParams;
     private Map<String, Object> filterParams;
-    private SortableDataSource<T> sortableDataSource;
-    private FilterableDataSource<T> filterableDataSource;
+    private SortableDataSource sortableDataSource;
+    private FilterableDataSource filterableDataSource;
 
     public TableFilterSort(TableDataModel tableDataModel) {
         this.tableDataModel = tableDataModel;
 
         filterParams = new HashMap<String, Object>();
-        filterableDataSource = new FilterableDataSource<T>(tableDataModel);
+        filterableDataSource = new FilterableDataSource(tableDataModel);
         filterableDataSource.setFilterParams(filterParams);
 
         sortParams = new HashMap<String, SortOrder>();
-        sortableDataSource = new SortableDataSource<T>(tableDataModel);
+        sortableDataSource = new SortableDataSource(tableDataModel);
         sortableDataSource.setSortParams(sortParams);
     }
 
@@ -60,22 +59,22 @@ public class TableFilterSort<T> {
     }
 
     public void sort() {
-        SortableDataSource<T> sortableDataSource = new SortableDataSource<T>(tableDataModel);
+        SortableDataSource sortableDataSource = new SortableDataSource(tableDataModel);
         sortableDataSource.setSortParams(sortParams);
         this.sortableDataSource = sortableDataSource;
         updateModelDataSource();
     }
 
     public void filter() {
-        FilterableDataSource<T> filterableDataSource = new FilterableDataSource<T>(tableDataModel);
+        FilterableDataSource filterableDataSource = new FilterableDataSource(tableDataModel);
         filterableDataSource.setFilterParams(filterParams);
         this.filterableDataSource = filterableDataSource;
         updateModelDataSource();
     }
 
     private void updateModelDataSource() {
-        FilterableSortableDataSource<T> filterableSortableDataSource =
-                new FilterableSortableDataSource<T>(sortableDataSource, filterableDataSource);
+        FilterableSortableDataSource filterableSortableDataSource =
+                new FilterableSortableDataSource(sortableDataSource, filterableDataSource);
         tableDataModel.setCurrentDataSource(filterableSortableDataSource);
     }
 }

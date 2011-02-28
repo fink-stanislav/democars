@@ -3,9 +3,7 @@ package com.exadel.democars.view.model.datasource;
 import com.exadel.democars.util.JpqlExpressionBuilder;
 import com.exadel.democars.view.model.table.TableDataModel;
 
-import java.util.List;
-
-public class DefaultDataSource<T> extends JpqlDataSource<T> {
+public class DefaultDataSource extends JpqlDataSource {
 
     public DefaultDataSource(TableDataModel tableDataModel) {
         this.tableDataModel = tableDataModel;

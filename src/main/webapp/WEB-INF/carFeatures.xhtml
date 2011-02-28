@@ -10,24 +10,37 @@
             <h:outputText value="Car Features"/>
         </f:facet>
         <h:outputText value="Body Type"/>
-        <h:inputText value="#{carCreationBean.bodyType}">
-            <f:converter converterId="BodyTypeConverter"/>
-        </h:inputText>
+        <rich:select value="#{carCreationBean.bodyType}" defaultLabel="Select value from list">
+            <f:selectItem itemLabel="Sedan" itemValue="SEDAN"/>
+            <f:selectItem itemLabel="Hatchback" itemValue="HATCHBACK"/>
+            <f:selectItem itemLabel="Minivan" itemValue="MINIVAN"/>
+        </rich:select>
 
         <h:outputText value="Engine"/>
-        <h:inputText value="#{carCreationBean.engine}">
-            <f:converter converterId="EngineConverter"/>
-        </h:inputText>
+        <rich:select value="#{carCreationBean.engine}" defaultLabel="Select value from list">
+            <f:selectItem itemLabel="i4" itemValue="I4"/>
+            <f:selectItem itemLabel="i6" itemValue="I6"/>
+            <f:selectItem itemLabel="v4" itemValue="V4"/>
+            <f:selectItem itemLabel="v6" itemValue="V6"/>
+            <f:selectItem itemLabel="v8" itemValue="V8"/>
+            <f:selectItem itemLabel="Diesel" itemValue="DIESEL"/>
+        </rich:select>
 
         <h:outputText value="Fuel"/>
-        <h:inputText value="#{carCreationBean.fuel}">
-            <f:converter converterId="FuelConverter"/>
-        </h:inputText>
+        <rich:select value="#{carCreationBean.fuel}" defaultLabel="Select value from list">
+            <f:selectItem itemLabel="a80" itemValue="A80"/>
+            <f:selectItem itemLabel="a92" itemValue="A92"/>
+            <f:selectItem itemLabel="a95" itemValue="A95"/>
+            <f:selectItem itemLabel="a98" itemValue="A98"/>
+            <f:selectItem itemLabel="Diesel" itemValue="DIESEL"/>
+        </rich:select>
 
         <h:outputText value="Transmission"/>
-        <h:inputText value="#{carCreationBean.transmission}">
-            <f:converter converterId="TransmissionConverter"/>
-        </h:inputText>
+        <rich:select value="#{carCreationBean.transmission}" defaultLabel="Select value from list">
+            <f:selectItem itemLabel="Automatic" itemValue="AUTOMATIC"/>
+            <f:selectItem itemLabel="Semi-automatic" itemValue="SEMIAUTOMATIC"/>
+            <f:selectItem itemLabel="Mechanic" itemValue="MECHANIC"/>
+        </rich:select>
 
         <h:outputText value="Exterior Color"/>
         <h:inputText value="#{carCreationBean.exteriorColor}"/>

@@ -2,7 +2,7 @@ package com.exadel.democars.view.model.datasource;
 
 import com.exadel.democars.view.model.table.TableDataModel;
 
-public abstract class PageableDataSource<T> implements DataSource<T> {
+public abstract class PageableDataSource implements DataSource {
     protected TableDataModel tableDataModel;
 
     public void setPageSize(Integer pageSize) {

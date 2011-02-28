@@ -5,11 +5,10 @@ import com.exadel.democars.view.model.table.TableDataModel;
 import org.richfaces.component.SortOrder;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class SortableDataSource<T> extends JpqlDataSource<T> {
+public class SortableDataSource extends JpqlDataSource {
     private Map<String, SortOrder> sortParams;
 
     public SortableDataSource(TableDataModel tableDataModel) {

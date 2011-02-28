@@ -4,11 +4,10 @@ import com.exadel.democars.util.JpqlExpressionBuilder;
 import com.exadel.democars.view.model.table.TableDataModel;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class FilterableDataSource<T> extends JpqlDataSource<T> {
+public class FilterableDataSource extends JpqlDataSource {
     private Map<String, Object> filterParams;
 
     public FilterableDataSource(TableDataModel tableDataModel) {
