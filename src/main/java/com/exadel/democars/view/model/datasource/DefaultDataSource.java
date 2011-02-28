@@ -11,14 +11,16 @@ public class DefaultDataSource<T> extends JpqlDataSource<T> {
         this.tableDataModel = tableDataModel;
     }
 
-    public JpqlExpressionBuilder evaluateExpression() {
+    public String evaluateExpression() {
         JpqlExpressionBuilder builder = new JpqlExpressionBuilder(this);
         builder.buildSelectExpression();
-        return builder;
+        return builder.getExpression();
     }
 
-    public List<T> updateRows() {
-        return tableDataModel.getDataManager().executeQuery(evaluateExpression(), this);
+    public void updateRows() {
+        JpqlExpressionBuilder builder = new JpqlExpressionBuilder(this);
+        builder.append(evaluateExpression());
+        tableDataModel.setWrappedData(tableDataModel.getDataManager().executeQuery(builder, this));
     }
 
     public Integer rowCount() {

@@ -30,7 +30,7 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
     public void updateRows() {
         currentDataSource.setCurrentPage(currentPage);
         currentDataSource.setPageSize(pageSize);
-        rows = currentDataSource.updateRows();
+        currentDataSource.updateRows();
     }
 
     @Override

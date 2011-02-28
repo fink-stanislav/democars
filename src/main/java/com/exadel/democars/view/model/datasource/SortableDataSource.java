@@ -17,7 +17,7 @@ public class SortableDataSource<T> extends JpqlDataSource<T> {
         sortParams = new HashMap<String, SortOrder>();
     }
 
-    public JpqlExpressionBuilder evaluateSortExpression() {
+    public String evaluateExpression() {
 
         Map<String, SortOrder> sortParams = new HashMap<String, SortOrder>();
         sortParams.putAll(this.sortParams);
@@ -32,7 +32,7 @@ public class SortableDataSource<T> extends JpqlDataSource<T> {
 
         Set<Map.Entry<String, SortOrder>> entrySet = sortParams.entrySet();
         if (entrySet.isEmpty()) {
-            return builder;
+            return builder.getExpression();
         }
 
         builder.buildOrderByExpression();
@@ -51,14 +51,7 @@ public class SortableDataSource<T> extends JpqlDataSource<T> {
                 }
             }
         }
-        return builder;
-    }
-
-    public List<T> updateRows() {
-        JpqlExpressionBuilder builder = new JpqlExpressionBuilder(this);
-        builder.buildSelectExpression();
-        builder.append(evaluateSortExpression().getExpression());
-        return tableDataModel.getDataManager().executeQuery(builder, this);
+        return builder.getExpression();
     }
 
     public Integer rowCount() {

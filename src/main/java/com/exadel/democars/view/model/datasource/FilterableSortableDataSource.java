@@ -15,15 +15,14 @@ public class FilterableSortableDataSource<T> extends JpqlDataSource<T> {
         this.filterableDataSource = filterableDataSource;
     }
 
-    public Integer rowCount() {
-        return tableDataModel.getDataManager().getRowCount();
+    public String evaluateExpression() {
+        JpqlExpressionBuilder builder = new JpqlExpressionBuilder(this);
+        builder.append(filterableDataSource.evaluateExpression());
+        builder.append(sortableDataSource.evaluateExpression());
+        return builder.getExpression();
     }
 
-    public List<T> updateRows() {
-        JpqlExpressionBuilder builder = new JpqlExpressionBuilder(this);
-        builder.buildSelectExpression();
-        builder.append(filterableDataSource.evaluateFilterExpression().getExpression());
-        builder.append(sortableDataSource.evaluateSortExpression().getExpression());
-        return tableDataModel.getDataManager().executeQuery(builder, this);
+    public Integer rowCount() {
+        return tableDataModel.getDataManager().getRowCount();
     }
 }

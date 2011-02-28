@@ -16,12 +16,12 @@ public class FilterableDataSource<T> extends JpqlDataSource<T> {
         this.filterParams = new HashMap<String, Object>();
     }
 
-    public JpqlExpressionBuilder evaluateFilterExpression() {
+    public String evaluateExpression() {
         JpqlExpressionBuilder builder = new JpqlExpressionBuilder(this);
 
         Set<Map.Entry<String, Object>> entrySet = filterParams.entrySet();
         if (entrySet.isEmpty()) {
-            return builder;
+            return builder.getExpression();
         }
 
         builder.addWhere();
@@ -40,14 +40,7 @@ public class FilterableDataSource<T> extends JpqlDataSource<T> {
                 }
             }
         }
-        return builder;
-    }
-
-    public List<T> updateRows() {
-        JpqlExpressionBuilder builder = new JpqlExpressionBuilder(this);
-        builder.buildSelectExpression();
-        builder.append(evaluateFilterExpression().getExpression());
-        return tableDataModel.getDataManager().executeQuery(builder, this);
+        return builder.getExpression();
     }
 
     public Integer rowCount() {
