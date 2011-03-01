@@ -326,14 +326,14 @@
                         onclick="#{rich:component('carCreatePanel')}.hide()"/>
     </f:facet>
     <h:form>
-        <rich:togglePanel id="togglePanel" switchType="ajax">
-            <rich:togglePanelItem name="commonCarInfo">
+        <rich:togglePanel id="togglePanel" switchType="ajax" activeItem="commonCarInfo">
+            <rich:togglePanelItem id="commonCarInfo">
                 <ui:include src="WEB-INF/commonCarInfo.xhtml"/>
             </rich:togglePanelItem>
-            <rich:togglePanelItem name="carFeatures">
+            <rich:togglePanelItem id="carFeatures">
                 <ui:include src="WEB-INF/carFeatures.xhtml"/>
             </rich:togglePanelItem>
-            <rich:togglePanelItem name="sellerInfo">
+            <rich:togglePanelItem id="sellerInfo">
                 <ui:include src="WEB-INF/sellerInfo.xhtml"/>
             </rich:togglePanelItem>
         </rich:togglePanel>

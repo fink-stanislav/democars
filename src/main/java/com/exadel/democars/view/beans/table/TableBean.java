@@ -15,11 +15,9 @@ public class TableBean implements Serializable {
     private TableDataModel<Car> tableModel;
     private Integer currentPage = 1;
     private Integer pageSize = 10;
-    private TableFilterSort tableFilterSort;
 
     public TableBean() {
         tableModel = new TableDataModel<Car>(pageSize, currentPage);
-        tableFilterSort = new TableFilterSort(tableModel);
     }
 
     public DataModel getCars() {
@@ -46,6 +44,6 @@ public class TableBean implements Serializable {
     }
 
     public TableFilterSort getTableFilterSort() {
-        return tableFilterSort;
+        return tableModel.getTableFilterSort();
     }
 }

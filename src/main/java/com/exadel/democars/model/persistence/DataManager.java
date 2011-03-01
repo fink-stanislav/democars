@@ -1,7 +1,6 @@
 package com.exadel.democars.model.persistence;
 
-import com.exadel.democars.util.JpqlExpressionBuilder;
-import com.exadel.democars.view.model.datasource.JpqlDataSource;
+import com.exadel.democars.view.model.expression.PaginationParams;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -41,14 +40,14 @@ public class DataManager {
         entityTransaction.commit();
     }
 
-    public List executeQuery(JpqlExpressionBuilder builder, JpqlDataSource source) {
-        Query rangedQuery = entityManager.createQuery(builder.getExpression());
+    public List executeQuery(String query, PaginationParams params) {
+        Query rangedQuery = entityManager.createQuery(query);
 
         // ! bad thing
         rowCount = rangedQuery.getResultList().size();
 
-        rangedQuery.setFirstResult(source.getCurrentPage() * source.getPageSize() - source.getPageSize());
-        rangedQuery.setMaxResults(source.getPageSize());
+        rangedQuery.setFirstResult(params.getCurrentPage() * params.getPageSize() - params.getPageSize());
+        rangedQuery.setMaxResults(params.getPageSize());
         return rangedQuery.getResultList();
     }
 

@@ -2,7 +2,6 @@ package com.exadel.democars.model.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Collection;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)

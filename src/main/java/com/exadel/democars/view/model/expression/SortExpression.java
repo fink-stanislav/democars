@@ -1,21 +1,38 @@
-package com.exadel.democars.view.model.datasource;
+package com.exadel.democars.view.model.expression;
 
 import com.exadel.democars.util.JpqlExpressionBuilder;
-import com.exadel.democars.view.model.table.TableDataModel;
 import org.richfaces.component.SortOrder;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class SortableDataSource extends JpqlDataSource {
+/**
+ * Provides sorting of rows. Sorting based on Jpql ORDER BY clause.
+ */
+public class SortExpression extends DefaultExpression {
+    /**
+     * Contains values to be placed in ORDER BY statement
+     */
     private Map<String, SortOrder> sortParams;
+    private String expressionString = "";
 
-    public SortableDataSource(TableDataModel tableDataModel) {
-        this.tableDataModel = tableDataModel;
+    public SortExpression(PaginationParams paginationParams, JpqlParams jpqlParams) {
+        super(paginationParams, jpqlParams);
         sortParams = new HashMap<String, SortOrder>();
     }
 
+    public SortExpression(JpqlParams jpqlParams) {
+        super(jpqlParams);
+        sortParams = new HashMap<String, SortOrder>();
+    }
+
+    /**
+     * Evaluates sort expression.
+     * First, clears up the parameters from <code>SortOrder.unsorted</code> values;
+     * Second, builds ORDER BY statement, inserting appropriate param names and Jpql ASC and DESC words.
+     * @return String representation of sorting Jpql-expression.
+     */
     public String evaluateExpression() {
 
         Map<String, SortOrder> sortParams = new HashMap<String, SortOrder>();
@@ -27,7 +44,7 @@ public class SortableDataSource extends JpqlDataSource {
             }
         }
 
-        JpqlExpressionBuilder builder = new JpqlExpressionBuilder(this);
+        JpqlExpressionBuilder builder = new JpqlExpressionBuilder(jpqlParams);
 
         Set<Map.Entry<String, SortOrder>> entrySet = sortParams.entrySet();
         if (entrySet.isEmpty()) {
@@ -50,18 +67,19 @@ public class SortableDataSource extends JpqlDataSource {
                 }
             }
         }
-        return builder.getExpression();
+        expressionString = builder.getExpression();
+        return expressionString;
     }
 
-    public Integer rowCount() {
-        return tableDataModel.getDataManager().getRowCount();
-    }
-
-    public Map<String, SortOrder> getSortParams() {
-        return sortParams;
-    }
-
+    /**
+     * Sorting parameters setter
+     * @param sortParams from backing bean that uses this DataSource
+     */
     public void setSortParams(Map<String, SortOrder> sortParams) {
         this.sortParams = sortParams;
+    }
+
+    public String getExpressionString() {
+        return expressionString;
     }
 }

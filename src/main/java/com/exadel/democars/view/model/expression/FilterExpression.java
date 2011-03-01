@@ -1,22 +1,27 @@
-package com.exadel.democars.view.model.datasource;
+package com.exadel.democars.view.model.expression;
 
 import com.exadel.democars.util.JpqlExpressionBuilder;
-import com.exadel.democars.view.model.table.TableDataModel;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class FilterableDataSource extends JpqlDataSource {
+public class FilterExpression extends DefaultExpression {
     private Map<String, Object> filterParams;
+    private String expressionString = "";
 
-    public FilterableDataSource(TableDataModel tableDataModel) {
-        this.tableDataModel = tableDataModel;
+    public FilterExpression(JpqlParams jpqlParams) {
+        super(jpqlParams);
+        this.filterParams = new HashMap<String, Object>();
+    }
+
+    public FilterExpression(PaginationParams paginationParams, JpqlParams jpqlParams) {
+        super(paginationParams, jpqlParams);
         this.filterParams = new HashMap<String, Object>();
     }
 
     public String evaluateExpression() {
-        JpqlExpressionBuilder builder = new JpqlExpressionBuilder(this);
+        JpqlExpressionBuilder builder = new JpqlExpressionBuilder(jpqlParams);
 
         Set<Map.Entry<String, Object>> entrySet = filterParams.entrySet();
         if (entrySet.isEmpty()) {
@@ -39,18 +44,15 @@ public class FilterableDataSource extends JpqlDataSource {
                 }
             }
         }
-        return builder.getExpression();
-    }
-
-    public Integer rowCount() {
-        return tableDataModel.getDataManager().getRowCount();
-    }
-
-    public Map<String, Object> getFilterParams() {
-        return filterParams;
+        expressionString = builder.getExpression();
+        return expressionString;
     }
 
     public void setFilterParams(Map<String, Object> filterParams) {
         this.filterParams = filterParams;
+    }
+
+    public String getExpressionString() {
+        return expressionString;
     }
 }

@@ -1,15 +1,15 @@
 package com.exadel.democars.util;
 
-import com.exadel.democars.view.model.datasource.JpqlDataSource;
+import com.exadel.democars.view.model.expression.JpqlParams;
 
 public class JpqlExpressionBuilder {
     private String sqlTableAlias;
     private String sqlTableName;
     private StringBuilder expression;
 
-    public JpqlExpressionBuilder(JpqlDataSource source) {
-        this.sqlTableAlias = source.getTableAlias();
-        this.sqlTableName = source.getTableName();
+    public JpqlExpressionBuilder(JpqlParams params) {
+        this.sqlTableAlias = params.getTableAlias();
+        this.sqlTableName = params.getTableName();
         expression = new StringBuilder();
     }
 

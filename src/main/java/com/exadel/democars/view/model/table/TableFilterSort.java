@@ -1,30 +1,26 @@
 package com.exadel.democars.view.model.table;
 
-import com.exadel.democars.view.model.datasource.FilterableDataSource;
-import com.exadel.democars.view.model.datasource.FilterableSortableDataSource;
-import com.exadel.democars.view.model.datasource.SortableDataSource;
+import com.exadel.democars.util.JpqlExpressionBuilder;
+import com.exadel.democars.view.model.expression.*;
 import org.richfaces.component.SortOrder;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class TableFilterSort {
-    private TableDataModel tableDataModel;
     private Map<String, SortOrder> sortParams;
     private Map<String, Object> filterParams;
-    private SortableDataSource sortableDataSource;
-    private FilterableDataSource filterableDataSource;
+    private SortExpression sortExpression;
+    private FilterExpression filterExpression;
 
-    public TableFilterSort(TableDataModel tableDataModel) {
-        this.tableDataModel = tableDataModel;
-
+    public TableFilterSort(PaginationParams paginationParams, JpqlParams jpqlParams) {
+        filterExpression = new FilterExpression(paginationParams, jpqlParams);
         filterParams = new HashMap<String, Object>();
-        filterableDataSource = new FilterableDataSource(tableDataModel);
-        filterableDataSource.setFilterParams(filterParams);
+        filterExpression.setFilterParams(filterParams);
 
+        sortExpression = new SortExpression(paginationParams, jpqlParams);
         sortParams = new HashMap<String, SortOrder>();
-        sortableDataSource = new SortableDataSource(tableDataModel);
-        sortableDataSource.setSortParams(sortParams);
+        sortExpression.setSortParams(sortParams);
     }
 
     public boolean isUnsorted(String key) {
@@ -59,22 +55,21 @@ public class TableFilterSort {
     }
 
     public void sort() {
-        SortableDataSource sortableDataSource = new SortableDataSource(tableDataModel);
-        sortableDataSource.setSortParams(sortParams);
-        this.sortableDataSource = sortableDataSource;
-        updateModelDataSource();
+        sortExpression.setSortParams(sortParams);
+        sortExpression.evaluateExpression();
     }
 
     public void filter() {
-        FilterableDataSource filterableDataSource = new FilterableDataSource(tableDataModel);
-        filterableDataSource.setFilterParams(filterParams);
-        this.filterableDataSource = filterableDataSource;
-        updateModelDataSource();
+        filterExpression.setFilterParams(filterParams);
+        filterExpression.evaluateExpression();
     }
 
-    private void updateModelDataSource() {
-        FilterableSortableDataSource filterableSortableDataSource =
-                new FilterableSortableDataSource(sortableDataSource, filterableDataSource);
-        tableDataModel.setCurrentDataSource(filterableSortableDataSource);
+    public String buildFilterSortExpression() {
+        JpqlExpressionBuilder builder = new JpqlExpressionBuilder(sortExpression.getJpqlParams());
+        builder.buildSelectExpression();
+        FilterSortExpression filterSortExpression =
+                new FilterSortExpression(sortExpression, filterExpression);
+        builder.append(filterSortExpression.evaluateExpression());
+        return builder.getExpression();
     }
 }

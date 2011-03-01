@@ -1,8 +1,8 @@
 package com.exadel.democars.view.model.table;
 
 import com.exadel.democars.model.persistence.DataManager;
-import com.exadel.democars.view.model.datasource.DefaultDataSource;
-import com.exadel.democars.view.model.datasource.PageableDataSource;
+import com.exadel.democars.view.model.expression.JpqlParams;
+import com.exadel.democars.view.model.expression.PaginationParams;
 
 import javax.faces.model.DataModel;
 import java.io.Serializable;
@@ -12,25 +12,19 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
     private DataManager dataManager;
     private Integer rowIndex = 0;
     private List<T> rows;
-    private Integer pageSize = 10;
-    private Integer currentPage = 1;
-    private PageableDataSource currentDataSource;
-    private String dbTableName;
-    private String dbTableAlias;
+    private PaginationParams paginationParams;
+    private TableFilterSort tableFilterSort;
 
     public TableDataModel(Integer pageSize, Integer currentPage) {
-        this.pageSize = pageSize;
-        this.currentPage = currentPage;
+        paginationParams = new PaginationParams(pageSize, currentPage);
+        JpqlParams jpqlParams = new JpqlParams("Car", "c");
         dataManager = new DataManager();
-        dbTableName = "Car";
-        dbTableAlias = "c";
-        currentDataSource = new DefaultDataSource(this);
+        tableFilterSort = new TableFilterSort(paginationParams, jpqlParams);
     }
 
     public void updateRows() {
-        currentDataSource.setCurrentPage(currentPage);
-        currentDataSource.setPageSize(pageSize);
-        currentDataSource.updateRows();
+        String expression = tableFilterSort.buildFilterSortExpression();
+        setWrappedData(dataManager.executeQuery(expression, paginationParams));
     }
 
     @Override
@@ -41,9 +35,15 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
         return rows.size() > 0 && rows.get(getRowIndex()) != null;
     }
 
+    /**
+     * Returns number of rows, corresponding to evaluated expression. In case of sorting,
+     * number of obtained rows is equal to total number of rows in database table.
+     *
+     * @return total number of columns in database table
+     */
     @Override
     public int getRowCount() {
-        return currentDataSource.rowCount();
+        return dataManager.getRowCount();
     }
 
     @Override
@@ -53,7 +53,7 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
 
     @Override
     public int getRowIndex() {
-        return rowIndex % pageSize;
+        return rowIndex % paginationParams.getPageSize();
     }
 
     @Override
@@ -72,46 +72,22 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
     }
 
     public void setCurrentPage(Integer currentPage) {
-        this.currentPage = currentPage;
+        paginationParams.setCurrentPage(currentPage);
     }
 
     public Integer getCurrentPage() {
-        return currentPage;
+        return paginationParams.getCurrentPage();
     }
 
     public Integer getPageSize() {
-        return pageSize;
+        return paginationParams.getPageSize();
     }
 
     public void setPageSize(Integer pageSize) {
-        this.pageSize = pageSize;
+        paginationParams.setPageSize(pageSize);
     }
 
-    public DataManager getDataManager() {
-        return dataManager;
-    }
-
-    public PageableDataSource getCurrentDataSource() {
-        return currentDataSource;
-    }
-
-    public void setCurrentDataSource(PageableDataSource currentDataSource) {
-        this.currentDataSource = currentDataSource;
-    }
-
-    public String getDbTableName() {
-        return dbTableName;
-    }
-
-    public void setDbTableName(String dbTableName) {
-        this.dbTableName = dbTableName;
-    }
-
-    public String getDbTableAlias() {
-        return dbTableAlias;
-    }
-
-    public void setDbTableAlias(String dbTableAlias) {
-        this.dbTableAlias = dbTableAlias;
+    public TableFilterSort getTableFilterSort() {
+        return tableFilterSort;
     }
 }
