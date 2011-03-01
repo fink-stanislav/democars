@@ -10,14 +10,14 @@
             <h:outputText value="Car Features"/>
         </f:facet>
         <h:outputText value="Body Type"/>
-        <rich:select value="#{carCreationBean.bodyType}" defaultLabel="Select value from list">
+        <rich:select value="#{carCreationBean.car.features.bodyType}" defaultLabel="Select value from list">
             <f:selectItem itemLabel="Sedan" itemValue="SEDAN"/>
             <f:selectItem itemLabel="Hatchback" itemValue="HATCHBACK"/>
             <f:selectItem itemLabel="Minivan" itemValue="MINIVAN"/>
         </rich:select>
 
         <h:outputText value="Engine"/>
-        <rich:select value="#{carCreationBean.engine}" defaultLabel="Select value from list">
+        <rich:select value="#{carCreationBean.car.features.engine}" defaultLabel="Select value from list">
             <f:selectItem itemLabel="i4" itemValue="I4"/>
             <f:selectItem itemLabel="i6" itemValue="I6"/>
             <f:selectItem itemLabel="v4" itemValue="V4"/>
@@ -27,7 +27,7 @@
         </rich:select>
 
         <h:outputText value="Fuel"/>
-        <rich:select value="#{carCreationBean.fuel}" defaultLabel="Select value from list">
+        <rich:select value="#{carCreationBean.car.features.fuel}" defaultLabel="Select value from list">
             <f:selectItem itemLabel="a80" itemValue="A80"/>
             <f:selectItem itemLabel="a92" itemValue="A92"/>
             <f:selectItem itemLabel="a95" itemValue="A95"/>
@@ -36,16 +36,16 @@
         </rich:select>
 
         <h:outputText value="Transmission"/>
-        <rich:select value="#{carCreationBean.transmission}" defaultLabel="Select value from list">
+        <rich:select value="#{carCreationBean.car.features.transmission}" defaultLabel="Select value from list">
             <f:selectItem itemLabel="Automatic" itemValue="AUTOMATIC"/>
             <f:selectItem itemLabel="Semi-automatic" itemValue="SEMIAUTOMATIC"/>
             <f:selectItem itemLabel="Mechanic" itemValue="MECHANIC"/>
         </rich:select>
 
         <h:outputText value="Exterior Color"/>
-        <h:inputText value="#{carCreationBean.exteriorColor}"/>
+        <h:inputText value="#{carCreationBean.car.features.exteriorColor}"/>
         <h:outputText value="Interior Color"/>
-        <h:inputText value="#{carCreationBean.interiorColor}"/>
+        <h:inputText value="#{carCreationBean.car.features.interiorColor}"/>
         <a4j:commandButton value="Previous">
             <rich:toggleControl disableDefault="true" targetItem="@prev" event="click"/>
         </a4j:commandButton>

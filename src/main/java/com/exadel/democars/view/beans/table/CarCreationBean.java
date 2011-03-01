@@ -1,6 +1,5 @@
 package com.exadel.democars.view.beans.table;
 
-import com.exadel.democars.beans.car.*;
 import com.exadel.democars.model.entities.*;
 import com.exadel.democars.model.persistence.DataManager;
 
@@ -17,160 +16,53 @@ public class CarCreationBean {
     private Seller seller;
     private IndividualSeller individualSeller;
     private LegalSeller legalSeller;
-    private Model carModel;
+    private Model model;
     private String sellerType;
 
     public CarCreationBean() {
-        car = new Car();
-        features = new Features();
-        address = new Address();
-        individualSeller = new IndividualSeller();
-        legalSeller = new LegalSeller();
-        carModel = new Model();
+        initCar();
+        initSeller();
         dataManager = new DataManager();
     }
 
-    private void reinit() {
+    private void initCar() {
         car = new Car();
         features = new Features();
+        model = new Model();
+        car.setModel(model);
+        car.setFeatures(features);
+    }
+
+    private void initSeller() {
         address = new Address();
         individualSeller = new IndividualSeller();
         legalSeller = new LegalSeller();
-        carModel = new Model();
-    }
-
-    private void createSeller() {
-        if (sellerType.equals("individualSeller")) {
-            seller = individualSeller;
-        } else if (sellerType.equals("legalSeller")) {
-            seller = legalSeller;
-        }
+        seller = individualSeller;
+        seller.setAddress(address);
+        car.setSeller(seller);
     }
 
     public void createCar() {
-        createSeller();
-        car.setModel(carModel);
-        car.setFeatures(features);
-        seller.setAddress(address);
-        car.setSeller(seller);
-        dataManager.persistEntity(features);
-        dataManager.persistEntity(address);
-        dataManager.persistEntity(carModel);
-        dataManager.persistEntity(seller);
-        dataManager.persistEntity(car);
-        reinit();
+        determineSeller();
+        dataManager.persistEntities(features, address, model, seller, car);
+        initCar();
+        initSeller();
     }
 
-    public Double getPrice() {
-        return car.getPrice();
+    private void determineSeller() {
+        if (sellerType.equals("legalSeller")) {
+            seller = legalSeller;
+            seller.setAddress(address);
+            car.setSeller(seller);
+        }
     }
 
-    public void setPrice(Double price) {
-        car.setPrice(price);
+    public Car getCar() {
+        return car;
     }
 
-    public Integer getMileage() {
-        return car.getMileage();
-    }
-
-    public void setMileage(Integer mileage) {
-        car.setMileage(mileage);
-    }
-
-    public String getVin() {
-        return car.getVin();
-    }
-
-    public void setVin(String vin) {
-        car.setVin(vin);
-    }
-
-    public Condition getCondition() {
-        return car.getCondition();
-    }
-
-    public void setCondition(Condition condition) {
-        car.setCondition(condition);
-    }
-
-    public String getModel() {
-        return carModel.getModel();
-    }
-
-    public void setModel(String model) {
-        carModel.setModel(model);
-    }
-
-    public String getMake() {
-        return carModel.getMake();
-    }
-
-    public void setMake(String make) {
-        carModel.setMake(make);
-    }
-
-    public String getInteriorColor() {
-        return features.getInteriorColor();
-    }
-
-    public void setInteriorColor(String interiorColor) {
-        features.setInteriorColor(interiorColor);
-    }
-
-    public String getExteriorColor() {
-        return features.getExteriorColor();
-    }
-
-    public void setExteriorColor(String exteriorColor) {
-        features.setExteriorColor(exteriorColor);
-    }
-
-    public Transmission getTransmission() {
-        return features.getTransmission();
-    }
-
-    public void setTransmission(Transmission transmission) {
-        features.setTransmission(transmission);
-    }
-
-    public Engine getEngine() {
-        return features.getEngine();
-    }
-
-    public void setEngine(Engine engine) {
-        features.setEngine(engine);
-    }
-
-    public Fuel getFuel() {
-        return features.getFuel();
-    }
-
-    public void setFuel(Fuel fuel) {
-        features.setFuel(fuel);
-    }
-
-    public BodyType getBodyType() {
-        return features.getBodyType();
-    }
-
-    public void setBodyType(BodyType bodyType) {
-        features.setBodyType(bodyType);
-    }
-
-    public String getStreet() {
-        return address.getStreet();
-    }
-
-    public void setStreet(String street) {
-        address.setStreet(street);
-    }
-
-    public String getCity() {
-        return address.getCity();
-    }
-
-    public void setCity(String city) {
-        address.setCity(city);
+    public void setCar(Car car) {
+        this.car = car;
     }
 
     public String getSellerType() {

@@ -26,9 +26,9 @@
             <f:selectItem id="legalSeller" itemLabel="Legal seller" itemValue="legalSeller"/>
         </h:selectOneRadio>
         <h:outputText value="City"/>
-        <h:inputText value="#{carCreationBean.city}"/>
+        <h:inputText value="#{carCreationBean.car.seller.address.city}"/>
         <h:outputText value="Street"/>
-        <h:inputText value="#{carCreationBean.street}"/>
+        <h:inputText value="#{carCreationBean.car.seller.address.street}"/>
 
         <rich:panel id="legalSellerPanel">
             <f:facet name="header">

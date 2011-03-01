@@ -10,17 +10,17 @@
             <h:outputText value="Common Car Information"/>
         </f:facet>
         <h:outputText value="Make"/>
-        <h:inputText value="#{carCreationBean.make}"/>
+        <h:inputText value="#{carCreationBean.car.model.make}"/>
         <h:outputText value="Model"/>
-        <h:inputText value="#{carCreationBean.model}"/>
+        <h:inputText value="#{carCreationBean.car.model.model}"/>
         <h:outputText value="Price"/>
-        <h:inputText value="#{carCreationBean.price}"/>
+        <h:inputText value="#{carCreationBean.car.price}"/>
         <h:outputText value="Mileage"/>
-        <h:inputText value="#{carCreationBean.mileage}"/>
+        <h:inputText value="#{carCreationBean.car.mileage}"/>
         <h:outputText value="Vin"/>
-        <h:inputText value="#{carCreationBean.vin}"/>
+        <h:inputText value="#{carCreationBean.car.vin}"/>
         <h:outputText value="Condition"/>
-        <rich:select value="#{carCreationBean.condition}" defaultLabel="Select value from list">
+        <rich:select value="#{carCreationBean.car.condition}" defaultLabel="Select value from list">
             <f:selectItem itemLabel="New" itemValue="NEW"/>
             <f:selectItem itemLabel="Used" itemValue="USED"/>
         </rich:select>

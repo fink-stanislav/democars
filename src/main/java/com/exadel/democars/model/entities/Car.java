@@ -16,15 +16,15 @@ public class Car implements Serializable {
     @Enumerated(EnumType.STRING)
     private Condition condition;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "seller")
     private Seller seller;
 
-    @ManyToOne
+    @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "model")
     private Model model;
 
-    @ManyToOne
+    @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "features")
     private Features features;
 

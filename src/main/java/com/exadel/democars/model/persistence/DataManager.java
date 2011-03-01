@@ -32,10 +32,12 @@ public class DataManager {
         entityTransaction.commit();
     }
 
-    public <T> void persistEntity(T entity) {
+    public <T> void persistEntities(T... entities) {
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
-        entityManager.persist(entity);
+        for (T entity : entities) {
+            entityManager.persist(entity);
+        }
         entityTransaction.commit();
     }
 
