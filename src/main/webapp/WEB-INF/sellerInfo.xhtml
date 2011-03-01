@@ -5,48 +5,45 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:a4j="http://richfaces.org/a4j">
 
-    <script type="text/javascript">
-        function showHide(elementId) {
-            var elementStyle = document.getElementById(elementId).style;
-            if (elementStyle.display == "") {
-                elementStyle.display = "none";
-            } else {
-                elementStyle.display = "";
-            }
-        }
-    </script>
-
     <h:panelGrid columns="2" styleClass="panel-text">
         <f:facet name="header">
             <h:outputText value="Seller Information"/>
         </f:facet>
         <h:outputText value="Seller Type"/>
-        <h:selectOneRadio value="#{carCreationBean.sellerType}" styleClass="panel-text">
-            <f:selectItem id="individualSeller" itemLabel="Individual seller" itemValue="individualSeller"/>
-            <f:selectItem id="legalSeller" itemLabel="Legal seller" itemValue="legalSeller"/>
+        <h:selectOneRadio value="#{carCreationBean.sellerType}" styleClass="panel-text"
+                          layout="pageDirection" valueChangeListener="#{carCreationBean.sellerType}">
+            <f:selectItem itemLabel="Individual seller" itemValue="individualSeller"/>
+            <f:selectItem itemLabel="Legal seller" itemValue="legalSeller"/>
+            <a4j:ajax render="sellerPanel"/>
         </h:selectOneRadio>
         <h:outputText value="City"/>
         <h:inputText value="#{carCreationBean.car.seller.address.city}"/>
         <h:outputText value="Street"/>
         <h:inputText value="#{carCreationBean.car.seller.address.street}"/>
 
-        <rich:panel id="legalSellerPanel">
-            <f:facet name="header">
-                <h:outputText value="Legal seller information"/>
-            </f:facet>
-            <h:outputText value="Company name"/>
-            <h:inputText value="#{carCreationBean.companyName}"/>
-        </rich:panel>
-
-        <rich:panel id="individualSellerPanel">
-            <f:facet name="header">
-                <h:outputText value="Individual seller information"/>
-            </f:facet>
-            <h:outputText value="Seller first name"/>
-            <h:inputText value="#{carCreationBean.firstName}"/>
-            <h:outputText value="Seller last name"/>
-            <h:inputText value="#{carCreationBean.lastName}"/>
-        </rich:panel>
+        <div></div>
+        <a4j:outputPanel id="sellerPanel" ajaxRendered="true">
+            <rich:panel rendered="#{carCreationBean.sellerType eq 'legalSeller'}">
+                <f:facet name="header">
+                    <h:outputText value="Legal seller information"/>
+                </f:facet>
+                <h:panelGrid columns="2" styleClass="panel-text">
+                    <h:outputText value="Company"/>
+                    <h:inputText value="#{carCreationBean.companyName}"/>
+                </h:panelGrid>
+            </rich:panel>
+            <rich:panel rendered="#{carCreationBean.sellerType eq 'individualSeller'}">
+                <f:facet name="header">
+                    <h:outputText value="Individual seller information"/>
+                </f:facet>
+                <h:panelGrid columns="2" styleClass="panel-text">
+                    <h:outputText value="First name"/>
+                    <h:inputText value="#{carCreationBean.firstName}"/>
+                    <h:outputText value="Last name"/>
+                    <h:inputText value="#{carCreationBean.lastName}"/>
+                </h:panelGrid>
+            </rich:panel>
+        </a4j:outputPanel>
 
         <a4j:commandButton value="Previous">
             <rich:toggleControl disableDefault="true" targetItem="@prev" event="click"/>
