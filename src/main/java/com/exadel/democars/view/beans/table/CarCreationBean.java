@@ -23,6 +23,7 @@ public class CarCreationBean {
         initCar();
         initSeller();
         dataManager = new DataManager();
+        sellerType = "individualSeller";
     }
 
     private void initCar() {
