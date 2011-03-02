@@ -44,14 +44,26 @@ public class TableBean implements Serializable {
         return tableModel;
     }
 
+    /**
+     * Updates {@link TableDataModel} filtering parameters.
+     * After that {@code TableDataModel} view (RichFaces dataTable)
+     * forces {@code TableDataModel} to update.
+     * <p/>
+     * Number of filtered data rows could be less than number of displayed rows. Hence filtered
+     * rows may become invisible - their number stays below current page number multiplied by page size.
+     * That's the reason to set current page number to one;
+     */
     public void filter() {
         tableModel.setFilterParams(filterParams);
-        tableModel.filter();
+        paginationParams.setCurrentPage(1);
+        tableModel.setPaginationParams(paginationParams);
     }
 
+    /**
+     * Updates {@link TableDataModel} sorting parameters.
+     */
     public void sort() {
         tableModel.setSortParams(sortParams);
-        tableModel.sort();
     }
 
     public Integer getCurrentPage() {
@@ -70,33 +82,77 @@ public class TableBean implements Serializable {
         paginationParams.setPageSize(pageSize);
     }
 
+    /**
+     * Checks if specified key is set to unsorted.
+     * This method is used in sort menu in header of RichFaces dataTable
+     *
+     * @param key entity's property name
+     * @return is corresponding key set to unsorted
+     */
     public boolean isUnsorted(String key) {
         return SortOrder.unsorted == sortParams.get(key);
     }
 
+    /**
+     * Checks if specified key is set to ascending.
+     * This method is used in sort menu in header of RichFaces dataTable
+     *
+     * @param key entity's property name
+     * @return is corresponding key set to ascending
+     */
     public boolean isAscending(String key) {
         return SortOrder.ascending == sortParams.get(key);
     }
 
+    /**
+     * Checks if specified key is set to descending.
+     * This method is used in sort menu in header of RichFaces dataTable
+     *
+     * @param key entity's property name
+     * @return is corresponding key set to descending
+     */
     public boolean isDescending(String key) {
         return SortOrder.descending == sortParams.get(key);
     }
 
-    public void sortAscending(String columnName) {
-        sortParams.put(columnName, SortOrder.ascending);
+    /**
+     * Sets appropriate sort order (ascending) to appropriate key
+     * and updates sorting parameters
+     *
+     * @param key entity's property name;
+     */
+    public void sortAscending(String key) {
+        sortParams.put(key, SortOrder.ascending);
         sort();
     }
 
-    public void sortDescending(String columnName) {
-        sortParams.put(columnName, SortOrder.descending);
+    /**
+     * Sets appropriate sort order (descending) to appropriate key
+     * and updates sorting parameters
+     *
+     * @param key entity's property name;
+     */
+    public void sortDescending(String key) {
+        sortParams.put(key, SortOrder.descending);
         sort();
     }
 
-    public void makeUnsorted(String columnName) {
-        sortParams.put(columnName, SortOrder.unsorted);
+    /**
+     * Sets appropriate sort order (unsorted) to appropriate key
+     * and updates sorting parameters
+     *
+     * @param key entity's property name;
+     */
+    public void makeUnsorted(String key) {
+        sortParams.put(key, SortOrder.unsorted);
         sort();
     }
 
+    /**
+     * Exposes map of filtering parameters to view
+     *
+     * @return map of filtering parameters
+     */
     public Map<String, Object> getFilterParams() {
         return filterParams;
     }

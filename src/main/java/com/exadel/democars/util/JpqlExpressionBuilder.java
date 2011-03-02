@@ -2,6 +2,11 @@ package com.exadel.democars.util;
 
 import com.exadel.democars.view.model.expression.JpqlParams;
 
+/**
+ * Class for building JPQL expressions. Based on {@code StringBuilder}
+ *
+ * @author S. Fink
+ */
 public class JpqlExpressionBuilder {
     private String entityAlias;
     private String entityName;
@@ -77,7 +82,15 @@ public class JpqlExpressionBuilder {
         return expression.toString();
     }
 
-    public boolean isRangeOk(Integer size, Integer position) {
-        return size > 1 && position <= size - 1;
+    /**
+     * Checks whether number of params is greater than one and current param is not penultimate.
+     * It is used to decide: insert "AND" or "," in expression or not
+     *
+     * @param number   number of params
+     * @param position current param
+     * @return
+     */
+    public boolean isRangeOk(Integer number, Integer position) {
+        return number > 1 && position <= number - 1;
     }
 }

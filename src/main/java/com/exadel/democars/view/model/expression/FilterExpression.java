@@ -8,6 +8,7 @@ import java.util.Set;
 
 /**
  * Provides filter expression evaluation
+ *
  * @author S. Fink
  */
 public class FilterExpression extends DefaultExpression {
@@ -15,11 +16,6 @@ public class FilterExpression extends DefaultExpression {
 
     public FilterExpression(JpqlParams jpqlParams) {
         super(jpqlParams);
-        this.filterParams = new HashMap<String, Object>();
-    }
-
-    public FilterExpression(PaginationParams paginationParams, JpqlParams jpqlParams) {
-        super(paginationParams, jpqlParams);
         this.filterParams = new HashMap<String, Object>();
     }
 
@@ -33,7 +29,7 @@ public class FilterExpression extends DefaultExpression {
     public String evaluateExpression() {
         JpqlExpressionBuilder builder = new JpqlExpressionBuilder(jpqlParams);
 
-        Set<Map.Entry<String, Object>> entrySet = filterParams.entrySet();
+        Set<Map.Entry<String, Object>> entrySet = cleanUpParams(filterParams).entrySet();
         if (entrySet.isEmpty()) {
             return builder.getExpression();
         }
@@ -55,6 +51,22 @@ public class FilterExpression extends DefaultExpression {
             }
         }
         return builder.getExpression();
+    }
+
+    private Map<String, Object> cleanUpParams(Map<String, Object> params) {
+        Map<String, Object> filterParams = new HashMap<String, Object>();
+        filterParams.putAll(params);
+        Set<Map.Entry<String, Object>> filterParamEntrySet = params.entrySet();
+        for (Map.Entry<String, Object> entry : filterParamEntrySet) {
+            if (entry.getValue() == null) {
+                filterParams.remove(entry.getKey());
+            } else if (entry.getValue() instanceof String) {
+                if (entry.getValue().equals("")) {
+                    filterParams.remove(entry.getKey());
+                }
+            }
+        }
+        return filterParams;
     }
 
     public void setFilterParams(Map<String, Object> filterParams) {

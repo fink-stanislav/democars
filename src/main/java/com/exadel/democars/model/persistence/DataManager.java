@@ -46,6 +46,10 @@ public class DataManager {
         // ! bad thing
         rowCount = rangedQuery.getResultList().size();
 
+        if (rowCount <= params.getPageSize()) {
+            params.setCurrentPage(1);
+        }
+
         rangedQuery.setFirstResult(params.getCurrentPage() * params.getPageSize() - params.getPageSize());
         rangedQuery.setMaxResults(params.getPageSize());
         return rangedQuery.getResultList();

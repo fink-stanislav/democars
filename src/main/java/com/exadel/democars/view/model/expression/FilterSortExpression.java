@@ -4,6 +4,7 @@ import com.exadel.democars.util.JpqlExpressionBuilder;
 
 /**
  * Combines {@link SortExpression} and {@link FilterExpression} functionality.
+ *
  * @author S. Fink
  */
 public class FilterSortExpression extends DefaultExpression {
@@ -11,7 +12,7 @@ public class FilterSortExpression extends DefaultExpression {
     private FilterExpression filterExpression;
 
     public FilterSortExpression(SortExpression sortExpression, FilterExpression filterExpression) {
-        super(sortExpression.getPaginationParams(), sortExpression.getJpqlParams());
+        super(sortExpression.jpqlParams);
         this.sortExpression = sortExpression;
         this.filterExpression = filterExpression;
     }
@@ -20,6 +21,7 @@ public class FilterSortExpression extends DefaultExpression {
      * Builds expression for retrieving filtered and sorted data.
      * The result depends on parameters of {@code SortExpression} and {@code FilterExpression} and
      * may vary from empty string to statement containing order by and like expressions.
+     *
      * @return String representation of JPQL statement
      */
     public String evaluateExpression() {

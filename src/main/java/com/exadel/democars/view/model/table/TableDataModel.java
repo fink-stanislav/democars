@@ -7,7 +7,6 @@ import org.richfaces.component.SortOrder;
 
 import javax.faces.model.DataModel;
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,27 +25,13 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
 
     private FilterExpression filterExpression;
     private SortExpression sortExpression;
-    private Map<String, SortOrder> sortParams;
-    private Map<String, Object> filterParams;
 
     public TableDataModel(PaginationParams paginationParams) {
         this.paginationParams = new PaginationParams(paginationParams);
         jpqlParams = new JpqlParams("Car", "c");
         dataManager = new DataManager();
-        filterParams = new HashMap<String, Object>();
-        sortParams = new HashMap<String, SortOrder>();
-        filterExpression = new FilterExpression(paginationParams, jpqlParams);
-        filterExpression.setFilterParams(filterParams);
-        sortExpression = new SortExpression(paginationParams, jpqlParams);
-        sortExpression.setSortParams(sortParams);
-    }
-
-    public void filter() {
-        filterExpression.setFilterParams(filterParams);
-    }
-
-    public void sort() {
-        sortExpression.setSortParams(sortParams);
+        filterExpression = new FilterExpression(jpqlParams);
+        sortExpression = new SortExpression(jpqlParams);
     }
 
     /**
@@ -83,6 +68,11 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
         return rows.get(getRowIndex());
     }
 
+    /**
+     * Returns row index in range of pagination
+     *
+     * @return int row index
+     */
     public int getRowIndex() {
         return rowIndex % paginationParams.getPageSize();
     }
@@ -115,11 +105,23 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
         this.jpqlParams = jpqlParams;
     }
 
+    /**
+     * Sets sorting parameters
+     *
+     * @param sortParams Map&lt;String, SortOrder&gt;
+     *                   map retrieved from bean associated with RichFaces dataTable
+     */
     public void setSortParams(Map<String, SortOrder> sortParams) {
-        this.sortParams = sortParams;
+        sortExpression.setSortParams(sortParams);
     }
 
+    /**
+     * Sets filtering parameters
+     *
+     * @param filterParams Map&lt;String, Object&gt;
+     *                     map retrieved from bean associated with RichFaces dataTable
+     */
     public void setFilterParams(Map<String, Object> filterParams) {
-        this.filterParams = filterParams;
+        filterExpression.setFilterParams(filterParams);
     }
 }
