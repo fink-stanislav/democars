@@ -10,20 +10,22 @@
 
     <properties>
         <jsf-version>2.0.3</jsf-version>
-        <richfaces-version>4.0.0.20110209-M6</richfaces-version>
+        <!--<richfaces-version>4.0.0.20110209-M6</richfaces-version>-->
+        <richfaces-version>4.0.0.20110227-CR1</richfaces-version>
         <junit-version>3.8.1</junit-version>
         <a4j-version>1.0.5</a4j-version>
         <hibernate-core-version>3.5.4-Final</hibernate-core-version>
         <hibernate-version>3.5.4-Final</hibernate-version>
         <hibernate-jpa-api-version>1.0.0.Final</hibernate-jpa-api-version>
         <slf4j-version>1.5.8</slf4j-version>
+        <derby-version>10.7.1.1</derby-version>
     </properties>
 
     <repositories>
         <repository>
             <id>jboss-public-repository-group</id>
             <name>JBoss Public Maven Repository Group</name>
-            <url>https://repository.jboss.org/nexus/content/groups/public</url>
+            <url>https://repository.jboss.org/nexus/content/groups/staging</url>
             <layout>default</layout>
             <releases>
                 <enabled>true</enabled>
@@ -124,12 +126,12 @@
         <dependency>
             <groupId>org.apache.derby</groupId>
             <artifactId>derby</artifactId>
-            <version>10.7.1.1</version>
+            <version>${derby-version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.derby</groupId>
             <artifactId>derbyclient</artifactId>
-            <version>10.7.1.1</version>
+            <version>${derby-version}</version>
         </dependency>
     </dependencies>
 

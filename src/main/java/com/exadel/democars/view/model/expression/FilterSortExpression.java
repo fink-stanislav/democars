@@ -14,8 +14,8 @@ public class FilterSortExpression extends DefaultExpression {
 
     public String evaluateExpression() {
         JpqlExpressionBuilder builder = new JpqlExpressionBuilder(jpqlParams);
-        builder.append(filterExpression.getExpressionString());
-        builder.append(sortExpression.getExpressionString());
+        builder.append(filterExpression.evaluateExpression());
+        builder.append(sortExpression.evaluateExpression());
         return builder.getExpression();
     }
 }

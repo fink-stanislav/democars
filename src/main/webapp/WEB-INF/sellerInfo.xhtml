@@ -5,7 +5,7 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:a4j="http://richfaces.org/a4j">
 
-    <h:panelGrid columns="2" styleClass="panel-text">
+    <h:panelGrid columns="3" styleClass="panel-text">
         <f:facet name="header">
             <h:outputText value="Seller Information"/>
         </f:facet>
@@ -16,10 +16,15 @@
             <f:selectItem itemLabel="Legal seller" itemValue="legalSeller"/>
             <a4j:ajax render="sellerPanel"/>
         </h:selectOneRadio>
+
+        <div></div>
         <h:outputText value="City"/>
-        <h:inputText value="#{carCreationBean.car.seller.address.city}"/>
+        <h:inputText id="cityInput" value="#{carCreationBean.car.seller.address.city}" required="true"/>
+        <rich:message for="cityInput"/>
+
         <h:outputText value="Street"/>
-        <h:inputText value="#{carCreationBean.car.seller.address.street}"/>
+        <h:inputText id="streetInput" value="#{carCreationBean.car.seller.address.street}" required="true"/>
+        <rich:message for="streetInput"/>
 
         <div></div>
         <a4j:outputPanel id="sellerPanel" ajaxRendered="true">
@@ -27,29 +32,34 @@
                 <f:facet name="header">
                     <h:outputText value="Legal seller information"/>
                 </f:facet>
-                <h:panelGrid columns="2" styleClass="panel-text">
+                <h:panelGrid columns="3" styleClass="panel-text">
                     <h:outputText value="Company"/>
-                    <h:inputText value="#{carCreationBean.companyName}"/>
+                    <h:inputText id="companyInput" value="#{carCreationBean.companyName}" required="true"/>
+                    <rich:message for="companyInput"/>
                 </h:panelGrid>
             </rich:panel>
             <rich:panel rendered="#{carCreationBean.sellerType eq 'individualSeller'}">
                 <f:facet name="header">
                     <h:outputText value="Individual seller information"/>
                 </f:facet>
-                <h:panelGrid columns="2" styleClass="panel-text">
+                <h:panelGrid columns="3" styleClass="panel-text">
                     <h:outputText value="First name"/>
-                    <h:inputText value="#{carCreationBean.firstName}"/>
+                    <h:inputText id="firstNameInput" value="#{carCreationBean.firstName}" required="true"/>
+                    <rich:message for="firstNameInput"/>
+
                     <h:outputText value="Last name"/>
-                    <h:inputText value="#{carCreationBean.lastName}"/>
+                    <h:inputText id="lastNameInput" value="#{carCreationBean.lastName}" required="true"/>
+                    <rich:message for="lastNameInput"/>
                 </h:panelGrid>
             </rich:panel>
         </a4j:outputPanel>
 
+        <div></div>
+
         <a4j:commandButton value="Previous">
             <rich:toggleControl disableDefault="true" targetItem="@prev" event="click"/>
         </a4j:commandButton>
-        <a4j:commandButton value="Create" action="#{carCreationBean.createCar}" render="dataTable"
-                           oncomplete="#{rich:component('carCreatePanel')}.hide()"/>
+        <a4j:commandButton value="Create" action="#{carCreationBean.createCar}" render="dataTable"/>
     </h:panelGrid>
 
 </ui:composition>

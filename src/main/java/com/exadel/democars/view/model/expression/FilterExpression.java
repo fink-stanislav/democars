@@ -8,7 +8,6 @@ import java.util.Set;
 
 public class FilterExpression extends DefaultExpression {
     private Map<String, Object> filterParams;
-    private String expressionString = "";
 
     public FilterExpression(JpqlParams jpqlParams) {
         super(jpqlParams);
@@ -44,15 +43,10 @@ public class FilterExpression extends DefaultExpression {
                 }
             }
         }
-        expressionString = builder.getExpression();
-        return expressionString;
+        return builder.getExpression();
     }
 
     public void setFilterParams(Map<String, Object> filterParams) {
         this.filterParams = filterParams;
-    }
-
-    public String getExpressionString() {
-        return expressionString;
     }
 }

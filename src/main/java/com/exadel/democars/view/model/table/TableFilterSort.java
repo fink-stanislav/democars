@@ -12,8 +12,10 @@ public class TableFilterSort {
     private Map<String, Object> filterParams;
     private SortExpression sortExpression;
     private FilterExpression filterExpression;
+    private JpqlParams jpqlParams;
 
     public TableFilterSort(PaginationParams paginationParams, JpqlParams jpqlParams) {
+        this.jpqlParams = jpqlParams;
         filterExpression = new FilterExpression(paginationParams, jpqlParams);
         filterParams = new HashMap<String, Object>();
         filterExpression.setFilterParams(filterParams);
@@ -56,16 +58,14 @@ public class TableFilterSort {
 
     public void sort() {
         sortExpression.setSortParams(sortParams);
-        sortExpression.evaluateExpression();
     }
 
     public void filter() {
         filterExpression.setFilterParams(filterParams);
-        filterExpression.evaluateExpression();
     }
 
     public String buildFilterSortExpression() {
-        JpqlExpressionBuilder builder = new JpqlExpressionBuilder(sortExpression.getJpqlParams());
+        JpqlExpressionBuilder builder = new JpqlExpressionBuilder(jpqlParams);
         builder.buildSelectExpression();
         FilterSortExpression filterSortExpression =
                 new FilterSortExpression(sortExpression, filterExpression);

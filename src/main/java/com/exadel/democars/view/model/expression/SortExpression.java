@@ -15,7 +15,6 @@ public class SortExpression extends DefaultExpression {
      * Contains values to be placed in ORDER BY statement
      */
     private Map<String, SortOrder> sortParams;
-    private String expressionString = "";
 
     public SortExpression(PaginationParams paginationParams, JpqlParams jpqlParams) {
         super(paginationParams, jpqlParams);
@@ -67,8 +66,7 @@ public class SortExpression extends DefaultExpression {
                 }
             }
         }
-        expressionString = builder.getExpression();
-        return expressionString;
+        return builder.getExpression();
     }
 
     /**
@@ -77,9 +75,5 @@ public class SortExpression extends DefaultExpression {
      */
     public void setSortParams(Map<String, SortOrder> sortParams) {
         this.sortParams = sortParams;
-    }
-
-    public String getExpressionString() {
-        return expressionString;
     }
 }

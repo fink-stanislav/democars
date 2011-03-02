@@ -4,27 +4,46 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:a4j="http://richfaces.org/a4j">
-        <h:panelGrid columns="2" styleClass="panel-text">
-            <f:facet name="header">
-                <h:outputText value="Common Car Information"/>
-            </f:facet>
-            <h:outputText value="Make"/>
-            <h:inputText value="#{carCreationBean.car.model.make}"/>
-            <h:outputText value="Model"/>
-            <h:inputText value="#{carCreationBean.car.model.model}"/>
-            <h:outputText value="Price"/>
-            <h:inputText value="#{carCreationBean.car.price}"/>
-            <h:outputText value="Mileage"/>
-            <h:inputText value="#{carCreationBean.car.mileage}"/>
-            <h:outputText value="Vin"/>
-            <h:inputText value="#{carCreationBean.car.vin}"/>
-            <h:outputText value="Condition"/>
-            <rich:select value="#{carCreationBean.car.condition}" defaultLabel="Select value from list">
-                <f:selectItem itemLabel="New" itemValue="NEW"/>
-                <f:selectItem itemLabel="Used" itemValue="USED"/>
-            </rich:select>
-            <a4j:commandButton value="Next">
-                <rich:toggleControl disableDefault="true" targetItem="@next" event="click"/>
-            </a4j:commandButton>
-        </h:panelGrid>
+    <h:panelGrid columns="3" styleClass="panel-text">
+        <f:facet name="header">
+            <h:outputText value="Common Car Information"/>
+        </f:facet>
+        <h:outputText value="Make"/>
+        <h:inputText id="makeInput" value="#{carCreationBean.car.model.make}" required="true"/>
+        <rich:message for="makeInput"/>
+
+        <h:outputText value="Model"/>
+        <h:inputText id="modelInput" value="#{carCreationBean.car.model.model}" required="true"/>
+        <rich:message for="modelInput"/>
+
+        <h:outputText value="Price"/>
+        <h:inputText id="priceInput" value="#{carCreationBean.car.price}" required="true">
+            <f:validateDoubleRange minimum="0" maximum="100000"/>
+        </h:inputText>
+        <rich:message for="priceInput"/>
+
+        <h:outputText value="Mileage"/>
+        <h:inputText id="mileageInput" value="#{carCreationBean.car.mileage}" required="true">
+            <f:validateLongRange minimum="0" maximum="1000000"/>
+        </h:inputText>
+        <rich:message for="mileageInput"/>
+
+        <h:outputText value="Vin"/>
+        <h:inputText id="vinInput" value="#{carCreationBean.car.vin}" required="true">
+            <f:validateLength minimum="5" maximum="20"/>
+        </h:inputText>
+        <rich:message for="vinInput"/>
+
+        <h:outputText value="Condition"/>
+        <rich:select id="conditionInput" value="#{carCreationBean.car.condition}"
+                     defaultLabel="Select value from list"
+                     required="true">
+            <f:selectItem itemLabel="New" itemValue="NEW"/>
+            <f:selectItem itemLabel="Used" itemValue="USED"/>
+        </rich:select>
+        <rich:message for="conditionInput"/>
+        <a4j:commandButton value="Next">
+            <rich:toggleControl disableDefault="true" targetItem="@next" event="click"/>
+        </a4j:commandButton>
+    </h:panelGrid>
 </ui:composition>
