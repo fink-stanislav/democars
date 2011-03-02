@@ -8,12 +8,10 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Provides sorting of rows. Sorting based on Jpql ORDER BY clause.
+ * Provides sorting expression evaluation.
+ * @author S. Fink
  */
 public class SortExpression extends DefaultExpression {
-    /**
-     * Contains values to be placed in ORDER BY statement
-     */
     private Map<String, SortOrder> sortParams;
 
     public SortExpression(PaginationParams paginationParams, JpqlParams jpqlParams) {
@@ -27,10 +25,10 @@ public class SortExpression extends DefaultExpression {
     }
 
     /**
-     * Evaluates sort expression.
+     * Builds JPQL expression for filtering data
      * First, clears up the parameters from <code>SortOrder.unsorted</code> values;
-     * Second, builds ORDER BY statement, inserting appropriate param names and Jpql ASC and DESC words.
-     * @return String representation of sorting Jpql-expression.
+     * Second, builds ORDER BY statement: inserts appropriate parameter names and ASC or DESC words.
+     * @return String representation of sorting JPQL-expression.
      */
     public String evaluateExpression() {
 
@@ -69,10 +67,6 @@ public class SortExpression extends DefaultExpression {
         return builder.getExpression();
     }
 
-    /**
-     * Sorting parameters setter
-     * @param sortParams from backing bean that uses this DataSource
-     */
     public void setSortParams(Map<String, SortOrder> sortParams) {
         this.sortParams = sortParams;
     }

@@ -6,6 +6,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Provides filter expression evaluation
+ * @author S. Fink
+ */
 public class FilterExpression extends DefaultExpression {
     private Map<String, Object> filterParams;
 
@@ -19,6 +23,13 @@ public class FilterExpression extends DefaultExpression {
         this.filterParams = new HashMap<String, Object>();
     }
 
+    /**
+     * Builds JPQL expression for filtering data.
+     * If <code>filterParams</code> map is empty, returns built query - in this case empty string.
+     * Otherwise builds like expression for string parameters and comparison expression for numeric ones.
+     *
+     * @return String representation of JPQL statement
+     */
     public String evaluateExpression() {
         JpqlExpressionBuilder builder = new JpqlExpressionBuilder(jpqlParams);
 
@@ -27,8 +38,8 @@ public class FilterExpression extends DefaultExpression {
             return builder.getExpression();
         }
 
-        builder.addWhere();
         int counter = 0;
+        builder.addWhere();
         for (Map.Entry<String, Object> entry : entrySet) {
             counter++;
             if (entry.getValue() instanceof String) {
@@ -37,7 +48,7 @@ public class FilterExpression extends DefaultExpression {
                     builder.addAnd();
                 }
             } else if (entry.getValue() instanceof Number) {
-                builder.buildComparsionExpression(entry.getKey(), entry.getValue(), "<=");
+                builder.buildComparisonExpression(entry.getKey(), entry.getValue(), "<=");
                 if (builder.isRangeOk(entrySet.size(), counter)) {
                     builder.addAnd();
                 }

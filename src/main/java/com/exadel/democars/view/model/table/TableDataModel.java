@@ -1,33 +1,67 @@
 package com.exadel.democars.view.model.table;
 
 import com.exadel.democars.model.persistence.DataManager;
-import com.exadel.democars.view.model.expression.JpqlParams;
-import com.exadel.democars.view.model.expression.PaginationParams;
+import com.exadel.democars.util.JpqlExpressionBuilder;
+import com.exadel.democars.view.model.expression.*;
+import org.richfaces.component.SortOrder;
 
 import javax.faces.model.DataModel;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+/**
+ * Implements {@link DataModel} for RichFaces dataTable
+ *
+ * @param <T> entity class
+ * @author S. Fink
+ */
 public class TableDataModel<T> extends DataModel<T> implements Serializable {
     private DataManager dataManager;
     private Integer rowIndex = 0;
     private List<T> rows;
     private PaginationParams paginationParams;
-    private TableFilterSort tableFilterSort;
+    private JpqlParams jpqlParams;
 
-    public TableDataModel(Integer pageSize, Integer currentPage) {
-        paginationParams = new PaginationParams(pageSize, currentPage);
-        JpqlParams jpqlParams = new JpqlParams("Car", "c");
+    private FilterExpression filterExpression;
+    private SortExpression sortExpression;
+    private Map<String, SortOrder> sortParams;
+    private Map<String, Object> filterParams;
+
+    public TableDataModel(PaginationParams paginationParams) {
+        this.paginationParams = new PaginationParams(paginationParams);
+        jpqlParams = new JpqlParams("Car", "c");
         dataManager = new DataManager();
-        tableFilterSort = new TableFilterSort(paginationParams, jpqlParams);
+        filterParams = new HashMap<String, Object>();
+        sortParams = new HashMap<String, SortOrder>();
+        filterExpression = new FilterExpression(paginationParams, jpqlParams);
+        filterExpression.setFilterParams(filterParams);
+        sortExpression = new SortExpression(paginationParams, jpqlParams);
+        sortExpression.setSortParams(sortParams);
     }
 
+    public void filter() {
+        filterExpression.setFilterParams(filterParams);
+    }
+
+    public void sort() {
+        sortExpression.setSortParams(sortParams);
+    }
+
+    /**
+     * Updates table rows. Evaluates data retrieval expression,
+     * executes it and sets new value to the rows list.
+     */
     public void updateRows() {
-        String expression = tableFilterSort.buildFilterSortExpression();
-        setWrappedData(dataManager.executeQuery(expression, paginationParams));
+        JpqlExpressionBuilder builder = new JpqlExpressionBuilder(jpqlParams);
+        builder.buildSelectExpression();
+        FilterSortExpression filterSortExpression =
+                new FilterSortExpression(sortExpression, filterExpression);
+        builder.append(filterSortExpression.evaluateExpression());
+        rows = dataManager.executeQuery(builder.getExpression(), paginationParams);
     }
 
-    @Override
     public boolean isRowAvailable() {
         if (rows.size() <= getRowIndex()) {
             return false;
@@ -39,55 +73,53 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
      * Returns number of rows, corresponding to evaluated expression. In case of sorting,
      * number of obtained rows is equal to total number of rows in database table.
      *
-     * @return total number of columns in database table
+     * @return int row number of retrieved data
      */
-    @Override
     public int getRowCount() {
         return dataManager.getRowCount();
     }
 
-    @Override
     public T getRowData() {
         return rows.get(getRowIndex());
     }
 
-    @Override
     public int getRowIndex() {
         return rowIndex % paginationParams.getPageSize();
     }
 
-    @Override
     public void setRowIndex(int rowIndex) {
         this.rowIndex = rowIndex;
     }
 
-    @Override
     public Object getWrappedData() {
         return rows;
     }
 
-    @Override
     public void setWrappedData(Object rows) {
         this.rows = (List<T>) rows;
     }
 
-    public void setCurrentPage(Integer currentPage) {
-        paginationParams.setCurrentPage(currentPage);
+    public PaginationParams getPaginationParams() {
+        return paginationParams;
     }
 
-    public Integer getCurrentPage() {
-        return paginationParams.getCurrentPage();
+    public void setPaginationParams(PaginationParams paginationParams) {
+        this.paginationParams = paginationParams;
     }
 
-    public Integer getPageSize() {
-        return paginationParams.getPageSize();
+    public JpqlParams getJpqlParams() {
+        return jpqlParams;
     }
 
-    public void setPageSize(Integer pageSize) {
-        paginationParams.setPageSize(pageSize);
+    public void setJpqlParams(JpqlParams jpqlParams) {
+        this.jpqlParams = jpqlParams;
     }
 
-    public TableFilterSort getTableFilterSort() {
-        return tableFilterSort;
+    public void setSortParams(Map<String, SortOrder> sortParams) {
+        this.sortParams = sortParams;
+    }
+
+    public void setFilterParams(Map<String, Object> filterParams) {
+        this.filterParams = filterParams;
     }
 }

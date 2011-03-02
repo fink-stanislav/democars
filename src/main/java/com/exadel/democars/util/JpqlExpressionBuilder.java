@@ -3,29 +3,29 @@ package com.exadel.democars.util;
 import com.exadel.democars.view.model.expression.JpqlParams;
 
 public class JpqlExpressionBuilder {
-    private String sqlTableAlias;
-    private String sqlTableName;
+    private String entityAlias;
+    private String entityName;
     private StringBuilder expression;
 
     public JpqlExpressionBuilder(JpqlParams params) {
-        this.sqlTableAlias = params.getTableAlias();
-        this.sqlTableName = params.getTableName();
+        this.entityName = params.getEntityName();
+        this.entityAlias = params.getEntityAlias();
         expression = new StringBuilder();
     }
 
     public void buildSelectExpression() {
         StringBuilder sb = new StringBuilder();
         sb.append(" select ")
-                .append(sqlTableAlias)
+                .append(entityAlias)
                 .append(" from ")
-                .append(sqlTableName).append(" ")
-                .append(sqlTableAlias);
+                .append(entityName).append(" ")
+                .append(entityAlias);
         expression.append(sb);
     }
 
     public void buildLikeExpression(String paramName, Object paramValue) {
         StringBuilder sb = new StringBuilder();
-        sb.append(" upper(").append(sqlTableAlias).append(".")
+        sb.append(" upper(").append(entityAlias).append(".")
                 .append(paramName)
                 .append(") like '")
                 .append(((String) paramValue).toUpperCase())
@@ -33,9 +33,9 @@ public class JpqlExpressionBuilder {
         expression.append(sb);
     }
 
-    public void buildComparsionExpression(String paramName, Object paramValue, String sign) {
+    public void buildComparisonExpression(String paramName, Object paramValue, String sign) {
         StringBuilder sb = new StringBuilder();
-        sb.append(sqlTableAlias)
+        sb.append(entityAlias)
                 .append(".")
                 .append(paramName).append(" ")
                 .append(sign).append(" ")
@@ -59,7 +59,7 @@ public class JpqlExpressionBuilder {
     public void addOrderParams(String paramName, String sortOrder) {
         StringBuilder sb = new StringBuilder();
         sb.append(" ")
-                .append(sqlTableAlias).append(".")
+                .append(entityAlias).append(".")
                 .append(paramName).append(" ")
                 .append(sortOrder);
         expression.append(sb);
