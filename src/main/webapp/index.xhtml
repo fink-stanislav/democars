@@ -236,7 +236,7 @@
         <f:setPropertyActionListener target="#{carBean.car}" value="#{car}"/>
     </a4j:commandLink>
     <f:facet name="footer">
-        <a4j:commandLink oncomplete="#{rich:component('carCreatePanel')}.show()">
+        <a4j:commandLink onbegin="#{rich:component('carCreatePanel')}.show()">
             <h:graphicImage url="images/plus.jpg" styleClass="square-image"/>
         </a4j:commandLink>
     </f:facet>
@@ -281,19 +281,28 @@
     </f:facet>
     <h:form>
         <a4j:outputPanel ajaxRendered="true">
-            <h:panelGrid columns="2" styleClass="panel-text">
+            <h:panelGrid columns="3" styleClass="panel-text">
                 <f:facet name="header">
                     <h:outputText value="Data to change"/>
                 </f:facet>
                 <h:outputText value="Make"/>
-                <h:inputText value="#{carBean.car.model.make}"/>
+                <h:inputText id="makeEditInput" value="#{carBean.car.model.make}" required="true">
+                    <f:validateRegex pattern="^[a-zA-Z0-9\-]*$"/>
+                </h:inputText>
+                <rich:message for="makeEditInput"/>
+
                 <h:outputText value="Model"/>
-                <h:inputText value="#{carBean.car.model.model}"/>
+                <h:inputText id="modelEditInput" value="#{carBean.car.model.model}" required="true">
+                    <f:validateRegex pattern="^[a-zA-Z0-9\-]*$"/>
+                </h:inputText>
+                <rich:message for="modelEditInput"/>
+
                 <h:outputText value="Price"/>
-                <h:inputText value="#{carBean.car.price}"/>
-                <a4j:commandButton value="Apply changes" action="#{carBean.updateCar}" render="dataTable"
-                                   oncomplete="#{rich:component('carEditPanel')}.hide()">
-                </a4j:commandButton>
+                <h:inputText id="priceEditInput" value="#{carBean.car.price}" required="true"
+                             converter="javax.faces.Double"/>
+                <rich:message for="priceEditInput"/>
+
+                <a4j:commandButton value="Apply changes" action="#{carBean.updateCar}" render="dataTable"/>
             </h:panelGrid>
         </a4j:outputPanel>
     </h:form>
@@ -323,7 +332,7 @@
     </h:form>
 </rich:popupPanel>
 
-<rich:popupPanel modal="true" id="carCreatePanel" width="370" height="285">
+<rich:popupPanel modal="true" id="carCreatePanel" width="400" height="315">
     <f:facet name="header">
         <h:outputText value="Add new car"/>
     </f:facet>
@@ -332,7 +341,7 @@
                         onclick="#{rich:component('carCreatePanel')}.hide()"/>
     </f:facet>
     <h:form>
-        <rich:togglePanel id="togglePanel" switchType="ajax" activeItem="commonCarInfo">
+        <rich:togglePanel id="carCreationDialog" switchType="ajax">
             <rich:togglePanelItem id="commonCarInfo">
                 <ui:include src="WEB-INF/commonCarInfo.xhtml"/>
             </rich:togglePanelItem>
