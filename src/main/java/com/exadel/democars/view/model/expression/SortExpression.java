@@ -22,7 +22,7 @@ public class SortExpression extends DefaultExpression {
 
     /**
      * Builds JPQL expression for filtering data
-     * First, clears up the parameters from <code>SortOrder.unsorted</code> values;
+     * First, cleans up the parameters from {@code SortOrder.unsorted} values;
      * Second, builds ORDER BY statement: inserts appropriate parameter names and ASC or DESC words.
      *
      * @return String representation of sorting JPQL-expression.

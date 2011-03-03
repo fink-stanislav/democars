@@ -21,10 +21,11 @@ public class FilterExpression extends DefaultExpression {
 
     /**
      * Builds JPQL expression for filtering data.
-     * If <code>filterParams</code> map is empty, returns built query - in this case empty string.
+     * Cleans up {@code filterParams} map from null values and empty strings.
+     * If {@code filterParams} map become empty, returns built query - in this case empty string.
      * Otherwise builds like expression for string parameters and comparison expression for numeric ones.
      *
-     * @return String representation of JPQL statement
+     * @return string representation of JPQL statement
      */
     public String evaluateExpression() {
         JpqlExpressionBuilder builder = new JpqlExpressionBuilder(jpqlParams);

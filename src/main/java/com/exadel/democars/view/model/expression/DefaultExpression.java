@@ -3,7 +3,7 @@ package com.exadel.democars.view.model.expression;
 import com.exadel.democars.util.JpqlExpressionBuilder;
 
 /**
- * Implements default functionality of data {@link DataRetrievalExpression}
+ * Implements default functionality of {@link DataRetrievalExpression}
  * Retrieves data as it is - without sorting or filtering.
  *
  * @author S. Fink
@@ -12,7 +12,7 @@ public class DefaultExpression implements DataRetrievalExpression {
     protected JpqlParams jpqlParams;
 
     /**
-     * Creates <code>DefaultExpression</code> with custom JPQL parameters
+     * Creates {@code DefaultExpression} with custom JPQL parameters
      *
      * @param jpqlParams contains parameters for building expressions; e.g. entity name and its alias
      */
@@ -21,7 +21,7 @@ public class DefaultExpression implements DataRetrievalExpression {
     }
 
     /**
-     * Builds JPQL select statement
+     * Returns JPQL select statement
      *
      * @return String representation of JPQL select statement
      */

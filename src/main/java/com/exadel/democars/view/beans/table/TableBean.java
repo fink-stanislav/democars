@@ -34,9 +34,9 @@ public class TableBean implements Serializable {
     }
 
     /**
-     * Returns updated TableDataModel.
+     * Returns updated TableDataModel. It is called when view updates.
      *
-     * @return DataModel
+     * @return data model for the view
      */
     public DataModel getModel() {
         tableModel.setPaginationParams(paginationParams);

@@ -5,6 +5,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaBuilder;
 
+/**
+ * Provides {@code EntityManager} for performing CRUD operations.
+ *
+ * @author S. Fink
+ */
 public class EntityManagerProvider {
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
@@ -12,6 +17,9 @@ public class EntityManagerProvider {
 
     private static EntityManagerProvider instance = new EntityManagerProvider();
 
+    /**
+     * Creates {@code EntityManager} from specified persistence unit.
+     */
     private EntityManagerProvider() {
         entityManagerFactory = Persistence.createEntityManagerFactory("demoCars");
         entityManager = entityManagerFactory.createEntityManager();

@@ -9,6 +9,11 @@ import java.util.List;
 
 import static com.exadel.democars.model.persistence.EntityManagerProvider.getEntityManagerProvider;
 
+/**
+ * Implements CRUD operations for entities.
+ *
+ * @author S. Fink
+ */
 public class DataManager {
     private EntityManager entityManager;
     private Integer rowCount = 0;
@@ -40,6 +45,13 @@ public class DataManager {
         entityTransaction.commit();
     }
 
+    /**
+     * Executes JPQL query from string. Retrieves specified number of results.
+     *
+     * @param query  JPQL query string
+     * @param params contains range for results
+     * @return List of entities
+     */
     public List executeQuery(String query, PaginationParams params) {
         Query rangedQuery = entityManager.createQuery(query);
 

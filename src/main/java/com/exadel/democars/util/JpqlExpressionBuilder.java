@@ -18,6 +18,9 @@ public class JpqlExpressionBuilder {
         expression = new StringBuilder();
     }
 
+    /**
+     * Builds JPQL select statement, based on specified entity alias and entity class name.
+     */
     public void buildSelectExpression() {
         StringBuilder sb = new StringBuilder();
         sb.append(" select ")
@@ -88,7 +91,7 @@ public class JpqlExpressionBuilder {
      *
      * @param number   number of params
      * @param position current param
-     * @return
+     * @return is it necessary to insert "," or "AND" or not
      */
     public boolean isRangeOk(Integer number, Integer position) {
         return number > 1 && position <= number - 1;

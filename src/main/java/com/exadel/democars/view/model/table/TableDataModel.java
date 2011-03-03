@@ -47,6 +47,11 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
         rows = dataManager.executeQuery(builder.getExpression(), paginationParams);
     }
 
+    /**
+     * Checks is row available or not. Prevents out of bounds exception.
+     *
+     * @return state of the current row
+     */
     public boolean isRowAvailable() {
         if (rows.size() <= getRowIndex()) {
             return false;
@@ -64,10 +69,6 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
         return dataManager.getRowCount();
     }
 
-    public T getRowData() {
-        return rows.get(getRowIndex());
-    }
-
     /**
      * Returns row index in range of pagination
      *
@@ -75,6 +76,30 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
      */
     public int getRowIndex() {
         return rowIndex % paginationParams.getPageSize();
+    }
+
+    /**
+     * Sets sorting parameters
+     *
+     * @param sortParams Map&lt;String, SortOrder&gt;
+     *                   map retrieved from bean associated with RichFaces dataTable
+     */
+    public void setSortParams(Map<String, SortOrder> sortParams) {
+        sortExpression.setSortParams(sortParams);
+    }
+
+    /**
+     * Sets filtering parameters
+     *
+     * @param filterParams Map&lt;String, Object&gt;
+     *                     map retrieved from bean associated with RichFaces dataTable
+     */
+    public void setFilterParams(Map<String, Object> filterParams) {
+        filterExpression.setFilterParams(filterParams);
+    }
+
+    public T getRowData() {
+        return rows.get(getRowIndex());
     }
 
     public void setRowIndex(int rowIndex) {
@@ -103,25 +128,5 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
 
     public void setJpqlParams(JpqlParams jpqlParams) {
         this.jpqlParams = jpqlParams;
-    }
-
-    /**
-     * Sets sorting parameters
-     *
-     * @param sortParams Map&lt;String, SortOrder&gt;
-     *                   map retrieved from bean associated with RichFaces dataTable
-     */
-    public void setSortParams(Map<String, SortOrder> sortParams) {
-        sortExpression.setSortParams(sortParams);
-    }
-
-    /**
-     * Sets filtering parameters
-     *
-     * @param filterParams Map&lt;String, Object&gt;
-     *                     map retrieved from bean associated with RichFaces dataTable
-     */
-    public void setFilterParams(Map<String, Object> filterParams) {
-        filterExpression.setFilterParams(filterParams);
     }
 }
