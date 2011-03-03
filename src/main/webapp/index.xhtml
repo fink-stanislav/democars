@@ -57,7 +57,10 @@
         <a4j:commandLink id="filterByMakeLink" action="#{tableBean.filter()}" render="dataTable">
             <h:outputText value="Filter by make:"/>
         </a4j:commandLink>
-        <h:inputText value="#{tableBean.filterParams['model.make']}"/>
+        <h:inputText id="makeFilterInput" value="#{tableBean.filterParams['model.make']}">
+            <f:validateRegex pattern="^[a-zA-Z0-9]*$"/>
+        </h:inputText>
+        <rich:message for="makeFilterInput"/>
     </f:facet>
 </rich:column>
 
@@ -98,7 +101,10 @@
         <a4j:commandLink id="filterByModelLink" action="#{tableBean.filter()}" render="dataTable">
             <h:outputText value="Filter by model:"/>
         </a4j:commandLink>
-        <h:inputText value="#{tableBean.filterParams['model.model']}"/>
+        <h:inputText id="filterModelInput" value="#{tableBean.filterParams['model.model']}">
+            <f:validateRegex pattern="^[a-zA-Z0-9]*$"/>
+        </h:inputText>
+        <rich:message for="filterModelInput"/>
     </f:facet>
 </rich:column>
 
