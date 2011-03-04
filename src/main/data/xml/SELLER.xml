@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<results_table>
+    <row id="1">
+        <ID>1</ID>
+        <ADDRESS>1</ADDRESS>
+        <DTYPE>LegalSeller</DTYPE>
+    </row>
+    <row id="2">
+        <ID>2</ID>
+        <ADDRESS>2</ADDRESS>
+        <DTYPE>IndividualSeller</DTYPE>
+    </row>
+    <row id="3">
+        <ID>3</ID>
+        <ADDRESS>3</ADDRESS>
+        <DTYPE>LegalSeller</DTYPE>
+    </row>
+    <row id="4">
+        <ID>4</ID>
+        <ADDRESS>4</ADDRESS>
+        <DTYPE>IndividualSeller</DTYPE>
+    </row>
+    <row id="5">
+        <ID>5</ID>
+        <ADDRESS>5</ADDRESS>
+        <DTYPE>LegalSeller</DTYPE>
+    </row>
+    <row id="6">
+        <ID>6</ID>
+        <ADDRESS>6</ADDRESS>
+        <DTYPE>IndividualSeller</DTYPE>
+    </row>
+    <row id="7">
+        <ID>7</ID>
+        <ADDRESS>7</ADDRESS>
+        <DTYPE>LegalSeller</DTYPE>
+    </row>
+    <row id="8">
+        <ID>8</ID>
+        <ADDRESS>8</ADDRESS>
+        <DTYPE>IndividualSeller</DTYPE>
+    </row>
+    <row id="9">
+        <ID>9</ID>
+        <ADDRESS>9</ADDRESS>
+        <DTYPE>LegalSeller</DTYPE>
+    </row>
+    <row id="10">
+        <ID>10</ID>
+        <ADDRESS>10</ADDRESS>
+        <DTYPE>IndividualSeller</DTYPE>
+    </row>
+    <row id="11">
+        <ID>11</ID>
+        <ADDRESS>11</ADDRESS>
+        <DTYPE>LegalSeller</DTYPE>
+    </row>
+    <row id="12">
+        <ID>12</ID>
+        <ADDRESS>12</ADDRESS>
+        <DTYPE>IndividualSeller</DTYPE>
+    </row>
+    <row id="13">
+        <ID>13</ID>
+        <ADDRESS>13</ADDRESS>
+        <DTYPE>LegalSeller</DTYPE>
+    </row>
+    <row id="14">
+        <ID>14</ID>
+        <ADDRESS>14</ADDRESS>
+        <DTYPE>IndividualSeller</DTYPE>
+    </row>
+    <row id="15">
+        <ID>15</ID>
+        <ADDRESS>15</ADDRESS>
+        <DTYPE>LegalSeller</DTYPE>
+    </row>
+    <row id="16">
+        <ID>16</ID>
+        <ADDRESS>16</ADDRESS>
+        <DTYPE>IndividualSeller</DTYPE>
+    </row>
+    <row id="17">
+        <ID>17</ID>
+        <ADDRESS>17</ADDRESS>
+        <DTYPE>LegalSeller</DTYPE>
+    </row>
+    <row id="18">
+        <ID>18</ID>
+        <ADDRESS>18</ADDRESS>
+        <DTYPE>IndividualSeller</DTYPE>
+    </row>
+    <row id="19">
+        <ID>19</ID>
+        <ADDRESS>19</ADDRESS>
+        <DTYPE>LegalSeller</DTYPE>
+    </row>
+    <row id="20">
+        <ID>20</ID>
+        <ADDRESS>20</ADDRESS>
+        <DTYPE>IndividualSeller</DTYPE>
+    </row>
+    <row id="21">
+        <ID>21</ID>
+        <ADDRESS>27</ADDRESS>
+        <DTYPE>LegalSeller</DTYPE>
+    </row>
+    <row id="22">
+        <ID>22</ID>
+        <ADDRESS>22</ADDRESS>
+        <DTYPE>IndividualSeller</DTYPE>
+    </row>
+    <row id="23">
+        <ID>23</ID>
+        <ADDRESS>23</ADDRESS>
+        <DTYPE>LegalSeller</DTYPE>
+    </row>
+    <row id="24">
+        <ID>24</ID>
+        <ADDRESS>24</ADDRESS>
+        <DTYPE>IndividualSeller</DTYPE>
+    </row>
+    <row id="25">
+        <ID>25</ID>
+        <ADDRESS>25</ADDRESS>
+        <DTYPE>LegalSeller</DTYPE>
+    </row>
+</results_table>
