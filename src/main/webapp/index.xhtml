@@ -236,7 +236,8 @@
         <f:setPropertyActionListener target="#{carBean.car}" value="#{car}"/>
     </a4j:commandLink>
     <f:facet name="footer">
-        <a4j:commandLink onbegin="#{rich:component('carCreatePanel')}.show()">
+        <a4j:commandLink oncomplete="#{rich:component('carCreatePanel')}.show()"
+                         render="carCreatePanel">
             <h:graphicImage url="images/plus.jpg" styleClass="square-image"/>
         </a4j:commandLink>
     </f:facet>
@@ -303,6 +304,7 @@
                 <rich:message for="priceEditInput"/>
 
                 <a4j:commandButton value="Apply changes" action="#{carBean.updateCar}" render="dataTable"/>
+                <a4j:commandButton value="Cancel" oncomplete="#{rich:component('carEditPanel')}.hide()"/>
             </h:panelGrid>
         </a4j:outputPanel>
     </h:form>
