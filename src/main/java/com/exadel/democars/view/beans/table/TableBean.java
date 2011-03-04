@@ -90,7 +90,7 @@ public class TableBean implements Serializable {
      * @return is corresponding key set to unsorted
      */
     public boolean isUnsorted(String key) {
-        return SortOrder.unsorted == sortParams.get(key);
+        return sortParams.get(key) == null || sortParams.get(key) == SortOrder.unsorted;
     }
 
     /**

@@ -43,11 +43,15 @@ public class CarCreationBean {
         car.setSeller(seller);
     }
 
+    public void clear() {
+        initCar();
+        initSeller();
+    }
+
     public void createCar() {
         determineSeller();
         dataManager.persistEntities(features, address, model, seller, car);
-        initCar();
-        initSeller();
+        clear();
     }
 
     private void determineSeller() {
