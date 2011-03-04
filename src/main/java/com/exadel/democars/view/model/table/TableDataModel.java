@@ -18,6 +18,7 @@ import java.util.Map;
  */
 public class TableDataModel<T> extends DataModel<T> implements Serializable {
     private DataManager dataManager;
+    private Integer rowCount = 0;
     private Integer rowIndex = 0;
     private List<T> rows;
     private PaginationParams paginationParams;
@@ -41,10 +42,17 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
     public void updateRows() {
         JpqlExpressionBuilder builder = new JpqlExpressionBuilder(jpqlParams);
         builder.buildSelectExpression();
+
         FilterSortExpression filterSortExpression =
                 new FilterSortExpression(sortExpression, filterExpression);
-        builder.append(filterSortExpression.evaluateExpression());
+        String dataRetrievalExpression = filterSortExpression.evaluateExpression();
+        builder.append(dataRetrievalExpression);
+
         rows = dataManager.executeQuery(builder.getExpression(), paginationParams);
+
+        JpqlExpressionBuilder countBuilder = new JpqlExpressionBuilder(jpqlParams);
+        countBuilder.buildCountExpression(dataRetrievalExpression);
+        rowCount = dataManager.executeQuery(countBuilder.getExpression());
     }
 
     /**
@@ -66,7 +74,7 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
      * @return int row number of retrieved data
      */
     public int getRowCount() {
-        return dataManager.getRowCount();
+        return rowCount;
     }
 
     /**

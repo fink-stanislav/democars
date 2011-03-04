@@ -21,14 +21,12 @@ public class DefaultExpression implements DataRetrievalExpression {
     }
 
     /**
-     * Returns JPQL select statement
+     * Returns Empty string
      *
-     * @return String representation of JPQL select statement
+     * @return expression for retrieval all data - empty string
      */
     public String evaluateExpression() {
-        JpqlExpressionBuilder builder = new JpqlExpressionBuilder(jpqlParams);
-        builder.buildSelectExpression();
-        return builder.getExpression();
+        return "";
     }
 
     public JpqlParams getJpqlParams() {

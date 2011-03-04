@@ -341,17 +341,19 @@
                         onclick="#{rich:component('carCreatePanel')}.hide()"/>
     </f:facet>
     <h:form>
-        <rich:togglePanel id="carCreationDialog" switchType="ajax">
-            <rich:togglePanelItem id="commonCarInfo">
-                <ui:include src="WEB-INF/commonCarInfo.xhtml"/>
-            </rich:togglePanelItem>
-            <rich:togglePanelItem id="carFeatures">
-                <ui:include src="WEB-INF/carFeatures.xhtml"/>
-            </rich:togglePanelItem>
-            <rich:togglePanelItem id="sellerInfo">
-                <ui:include src="WEB-INF/sellerInfo.xhtml"/>
-            </rich:togglePanelItem>
-        </rich:togglePanel>
+        <a4j:outputPanel ajaxRendered="true">
+            <rich:togglePanel id="carCreationDialog" switchType="ajax">
+                <rich:togglePanelItem id="commonCarInfo">
+                    <ui:include src="WEB-INF/commonCarInfo.xhtml"/>
+                </rich:togglePanelItem>
+                <rich:togglePanelItem id="carFeatures">
+                    <ui:include src="WEB-INF/carFeatures.xhtml"/>
+                </rich:togglePanelItem>
+                <rich:togglePanelItem id="sellerInfo">
+                    <ui:include src="WEB-INF/sellerInfo.xhtml"/>
+                </rich:togglePanelItem>
+            </rich:togglePanel>
+        </a4j:outputPanel>
     </h:form>
 </rich:popupPanel>
 </h:form>

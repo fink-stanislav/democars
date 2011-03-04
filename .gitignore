@@ -6,3 +6,4 @@ docs-private/*
 *.iws
 *.classpath
 *.project
+*.ids

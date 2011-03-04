@@ -5,6 +5,7 @@ import com.exadel.democars.view.model.expression.PaginationParams;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 import static com.exadel.democars.model.persistence.EntityManagerProvider.getEntityManagerProvider;
@@ -16,7 +17,6 @@ import static com.exadel.democars.model.persistence.EntityManagerProvider.getEnt
  */
 public class DataManager {
     private EntityManager entityManager;
-    private Integer rowCount = 0;
 
     public DataManager() {
         entityManager = getEntityManagerProvider().getEntityManager();
@@ -45,6 +45,11 @@ public class DataManager {
         entityTransaction.commit();
     }
 
+    public Integer executeQuery(String query) {
+        TypedQuery<Long> singleResultQuery = entityManager.createQuery(query, Long.class);
+        return singleResultQuery.getSingleResult().intValue();
+    }
+
     /**
      * Executes JPQL query from string. Retrieves specified number of results.
      *
@@ -54,20 +59,8 @@ public class DataManager {
      */
     public List executeQuery(String query, PaginationParams params) {
         Query rangedQuery = entityManager.createQuery(query);
-
-        // ! bad thing
-        rowCount = rangedQuery.getResultList().size();
-
-        if (rowCount <= params.getPageSize()) {
-            params.setCurrentPage(1);
-        }
-
         rangedQuery.setFirstResult(params.getCurrentPage() * params.getPageSize() - params.getPageSize());
         rangedQuery.setMaxResults(params.getPageSize());
         return rangedQuery.getResultList();
-    }
-
-    public Integer getRowCount() {
-        return rowCount;
     }
 }

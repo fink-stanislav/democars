@@ -1,6 +1,10 @@
 package com.exadel.democars.util;
 
 import com.exadel.democars.view.model.expression.JpqlParams;
+import org.apache.commons.lang.StringUtils;
+
+import static org.apache.commons.lang.StringUtils.*;
+import static org.apache.commons.lang.StringUtils.INDEX_NOT_FOUND;
 
 /**
  * Class for building JPQL expressions. Based on {@code StringBuilder}
@@ -20,35 +24,60 @@ public class JpqlExpressionBuilder {
 
     /**
      * Builds JPQL select statement, based on specified entity alias and entity class name.
+     *
+     * @return builder
      */
-    public void buildSelectExpression() {
+    public JpqlExpressionBuilder buildSelectExpression() {
         StringBuilder sb = new StringBuilder();
         sb.append(" select ")
                 .append(entityAlias)
                 .append(" from ")
                 .append(entityName).append(" ")
                 .append(entityAlias);
-        expression.append(sb);
+        return this.append(sb.toString());
     }
 
-    public void buildLikeExpression(String paramName, Object paramValue) {
+    public JpqlExpressionBuilder buildCountExpression(String dataRetrievalExpression) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(" select count(")
+                .append(entityAlias)
+                .append(") from ")
+                .append(entityName).append(" ")
+                .append(entityAlias);
+        append(sb.toString());
+        append(dataRetrievalExpression);
+
+        excludeOrderBy();
+
+        return this;
+    }
+
+    public JpqlExpressionBuilder excludeOrderBy() {
+        int orderByPosition = indexOf(getExpression(), "order by");
+        if (orderByPosition != INDEX_NOT_FOUND) {
+            replace(substring(getExpression(), 0, orderByPosition));
+        }
+        return this;
+    }
+
+    public JpqlExpressionBuilder buildLikeExpression(String paramName, Object paramValue) {
         StringBuilder sb = new StringBuilder();
         sb.append(" upper(").append(entityAlias).append(".")
                 .append(paramName)
                 .append(") like '")
                 .append(((String) paramValue).toUpperCase())
                 .append("%'");
-        expression.append(sb);
+        return this.append(sb.toString());
     }
 
-    public void buildComparisonExpression(String paramName, Object paramValue, String sign) {
+    public JpqlExpressionBuilder buildComparisonExpression(String paramName, Object paramValue, String sign) {
         StringBuilder sb = new StringBuilder();
         sb.append(entityAlias)
                 .append(".")
                 .append(paramName).append(" ")
                 .append(sign).append(" ")
                 .append(paramValue);
-        expression.append(sb);
+        return this.append(sb.toString());
     }
 
     public JpqlExpressionBuilder append(String expression) {
@@ -56,29 +85,34 @@ public class JpqlExpressionBuilder {
         return this;
     }
 
-    public void buildOrderByExpression() {
-        expression.append(" order by ");
+    public JpqlExpressionBuilder replace(String expression) {
+        this.expression = new StringBuilder(expression);
+        return this;
     }
 
-    public void addComma() {
-        expression.append(" , ");
+    public JpqlExpressionBuilder buildOrderByExpression() {
+        return append("order by ");
     }
 
-    public void addOrderParams(String paramName, String sortOrder) {
+    public JpqlExpressionBuilder addComma() {
+        return append(", ");
+    }
+
+    public JpqlExpressionBuilder addOrderParams(String paramName, String sortOrder) {
         StringBuilder sb = new StringBuilder();
         sb.append(" ")
                 .append(entityAlias).append(".")
                 .append(paramName).append(" ")
                 .append(sortOrder);
-        expression.append(sb);
+        return this.append(sb.toString());
     }
 
-    public void addWhere() {
-        expression.append(" where ");
+    public JpqlExpressionBuilder addWhere() {
+        return append(" where ");
     }
 
-    public void addAnd() {
-        expression.append(" and ");
+    public JpqlExpressionBuilder addAnd() {
+        return append(" and ");
     }
 
     public String getExpression() {

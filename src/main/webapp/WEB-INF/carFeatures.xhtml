@@ -62,7 +62,7 @@
         <h:inputText id="intColorInput" value="#{carCreationBean.car.features.interiorColor}" required="true"/>
         <rich:message for="intColorInput"/>
     </h:panelGrid>
-    <a4j:commandButton value="Previous">
+    <a4j:commandButton value="Previous" immediate="true">
         <rich:toggleControl disableDefault="true" targetItem="@prev" event="click"/>
     </a4j:commandButton>
     <a4j:commandButton value="Next">
