@@ -50,9 +50,17 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
 
         rows = dataManager.executeQuery(builder.getExpression(), paginationParams);
 
+        adjustPagesAfterDelete();
+
         JpqlExpressionBuilder countBuilder = new JpqlExpressionBuilder(jpqlParams);
         countBuilder.buildCountExpression(dataRetrievalExpression);
         rowCount = dataManager.executeQuery(countBuilder.getExpression());
+    }
+
+    private void adjustPagesAfterDelete() {
+        if (rows.size() == 0 && paginationParams.getCurrentPage() > 1) {
+            paginationParams.setCurrentPage(paginationParams.getCurrentPage() - 1);
+        }
     }
 
     /**

@@ -57,6 +57,6 @@
     <a4j:commandButton value="Previous">
         <rich:toggleControl disableDefault="true" targetItem="@prev" event="click"/>
     </a4j:commandButton>
-    <a4j:commandButton value="Create" render="dataTable"
+    <a4j:commandButton value="Create" render="dataTable" limitRender="true"
                        action="#{carCreationBean.createCar}"/>
 </ui:composition>
