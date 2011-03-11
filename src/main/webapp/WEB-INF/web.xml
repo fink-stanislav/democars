@@ -5,7 +5,7 @@
          version="2.5">
 
     <listener>
-        <listener-class>com.exadel.democars.model.connection.Initializer</listener-class>
+        <listener-class>org.richfaces.democars.model.connection.Initializer</listener-class>
     </listener>
 
     <servlet>

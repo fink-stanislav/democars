@@ -182,7 +182,8 @@
             <f:facet name="label">
                 <h:outputText value="Seller"/>
             </f:facet>
-            <rich:menuItem action="#{tableBean.sortAscending('seller.address.city')}" render="dataTable" limitRender="true"
+            <rich:menuItem action="#{tableBean.sortAscending('seller.address.city')}" render="dataTable"
+                           limitRender="true"
                            mode="ajax" styleClass="menuItem">
                 <f:facet name="icon">
                     <h:selectBooleanCheckbox disabled="true"
@@ -190,7 +191,8 @@
                 </f:facet>
                 <h:outputText value="Ascending sort"/>
             </rich:menuItem>
-            <rich:menuItem action="#{tableBean.sortDescending('seller.address.city')}" render="dataTable" limitRender="true"
+            <rich:menuItem action="#{tableBean.sortDescending('seller.address.city')}" render="dataTable"
+                           limitRender="true"
                            mode="ajax" styleClass="menuItem">
                 <f:facet name="icon">
                     <h:selectBooleanCheckbox disabled="true"
@@ -198,7 +200,8 @@
                 </f:facet>
                 <h:outputText value="Descending sort"/>
             </rich:menuItem>
-            <rich:menuItem action="#{tableBean.makeUnsorted('seller.address.city')}" render="dataTable" limitRender="true"
+            <rich:menuItem action="#{tableBean.makeUnsorted('seller.address.city')}" render="dataTable"
+                           limitRender="true"
                            mode="ajax" styleClass="menuItem">
                 <f:facet name="icon">
                     <h:selectBooleanCheckbox disabled="true"
@@ -239,9 +242,11 @@
         <f:setPropertyActionListener target="#{carBean.car}" value="#{car}"/>
     </a4j:commandLink>
     <f:facet name="footer">
-        <a4j:commandLink render="carCreatePanel" limitRender="true" action="#{carCreationBean.clear}"
-                         oncomplete="#{rich:component('carCreatePanel')}.show();">
+        <a4j:commandLink action="#{carCreationBean.clear}"
+                         onbegin="#{rich:component('carCreationDialog')}.switchToItem('commonCarInfo');"
+                         onclick="#{rich:component('carCreatePanel')}.show();">
             <h:graphicImage url="images/plus.jpg" styleClass="square-image"/>
+            <f:setPropertyActionListener target="#{carCreationBean.ajaxRendered}" value="false"/>
         </a4j:commandLink>
     </f:facet>
 </rich:column>
@@ -345,8 +350,8 @@
                         onclick="#{rich:component('carCreatePanel')}.hide()"/>
     </f:facet>
     <h:form id="carCreateForm">
-        <a4j:outputPanel ajaxRendered="true">
-            <rich:togglePanel id="carCreationDialog" switchType="ajax">
+        <a4j:outputPanel id="carCreateFormPanel" ajaxRendered="#{carCreationBean.ajaxRendered}">
+            <rich:togglePanel id="carCreationDialog" switchType="client" activeItem="commonCarInfo">
                 <rich:togglePanelItem id="commonCarInfo">
                     <ui:include src="/WEB-INF/commonCarInfo.xhtml"/>
                 </rich:togglePanelItem>
