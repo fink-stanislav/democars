@@ -1,0 +1,31 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j">
+    <rich:popupPanel modal="true" id="carCreatePanel" width="400" height="315">
+        <f:facet name="header">
+            <h:outputText value="Add new car"/>
+        </f:facet>
+        <f:facet name="controls">
+            <h:graphicImage url="/images/close.jpeg" styleClass="square-image"
+                            onclick="#{rich:component('carCreatePanel')}.hide()"/>
+        </f:facet>
+        <h:form id="carCreateForm">
+            <a4j:outputPanel id="carCreateFormPanel" ajaxRendered="#{carCreationBean.ajaxRendered}">
+                <rich:togglePanel id="carCreationDialog" switchType="client" activeItem="commonCarInfo">
+                    <rich:togglePanelItem id="commonCarInfo">
+                        <ui:include src="/WEB-INF/wizard/commonCarForm.xhtml"/>
+                    </rich:togglePanelItem>
+                    <rich:togglePanelItem id="carFeatures">
+                        <ui:include src="/WEB-INF/wizard/carFeaturesForm.xhtml"/>
+                    </rich:togglePanelItem>
+                    <rich:togglePanelItem id="sellerInfo">
+                        <ui:include src="/WEB-INF/wizard/sellerForm.xhtml"/>
+                    </rich:togglePanelItem>
+                </rich:togglePanel>
+            </a4j:outputPanel>
+        </h:form>
+    </rich:popupPanel>
+</ui:composition>

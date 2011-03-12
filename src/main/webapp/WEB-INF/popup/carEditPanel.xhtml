@@ -1,0 +1,44 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j">
+    <rich:popupPanel modal="true" id="carEditPanel" width="350" height="180">
+        <f:facet name="header">
+            <h:outputText value="Edit Car Information"/>
+        </f:facet>
+        <f:facet name="controls">
+            <h:graphicImage url="/images/close.jpeg" styleClass="square-image"
+                            onclick="#{rich:component('carEditPanel')}.hide()"/>
+        </f:facet>
+        <h:form id="carEditForm">
+            <a4j:outputPanel ajaxRendered="true">
+                <h:panelGrid columns="3" styleClass="panel-text">
+                    <f:facet name="header">
+                        <h:outputText value="Data to change"/>
+                    </f:facet>
+                    <h:outputText value="Make"/>
+                    <h:inputText id="makeEditInput" value="#{carBean.car.model.make}" required="true">
+                        <f:validateRegex pattern="^[a-zA-Z0-9\- ]*$"/>
+                    </h:inputText>
+                    <rich:message for="makeEditInput"/>
+
+                    <h:outputText value="Model"/>
+                    <h:inputText id="modelEditInput" value="#{carBean.car.model.model}" required="true">
+                        <f:validateRegex pattern="^[a-zA-Z0-9\- ]*$"/>
+                    </h:inputText>
+                    <rich:message for="modelEditInput"/>
+
+                    <h:outputText value="Price"/>
+                    <h:inputText id="priceEditInput" value="#{carBean.car.price}" required="true"
+                                 converter="javax.faces.Double"/>
+                    <rich:message for="priceEditInput"/>
+
+                    <a4j:commandButton value="Apply changes" action="#{carBean.updateCar}" render="dataTable"/>
+                    <a4j:commandButton value="Cancel" oncomplete="#{rich:component('carEditPanel')}.hide()"/>
+                </h:panelGrid>
+            </a4j:outputPanel>
+        </h:form>
+    </rich:popupPanel>
+</ui:composition>
