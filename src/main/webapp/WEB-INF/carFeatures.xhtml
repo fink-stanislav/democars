@@ -4,7 +4,6 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:a4j="http://richfaces.org/a4j">
-
     <h:panelGrid columns="3" styleClass="panel-text">
         <f:facet name="header">
             <h:outputText value="Car Features"/>
@@ -16,6 +15,8 @@
             <f:selectItem itemLabel="Sedan" itemValue="SEDAN"/>
             <f:selectItem itemLabel="Hatchback" itemValue="HATCHBACK"/>
             <f:selectItem itemLabel="Minivan" itemValue="MINIVAN"/>
+            <f:validateRequired/>
+            <rich:validator event="blur"/>
         </rich:select>
         <rich:message for="bodyTypeInput"/>
 
@@ -29,37 +30,47 @@
             <f:selectItem itemLabel="v6" itemValue="V6"/>
             <f:selectItem itemLabel="v8" itemValue="V8"/>
             <f:selectItem itemLabel="Diesel" itemValue="DIESEL"/>
+            <f:validateRequired/>
+            <rich:validator event="blur"/>
         </rich:select>
         <rich:message for="engineInput"/>
 
         <h:outputText value="Fuel"/>
         <rich:select id="fuelInput" value="#{carCreationBean.car.features.fuel}"
-                     defaultLabel="Select value from list"
-                     required="true">
+                     defaultLabel="Select value from list">
             <f:selectItem itemLabel="a80" itemValue="A80"/>
             <f:selectItem itemLabel="a92" itemValue="A92"/>
             <f:selectItem itemLabel="a95" itemValue="A95"/>
             <f:selectItem itemLabel="a98" itemValue="A98"/>
             <f:selectItem itemLabel="Diesel" itemValue="DIESEL"/>
+            <f:validateRequired/>
+            <rich:validator event="blur"/>
         </rich:select>
         <rich:message for="fuelInput"/>
 
         <h:outputText value="Transmission"/>
         <rich:select id="transmissionInput" value="#{carCreationBean.car.features.transmission}"
-                     defaultLabel="Select value from list"
-                     required="true">
+                     defaultLabel="Select value from list">
             <f:selectItem itemLabel="Automatic" itemValue="AUTOMATIC"/>
             <f:selectItem itemLabel="Semi-automatic" itemValue="SEMIAUTOMATIC"/>
             <f:selectItem itemLabel="Mechanic" itemValue="MECHANIC"/>
+            <f:validateRequired/>
+            <rich:validator event="blur"/>
         </rich:select>
         <rich:message for="transmissionInput"/>
 
         <h:outputText value="Exterior Color"/>
-        <h:inputText id="extColorInput" value="#{carCreationBean.car.features.exteriorColor}" required="true"/>
+        <h:inputText id="extColorInput" value="#{carCreationBean.car.features.exteriorColor}">
+            <f:validateRequired/>
+            <rich:validator event="blur"/>
+        </h:inputText>
         <rich:message for="extColorInput"/>
 
         <h:outputText value="Interior Color"/>
-        <h:inputText id="intColorInput" value="#{carCreationBean.car.features.interiorColor}" required="true"/>
+        <h:inputText id="intColorInput" value="#{carCreationBean.car.features.interiorColor}">
+            <f:validateRequired/>
+            <rich:validator event="blur"/>
+        </h:inputText>
         <rich:message for="intColorInput"/>
     </h:panelGrid>
     <a4j:commandButton value="Previous">

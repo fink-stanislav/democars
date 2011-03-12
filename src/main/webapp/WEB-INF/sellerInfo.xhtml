@@ -4,7 +4,6 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:a4j="http://richfaces.org/a4j">
-
     <h:panelGrid columns="3" styleClass="panel-text">
         <f:facet name="header">
             <h:outputText value="Seller Information"/>
@@ -19,11 +18,17 @@
 
         <div></div>
         <h:outputText value="City"/>
-        <h:inputText id="cityInput" value="#{carCreationBean.car.seller.address.city}" required="true"/>
+        <h:inputText id="cityInput" value="#{carCreationBean.car.seller.address.city}">
+            <f:validateRequired/>
+            <rich:validator event="blur"/>
+        </h:inputText>
         <rich:message for="cityInput"/>
 
         <h:outputText value="Street"/>
-        <h:inputText id="streetInput" value="#{carCreationBean.car.seller.address.street}" required="true"/>
+        <h:inputText id="streetInput" value="#{carCreationBean.car.seller.address.street}">
+            <f:validateRequired/>
+            <rich:validator event="blur"/>
+        </h:inputText>
         <rich:message for="streetInput"/>
     </h:panelGrid>
 
@@ -34,7 +39,10 @@
             </f:facet>
             <h:panelGrid columns="3" styleClass="panel-text">
                 <h:outputText value="Company"/>
-                <h:inputText id="companyInput" value="#{carCreationBean.companyName}" required="true"/>
+                <h:inputText id="companyInput" value="#{carCreationBean.companyName}">
+                    <f:validateRequired/>
+                    <rich:validator event="blur"/>
+                </h:inputText>
                 <rich:message for="companyInput"/>
             </h:panelGrid>
         </rich:panel>
@@ -44,11 +52,17 @@
             </f:facet>
             <h:panelGrid columns="3" styleClass="panel-text">
                 <h:outputText value="First name"/>
-                <h:inputText id="firstNameInput" value="#{carCreationBean.firstName}" required="true"/>
+                <h:inputText id="firstNameInput" value="#{carCreationBean.firstName}">
+                    <f:validateRequired/>
+                    <rich:validator event="blur"/>
+                </h:inputText>
                 <rich:message for="firstNameInput"/>
 
                 <h:outputText value="Last name"/>
-                <h:inputText id="lastNameInput" value="#{carCreationBean.lastName}" required="true"/>
+                <h:inputText id="lastNameInput" value="#{carCreationBean.lastName}">
+                    <f:validateRequired/>
+                    <rich:validator event="blur"/>
+                </h:inputText>
                 <rich:message for="lastNameInput"/>
             </h:panelGrid>
         </rich:panel>

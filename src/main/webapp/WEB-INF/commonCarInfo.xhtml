@@ -4,48 +4,59 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:a4j="http://richfaces.org/a4j">
-
     <h:panelGrid columns="3" styleClass="panel-text">
         <f:facet name="header">
             <h:outputText value="Common Car Information"/>
         </f:facet>
         <h:outputText value="Make"/>
-        <h:inputText id="makeInput" value="#{carCreationBean.car.model.make}" required="true"/>
+        <h:inputText id="makeInput" value="#{carCreationBean.car.model.make}">
+            <f:validateRequired/>
+            <rich:validator event="blur"/>
+        </h:inputText>
         <rich:message for="makeInput"/>
 
         <h:outputText value="Model"/>
-        <h:inputText id="modelInput" value="#{carCreationBean.car.model.model}" required="true"/>
+        <h:inputText id="modelInput" value="#{carCreationBean.car.model.model}">
+            <f:validateRequired/>
+            <rich:validator event="blur"/>
+        </h:inputText>
         <rich:message for="modelInput"/>
 
         <h:outputText value="Price"/>
-        <h:inputText id="priceInput" value="#{carCreationBean.car.price}" required="true">
+        <h:inputText id="priceInput" value="#{carCreationBean.car.price}">
+            <f:validateRequired/>
             <f:validateDoubleRange minimum="0" maximum="100000"/>
+            <rich:validator event="blur"/>
         </h:inputText>
         <rich:message for="priceInput"/>
 
         <h:outputText value="Mileage"/>
-        <h:inputText id="mileageInput" value="#{carCreationBean.car.mileage}" required="true">
+        <h:inputText id="mileageInput" value="#{carCreationBean.car.mileage}">
             <f:validateLongRange minimum="0" maximum="1000000"/>
+            <f:validateRequired/>
+            <rich:validator event="blur"/>
         </h:inputText>
         <rich:message for="mileageInput"/>
 
         <h:outputText value="Vin"/>
-        <h:inputText id="vinInput" value="#{carCreationBean.car.vin}" required="true">
+        <h:inputText id="vinInput" value="#{carCreationBean.car.vin}">
             <f:validateLength minimum="5" maximum="20"/>
+            <f:validateRequired/>
+            <rich:validator event="blur"/>
         </h:inputText>
         <rich:message for="vinInput"/>
 
         <h:outputText value="Condition"/>
         <rich:select id="conditionInput" value="#{carCreationBean.car.condition}"
-                     defaultLabel="Select value from list"
-                     required="true">
+                     defaultLabel="Select value from list">
             <f:selectItem itemLabel="New" itemValue="NEW"/>
             <f:selectItem itemLabel="Used" itemValue="USED"/>
+            <f:validateRequired/>
+            <rich:validator event="blur"/>
         </rich:select>
         <rich:message for="conditionInput"/>
-        <a4j:commandButton value="Next">
+        <a4j:commandButton id="nextButton" value="Next">
             <rich:toggleControl disableDefault="true" targetItem="@next" event="click"/>
         </a4j:commandButton>
     </h:panelGrid>
-
 </ui:composition>
