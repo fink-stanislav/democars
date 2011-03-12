@@ -1,6 +1,6 @@
 package org.richfaces.democars.model.entities;
 
-import org.richfaces.democars.beans.car.Condition;
+import org.richfaces.democars.model.enums.Condition;
 
 import javax.persistence.*;
 import java.io.Serializable;

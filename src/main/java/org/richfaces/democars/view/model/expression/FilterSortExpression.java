@@ -1,6 +1,6 @@
 package org.richfaces.democars.view.model.expression;
 
-import org.richfaces.democars.util.JpqlExpressionBuilder;
+import org.richfaces.democars.model.util.JpqlExpressionBuilder;
 
 /**
  * Combines {@link SortExpression} and {@link FilterExpression} functionality.

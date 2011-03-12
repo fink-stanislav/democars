@@ -1,4 +1,4 @@
-package org.richfaces.democars.model.connection;
+package org.richfaces.democars.application;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;

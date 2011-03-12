@@ -1,4 +1,4 @@
-package org.richfaces.democars.view.beans.controls;
+package org.richfaces.democars.view.beans.popup;
 
 import org.richfaces.democars.model.persistence.DataManager;
 import org.richfaces.democars.model.entities.*;

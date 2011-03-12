@@ -1,9 +1,9 @@
 package org.richfaces.democars.model.entities;
 
-import org.richfaces.democars.beans.car.BodyType;
-import org.richfaces.democars.beans.car.Engine;
-import org.richfaces.democars.beans.car.Fuel;
-import org.richfaces.democars.beans.car.Transmission;
+import org.richfaces.democars.model.enums.BodyType;
+import org.richfaces.democars.model.enums.Engine;
+import org.richfaces.democars.model.enums.Fuel;
+import org.richfaces.democars.model.enums.Transmission;
 
 import javax.persistence.*;
 import java.io.Serializable;

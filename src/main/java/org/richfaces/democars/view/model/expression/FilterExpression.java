@@ -1,6 +1,6 @@
 package org.richfaces.democars.view.model.expression;
 
-import org.richfaces.democars.util.JpqlExpressionBuilder;
+import org.richfaces.democars.model.util.JpqlExpressionBuilder;
 
 import java.util.HashMap;
 import java.util.Map;

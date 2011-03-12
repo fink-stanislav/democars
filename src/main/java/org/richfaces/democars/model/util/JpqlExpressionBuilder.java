@@ -1,4 +1,4 @@
-package org.richfaces.democars.util;
+package org.richfaces.democars.model.util;
 
 import org.richfaces.democars.view.model.expression.JpqlParams;
 

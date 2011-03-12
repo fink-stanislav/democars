@@ -1,7 +1,7 @@
 package org.richfaces.democars.view.model.table;
 
 import org.richfaces.democars.model.persistence.DataManager;
-import org.richfaces.democars.util.JpqlExpressionBuilder;
+import org.richfaces.democars.model.util.JpqlExpressionBuilder;
 import org.richfaces.component.SortOrder;
 import org.richfaces.democars.view.model.expression.*;
 
