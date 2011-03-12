@@ -13,9 +13,9 @@
                             onclick="#{rich:component('sellerShowPanel')}.hide()"/>
         </f:facet>
         <a4j:outputPanel ajaxRendered="true">
-            <h:outputText styleClass="text-bold" value="#{sellerBean.seller}"/><br/>
-            <h:outputText value="#{sellerBean.seller.address.city}, "/>
-            <h:outputText value="#{sellerBean.seller.address.street}"/>
+            <h:outputText styleClass="text-bold" value="#{showSellerBean.seller}"/><br/>
+            <h:outputText value="#{showSellerBean.seller.address.city}, "/>
+            <h:outputText value="#{showSellerBean.seller.address.street}"/>
         </a4j:outputPanel>
     </rich:popupPanel>
 </ui:composition>

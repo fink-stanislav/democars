@@ -9,7 +9,7 @@
             <h:outputText value="Car Features"/>
         </f:facet>
         <h:outputText value="Body Type"/>
-        <rich:select id="bodyTypeInput" value="#{carCreationBean.car.features.bodyType}"
+        <rich:select id="bodyTypeInput" value="#{createCarBean.car.features.bodyType}"
                      defaultLabel="Select value from list"
                      required="true">
             <f:selectItem itemLabel="Sedan" itemValue="SEDAN"/>
@@ -21,7 +21,7 @@
         <rich:message for="bodyTypeInput"/>
 
         <h:outputText value="Engine"/>
-        <rich:select id="engineInput" value="#{carCreationBean.car.features.engine}"
+        <rich:select id="engineInput" value="#{createCarBean.car.features.engine}"
                      defaultLabel="Select value from list"
                      required="true">
             <f:selectItem itemLabel="i4" itemValue="I4"/>
@@ -36,7 +36,7 @@
         <rich:message for="engineInput"/>
 
         <h:outputText value="Fuel"/>
-        <rich:select id="fuelInput" value="#{carCreationBean.car.features.fuel}"
+        <rich:select id="fuelInput" value="#{createCarBean.car.features.fuel}"
                      defaultLabel="Select value from list">
             <f:selectItem itemLabel="a80" itemValue="A80"/>
             <f:selectItem itemLabel="a92" itemValue="A92"/>
@@ -49,7 +49,7 @@
         <rich:message for="fuelInput"/>
 
         <h:outputText value="Transmission"/>
-        <rich:select id="transmissionInput" value="#{carCreationBean.car.features.transmission}"
+        <rich:select id="transmissionInput" value="#{createCarBean.car.features.transmission}"
                      defaultLabel="Select value from list">
             <f:selectItem itemLabel="Automatic" itemValue="AUTOMATIC"/>
             <f:selectItem itemLabel="Semi-automatic" itemValue="SEMIAUTOMATIC"/>
@@ -60,14 +60,14 @@
         <rich:message for="transmissionInput"/>
 
         <h:outputText value="Exterior Color"/>
-        <h:inputText id="extColorInput" value="#{carCreationBean.car.features.exteriorColor}">
+        <h:inputText id="extColorInput" value="#{createCarBean.car.features.exteriorColor}">
             <f:validateRequired/>
             <rich:validator event="blur"/>
         </h:inputText>
         <rich:message for="extColorInput"/>
 
         <h:outputText value="Interior Color"/>
-        <h:inputText id="intColorInput" value="#{carCreationBean.car.features.interiorColor}">
+        <h:inputText id="intColorInput" value="#{createCarBean.car.features.interiorColor}">
             <f:validateRequired/>
             <rich:validator event="blur"/>
         </h:inputText>

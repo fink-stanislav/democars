@@ -9,8 +9,8 @@
             <h:outputText value="Seller Information"/>
         </f:facet>
         <h:outputText value="Seller Type"/>
-        <h:selectOneRadio value="#{carCreationBean.sellerType}" styleClass="panel-text"
-                          layout="pageDirection" valueChangeListener="#{carCreationBean.sellerType}">
+        <h:selectOneRadio value="#{createCarBean.sellerType}" styleClass="panel-text"
+                          layout="pageDirection" valueChangeListener="#{createCarBean.sellerType}">
             <f:selectItem itemLabel="Individual seller" itemValue="individualSeller"/>
             <f:selectItem itemLabel="Legal seller" itemValue="legalSeller"/>
             <a4j:ajax render="sellerPanel" limitRender="true"/>
@@ -18,14 +18,14 @@
 
         <div></div>
         <h:outputText value="City"/>
-        <h:inputText id="cityInput" value="#{carCreationBean.car.seller.address.city}">
+        <h:inputText id="cityInput" value="#{createCarBean.car.seller.address.city}">
             <f:validateRequired/>
             <rich:validator event="blur"/>
         </h:inputText>
         <rich:message for="cityInput"/>
 
         <h:outputText value="Street"/>
-        <h:inputText id="streetInput" value="#{carCreationBean.car.seller.address.street}">
+        <h:inputText id="streetInput" value="#{createCarBean.car.seller.address.street}">
             <f:validateRequired/>
             <rich:validator event="blur"/>
         </h:inputText>
@@ -33,33 +33,33 @@
     </h:panelGrid>
 
     <a4j:outputPanel id="sellerPanel" ajaxRendered="true">
-        <rich:panel rendered="#{carCreationBean.sellerType eq 'legalSeller'}">
+        <rich:panel rendered="#{createCarBean.sellerType eq 'legalSeller'}">
             <f:facet name="header">
                 <h:outputText value="Legal seller information"/>
             </f:facet>
             <h:panelGrid columns="3" styleClass="panel-text">
                 <h:outputText value="Company"/>
-                <h:inputText id="companyInput" value="#{carCreationBean.companyName}">
+                <h:inputText id="companyInput" value="#{createCarBean.companyName}">
                     <f:validateRequired/>
                     <rich:validator event="blur"/>
                 </h:inputText>
                 <rich:message for="companyInput"/>
             </h:panelGrid>
         </rich:panel>
-        <rich:panel rendered="#{carCreationBean.sellerType eq 'individualSeller'}">
+        <rich:panel rendered="#{createCarBean.sellerType eq 'individualSeller'}">
             <f:facet name="header">
                 <h:outputText value="Individual seller information"/>
             </f:facet>
             <h:panelGrid columns="3" styleClass="panel-text">
                 <h:outputText value="First name"/>
-                <h:inputText id="firstNameInput" value="#{carCreationBean.firstName}">
+                <h:inputText id="firstNameInput" value="#{createCarBean.firstName}">
                     <f:validateRequired/>
                     <rich:validator event="blur"/>
                 </h:inputText>
                 <rich:message for="firstNameInput"/>
 
                 <h:outputText value="Last name"/>
-                <h:inputText id="lastNameInput" value="#{carCreationBean.lastName}">
+                <h:inputText id="lastNameInput" value="#{createCarBean.lastName}">
                     <f:validateRequired/>
                     <rich:validator event="blur"/>
                 </h:inputText>
@@ -72,7 +72,7 @@
         <rich:toggleControl disableDefault="true" targetItem="@prev" event="click"/>
     </a4j:commandButton>
     <a4j:commandButton value="Create" render="dataTable" limitRender="true"
-                       action="#{carCreationBean.createCar}">
-        <f:setPropertyActionListener target="#{carCreationBean.ajaxRendered}" value="true"/>
+                       action="#{createCarBean.createCar}">
+        <f:setPropertyActionListener target="#{createCarBean.ajaxRendered}" value="true"/>
     </a4j:commandButton>
 </ui:composition>

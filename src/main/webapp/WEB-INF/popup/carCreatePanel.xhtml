@@ -13,7 +13,7 @@
                             onclick="#{rich:component('carCreatePanel')}.hide()"/>
         </f:facet>
         <h:form id="carCreateForm">
-            <a4j:outputPanel id="carCreateFormPanel" ajaxRendered="#{carCreationBean.ajaxRendered}">
+            <a4j:outputPanel id="carCreateFormPanel" ajaxRendered="#{createCarBean.ajaxRendered}">
                 <rich:togglePanel id="carCreationDialog" switchType="client" activeItem="commonCarInfo">
                     <rich:togglePanelItem id="commonCarInfo">
                         <ui:include src="/WEB-INF/wizard/commonCarForm.xhtml"/>

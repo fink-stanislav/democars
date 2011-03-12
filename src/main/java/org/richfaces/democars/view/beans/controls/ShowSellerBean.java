@@ -6,9 +6,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import java.io.Serializable;
 
-@ManagedBean(name = "sellerBean")
+@ManagedBean(name = "showSellerBean")
 @RequestScoped
-public class SellerBean implements Serializable {
+public class ShowSellerBean implements Serializable {
     private Seller seller;
 
     public Seller getSeller() {

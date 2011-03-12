@@ -205,7 +205,7 @@
         </rich:dropDownMenu>
     </f:facet>
     <a4j:commandLink value="#{car.seller}" oncomplete="#{rich:component('sellerShowPanel')}.show()">
-        <f:setPropertyActionListener target="#{sellerBean.seller}" value="#{car.seller}"/>
+        <f:setPropertyActionListener target="#{showSellerBean.seller}" value="#{car.seller}"/>
     </a4j:commandLink>
 </rich:column>
 
@@ -228,18 +228,18 @@
     </f:facet>
     <a4j:commandLink oncomplete="#{rich:component('carEditPanel')}.show()">
         <h:graphicImage url="images/edit.gif" styleClass="image"/>
-        <f:setPropertyActionListener target="#{carBean.car}" value="#{car}"/>
+        <f:setPropertyActionListener target="#{editCarBean.car}" value="#{car}"/>
     </a4j:commandLink>
     <a4j:commandLink oncomplete="#{rich:component('carDeletePanel')}.show()">
         <h:graphicImage url="images/delete.gif" styleClass="image"/>
-        <f:setPropertyActionListener target="#{carBean.car}" value="#{car}"/>
+        <f:setPropertyActionListener target="#{editCarBean.car}" value="#{car}"/>
     </a4j:commandLink>
     <f:facet name="footer">
-        <a4j:commandLink action="#{carCreationBean.clear}"
+        <a4j:commandLink action="#{createCarBean.clear}"
                          onbegin="#{rich:component('carCreationDialog')}.switchToItem('commonCarInfo');"
                          onclick="#{rich:component('carCreatePanel')}.show();">
             <h:graphicImage url="images/plus.jpg" styleClass="square-image"/>
-            <f:setPropertyActionListener target="#{carCreationBean.ajaxRendered}" value="false"/>
+            <f:setPropertyActionListener target="#{createCarBean.ajaxRendered}" value="false"/>
         </a4j:commandLink>
     </f:facet>
 </rich:column>

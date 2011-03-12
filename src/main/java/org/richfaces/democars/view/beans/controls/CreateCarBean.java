@@ -6,9 +6,9 @@ import org.richfaces.democars.model.entities.*;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-@ManagedBean(name = "carCreationBean")
+@ManagedBean(name = "createCarBean")
 @SessionScoped
-public class CarCreationBean {
+public class CreateCarBean {
     private DataManager dataManager;
     private Car car;
     private Features features;
@@ -28,7 +28,7 @@ public class CarCreationBean {
         this.ajaxRendered = ajaxRendered;
     }
 
-    public CarCreationBean() {
+    public CreateCarBean() {
         clear();
         dataManager = new DataManager();
         sellerType = "individualSeller";

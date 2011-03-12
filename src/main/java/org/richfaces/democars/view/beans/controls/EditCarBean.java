@@ -7,13 +7,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
 
-@ManagedBean(name = "carBean")
+@ManagedBean(name = "editCarBean")
 @SessionScoped
-public class CarBean implements Serializable {
+public class EditCarBean implements Serializable {
     private Car car;
     private DataManager dataManager;
 
-    public CarBean() {
+    public EditCarBean() {
         dataManager = new DataManager();
     }
 

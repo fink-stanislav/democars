@@ -9,21 +9,21 @@
             <h:outputText value="Common Car Information"/>
         </f:facet>
         <h:outputText value="Make"/>
-        <h:inputText id="makeInput" value="#{carCreationBean.car.model.make}">
+        <h:inputText id="makeInput" value="#{createCarBean.car.model.make}">
             <f:validateRequired/>
             <rich:validator event="blur"/>
         </h:inputText>
         <rich:message for="makeInput"/>
 
         <h:outputText value="Model"/>
-        <h:inputText id="modelInput" value="#{carCreationBean.car.model.model}">
+        <h:inputText id="modelInput" value="#{createCarBean.car.model.model}">
             <f:validateRequired/>
             <rich:validator event="blur"/>
         </h:inputText>
         <rich:message for="modelInput"/>
 
         <h:outputText value="Price"/>
-        <h:inputText id="priceInput" value="#{carCreationBean.car.price}">
+        <h:inputText id="priceInput" value="#{createCarBean.car.price}">
             <f:validateRequired/>
             <f:validateDoubleRange minimum="0" maximum="100000"/>
             <rich:validator event="blur"/>
@@ -31,7 +31,7 @@
         <rich:message for="priceInput"/>
 
         <h:outputText value="Mileage"/>
-        <h:inputText id="mileageInput" value="#{carCreationBean.car.mileage}">
+        <h:inputText id="mileageInput" value="#{createCarBean.car.mileage}">
             <f:validateLongRange minimum="0" maximum="1000000"/>
             <f:validateRequired/>
             <rich:validator event="blur"/>
@@ -39,7 +39,7 @@
         <rich:message for="mileageInput"/>
 
         <h:outputText value="Vin"/>
-        <h:inputText id="vinInput" value="#{carCreationBean.car.vin}">
+        <h:inputText id="vinInput" value="#{createCarBean.car.vin}">
             <f:validateLength minimum="5" maximum="20"/>
             <f:validateRequired/>
             <rich:validator event="blur"/>
@@ -47,7 +47,7 @@
         <rich:message for="vinInput"/>
 
         <h:outputText value="Condition"/>
-        <rich:select id="conditionInput" value="#{carCreationBean.car.condition}"
+        <rich:select id="conditionInput" value="#{createCarBean.car.condition}"
                      defaultLabel="Select value from list">
             <f:selectItem itemLabel="New" itemValue="NEW"/>
             <f:selectItem itemLabel="Used" itemValue="USED"/>

@@ -15,11 +15,11 @@
         <h:form id="carDeleteForm">
             <a4j:outputPanel ajaxRendered="true">
                 <h:panelGrid columns="2" styleClass="panel-text">
-                    <h:outputText value="#{carBean.car.model.make}" styleClass="text-bold"/>
-                    <h:outputText value="#{carBean.car.model.model}" styleClass="text-bold"/>
+                    <h:outputText value="#{editCarBean.car.model.make}" styleClass="text-bold"/>
+                    <h:outputText value="#{editCarBean.car.model.model}" styleClass="text-bold"/>
                     <h:outputText value="VIN"/>
-                    <h:outputText value="#{carBean.car.vin}"/>
-                    <a4j:commandButton value="Delete" action="#{carBean.deleteCar}" limitRender="true"
+                    <h:outputText value="#{editCarBean.car.vin}"/>
+                    <a4j:commandButton value="Delete" action="#{editCarBean.deleteCar}" limitRender="true"
                                        oncomplete="#{rich:component('carDeletePanel')}.hide()" render="dataTable"/>
                     <a4j:commandButton value="Cancel"
                                        oncomplete="#{rich:component('carDeletePanel')}.hide()"/>
