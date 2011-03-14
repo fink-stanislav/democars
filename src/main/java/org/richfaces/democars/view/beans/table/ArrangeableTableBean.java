@@ -1,10 +1,12 @@
 package org.richfaces.democars.view.beans.table;
 
-import org.richfaces.component.SortOrder;
 import org.richfaces.democars.model.entities.Car;
+import org.richfaces.democars.model.persistence.DataManager;
+import org.richfaces.democars.model.util.JpqlExpressionBuilder;
+import org.richfaces.democars.view.model.expression.JpqlParams;
 import org.richfaces.democars.view.model.expression.PaginationParams;
-import org.richfaces.democars.view.model.table.arrangeable.ArrangeableTableModel;
-import org.richfaces.democars.view.model.table.arrangeable.OriginalTableModel;
+import org.richfaces.democars.view.model.table.ArrangeableTableModel;
+import org.richfaces.democars.view.model.table.OriginalTableModel;
 import org.richfaces.model.ArrangeableStateDefaultImpl;
 import org.richfaces.model.FilterField;
 import org.richfaces.model.SortField;
@@ -20,25 +22,21 @@ import java.util.*;
 @SessionScoped
 public class ArrangeableTableBean implements Serializable {
     private ArrangeableTableModel tableModel;
-    private List<FilterField> filterFields;
-    private List<SortField> sortFields;
-    private Locale locale;
 
     private Integer pageSize = 10;
     private Integer currentPage = 1;
 
     public ArrangeableTableBean() {
-        tableModel = new ArrangeableTableModel(new OriginalTableModel<Car>(), "", "");
-        filterFields = new ArrayList<FilterField>();
-        sortFields = new ArrayList<SortField>();
-        locale = new Locale("en");
+        tableModel = new ArrangeableTableModel(new OriginalTableModel<Car>(), null, null);
+        DataManager dataManager = new DataManager();
+        tableModel.setWrappedData(dataManager.executeQuery(
+                new JpqlExpressionBuilder(new JpqlParams("Car", "c"))
+                        .buildSelectExpression().getExpression(),
+                new PaginationParams(10, 1)));
     }
 
     public DataModel getModel() {
-        ArrangeableStateDefaultImpl stateDefault =
-                new ArrangeableStateDefaultImpl(filterFields, sortFields, locale);
-        tableModel.arrange(FacesContext.getCurrentInstance(), stateDefault);
-        return tableModel;
+        return tableModel.getOriginalModel();
     }
 
     public Integer getPageSize() {

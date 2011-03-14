@@ -1,4 +1,4 @@
-package org.richfaces.democars.view.model.table.arrangeable;
+package org.richfaces.democars.view.model.table;
 
 import org.ajax4jsf.model.DataVisitor;
 import org.ajax4jsf.model.ExtendedDataModel;
@@ -18,14 +18,7 @@ public class OriginalTableModel<T> extends ExtendedDataModel<T> {
     private Integer rowCount = 0;
     private Integer pageSize = 10;
     private Integer rowIndex = 0;
-
-    public List getRows() {
-        JpqlParams jpqlParams = new JpqlParams("Car", "c");
-        JpqlExpressionBuilder builder = new JpqlExpressionBuilder(jpqlParams);
-        DataManager dataManager = new DataManager();
-        PaginationParams paginationParams = new PaginationParams();
-        return dataManager.executeQuery(builder.buildSelectExpression().getExpression(), paginationParams);
-    }
+    private Object rowKey;
 
     public boolean isRowAvailable() {
         if (rows.size() <= getRowIndex()) {
@@ -35,7 +28,7 @@ public class OriginalTableModel<T> extends ExtendedDataModel<T> {
     }
 
     public int getRowCount() {
-        return rowCount;
+        return rows.size();
     }
 
     public int getRowIndex() {
@@ -60,11 +53,12 @@ public class OriginalTableModel<T> extends ExtendedDataModel<T> {
 
     @Override
     public void setRowKey(Object key) {
+        this.rowKey = key;
     }
 
     @Override
     public Object getRowKey() {
-        return null;
+        return rowKey;
     }
 
     @Override
