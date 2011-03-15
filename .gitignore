@@ -7,3 +7,4 @@ docs-private/*
 *.classpath
 *.project
 *.ids
+*.log
