@@ -4,33 +4,6 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:a4j="http://richfaces.org/a4j">
-    <script type="text/javascript">
-        function isValidationFailed() {
-            var messageForMake = document.getElementById('carCreateForm:messageForMake');
-            var messageForModel = document.getElementById('carCreateForm:messageForModel');
-            var messageForPrice = document.getElementById('carCreateForm:messageForPrice');
-            var messageForMileage = document.getElementById('carCreateForm:messageForMileage');
-            var messageForVin = document.getElementById('carCreateForm:messageForVin');
-            var messageForCondition = document.getElementById('carCreateForm:messageForCondition');
-
-            var elements = new Array(
-                    messageForMake,
-                    messageForModel,
-                    messageForPrice,
-                    messageForMileage,
-                    messageForVin,
-                    messageForCondition);
-
-            for (var i in elements) {
-                if (elements[i].hasChildNodes()) {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-    </script>
-    <a4j:jsFunction name="callFunc" onbegin="doSomething()"/>
     <h:panelGrid columns="3" styleClass="panel-text">
         <f:facet name="header">
             <h:outputText value="Common Car Information"/>
@@ -82,7 +55,7 @@
             <rich:validator event="blur"/>
         </rich:select>
         <rich:message for="conditionInput" id="messageForCondition"/>
-        <a4j:commandButton id="nextButton" value="Next" onclick="return !isValidationFailed()">
+        <a4j:commandButton id="nextButton" value="Next">
             <rich:toggleControl disableDefault="true" targetItem="@next" event="click"/>
         </a4j:commandButton>
     </h:panelGrid>
