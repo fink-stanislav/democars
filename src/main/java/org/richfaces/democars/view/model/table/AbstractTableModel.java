@@ -57,7 +57,7 @@ public abstract class AbstractTableModel<T> extends ExtendedDataModel<T> impleme
 
     @Override
     public T getRowData() {
-        return cachedItems != null ? cachedItems.get(0) : null;
+        return dataItem != null ? dataItem : null;
     }
 
     public void arrange(FacesContext facesContext, ArrangeableState arrangeableState) {
@@ -116,7 +116,10 @@ public abstract class AbstractTableModel<T> extends ExtendedDataModel<T> impleme
         return result;
     }
 
-
+    /**
+     * unused
+     *
+     */
     @Override
     public Object getWrappedData() {
         return null;
@@ -128,7 +131,7 @@ public abstract class AbstractTableModel<T> extends ExtendedDataModel<T> impleme
 
     @Override
     public int getRowIndex() {
-        return 0;
+        return -1;
     }
 
     @Override
