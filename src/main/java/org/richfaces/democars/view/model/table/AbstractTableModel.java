@@ -24,40 +24,50 @@ public abstract class AbstractTableModel<T> extends ExtendedDataModel<T> impleme
 
     private List<SortField> sortFields;
 
-    private Class<T> entityClass;
-
     private SequenceRange cachedRange;
 
-    private T dataItem;
+    private String rowKey;
+
+    private Integer rowIndex;
+
+    private DataManager dataManager;
+    private JpqlParams jpqlParams;
+    private Integer currentPage;
+    private Integer pageRowCount;
 
     protected AbstractTableModel(Class<T> entityClass) {
         super();
-        this.entityClass = entityClass;
+        dataManager = new DataManager();
+        jpqlParams = new JpqlParams("Car", "c");
     }
 
     @Override
     public void setRowKey(Object key) {
-        dataItem = cachedItems != null ? cachedItems.get(0) : null;
+        this.rowKey = (String) key;
     }
 
     @Override
     public Object getRowKey() {
-        return dataItem;
+        return rowKey;
     }
 
     @Override
     public boolean isRowAvailable() {
-        return dataItem != null;
+        return cachedItems != null &&
+                cachedItems.size() > getRowIndex() &&
+                cachedItems.size() > 0 &&
+                cachedItems.get(getRowIndex()) != null;
     }
 
     @Override
     public int getRowCount() {
-        return cachedItems != null ? cachedItems.size() : 0;
+        JpqlExpressionBuilder builder = new JpqlExpressionBuilder(jpqlParams);
+        return dataManager.executeQuery(builder.buildCountExpression("").getExpression());
     }
 
     @Override
     public T getRowData() {
-        return dataItem != null ? dataItem : null;
+        return cachedItems.get(getRowIndex());
     }
 
     public void arrange(FacesContext facesContext, ArrangeableState arrangeableState) {
@@ -79,24 +89,17 @@ public abstract class AbstractTableModel<T> extends ExtendedDataModel<T> impleme
 
             // update filter and sort settings
 
-            PaginationParams paginationParams = new PaginationParams();
-
             if (sequenceRange != null) {
                 int first = sequenceRange.getFirstRow();
                 int rows = sequenceRange.getRows();
-
-                // update pagination params
-                paginationParams = convertToPaginationParams(sequenceRange);
             }
 
             this.cachedRange = sequenceRange;
-            paginationParams = convertToPaginationParams(sequenceRange);
 
-            DataManager dataManager = new DataManager();
-            JpqlParams params = new JpqlParams("Car", "c");
-            JpqlExpressionBuilder builder = new JpqlExpressionBuilder(params);
+            JpqlExpressionBuilder builder = new JpqlExpressionBuilder(jpqlParams);
             builder.buildSelectExpression();
-            this.cachedItems = dataManager.executeQuery(builder.getExpression(), paginationParams);
+            this.cachedItems = dataManager.executeQuery(builder.getExpression(),
+                    new PaginationParams(pageRowCount, currentPage));
         }
     }
 
@@ -108,17 +111,24 @@ public abstract class AbstractTableModel<T> extends ExtendedDataModel<T> impleme
         }
     }
 
-    private PaginationParams convertToPaginationParams(SequenceRange range) {
-        PaginationParams result = new PaginationParams();
-        if (range.getFirstRow() == 0) {
-            result.setCurrentPage(1);
-        }
-        return result;
+    public Integer getPageRowCount() {
+        return pageRowCount;
+    }
+
+    public void setPageRowCount(Integer pageRowCount) {
+        this.pageRowCount = pageRowCount;
+    }
+
+    public Integer getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(Integer currentPage) {
+        this.currentPage = currentPage;
     }
 
     /**
      * unused
-     *
      */
     @Override
     public Object getWrappedData() {
@@ -131,10 +141,11 @@ public abstract class AbstractTableModel<T> extends ExtendedDataModel<T> impleme
 
     @Override
     public int getRowIndex() {
-        return -1;
+        return rowIndex % 10;
     }
 
     @Override
     public void setRowIndex(int rowIndex) {
+        this.rowIndex = rowIndex;
     }
 }

@@ -15,8 +15,8 @@ public class CustomModelBean implements Serializable {
 
     public CustomModelBean() {
         model = new CustomTableModel();
-        currentPage = 1;
-        pageRowCount = 10;
+        model.setCurrentPage(1);
+        model.setPageRowCount(10);
     }
 
     public CustomTableModel getModel() {
@@ -24,18 +24,18 @@ public class CustomModelBean implements Serializable {
     }
 
     public Integer getCurrentPage() {
-        return currentPage;
+        return model.getCurrentPage();
     }
 
     public void setCurrentPage(Integer currentPage) {
-        this.currentPage = currentPage;
+        model.setCurrentPage(currentPage);
     }
 
     public Integer getPageRowCount() {
-        return pageRowCount;
+        return model.getPageRowCount();
     }
 
     public void setPageRowCount(Integer pageRowCount) {
-        this.pageRowCount = pageRowCount;
+        model.setPageRowCount(pageRowCount);
     }
 }
