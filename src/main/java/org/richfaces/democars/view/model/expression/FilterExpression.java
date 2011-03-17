@@ -27,7 +27,7 @@ public class FilterExpression extends DefaultExpression {
      *
      * @return string representation of JPQL statement
      */
-    public String evaluateExpression() {
+    public String evaluate() {
         JpqlExpressionBuilder builder = new JpqlExpressionBuilder(jpqlParams);
 
         Set<Map.Entry<String, Object>> entrySet = cleanUpParams(filterParams).entrySet();

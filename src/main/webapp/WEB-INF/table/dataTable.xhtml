@@ -235,9 +235,11 @@
         <f:setPropertyActionListener target="#{editCarBean.car}" value="#{car}"/>
     </a4j:commandLink>
     <f:facet name="footer">
-        <a4j:commandLink action="#{createCarBean.clear}" render="carCreatePanel"
-                         oncomplete="#{rich:component('carCreatePanel')}.show();">
+        <a4j:commandLink action="#{createCarBean.clear}"
+                         onbegin="#{rich:component('carCreationDialog')}.switchToItem('commonCarInfo');"
+                         onclick="#{rich:component('carCreatePanel')}.show();">
             <h:graphicImage url="images/plus.jpg" styleClass="square-image"/>
+            <f:setPropertyActionListener target="#{createCarBean.ajaxRendered}" value="false"/>
         </a4j:commandLink>
     </f:facet>
 </rich:column>

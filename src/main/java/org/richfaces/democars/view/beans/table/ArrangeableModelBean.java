@@ -1,25 +1,26 @@
 package org.richfaces.democars.view.beans.table;
 
-import org.richfaces.democars.view.model.table.CustomTableModel;
+import org.richfaces.democars.model.entities.Car;
+import org.richfaces.democars.view.model.table.ArrangeableModel;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
 
-@ManagedBean(name = "customModelBean")
+@ManagedBean(name = "arrangeableModelBean")
 @SessionScoped
-public class CustomModelBean implements Serializable {
-    private CustomTableModel model;
+public class ArrangeableModelBean implements Serializable {
+    private ArrangeableModel<Car> model;
     private Integer currentPage;
     private Integer pageRowCount;
 
-    public CustomModelBean() {
-        model = new CustomTableModel();
+    public ArrangeableModelBean() {
+        model = new ArrangeableModel<Car>();
         model.setCurrentPage(1);
         model.setPageRowCount(10);
     }
 
-    public CustomTableModel getModel() {
+    public ArrangeableModel<Car> getModel() {
         return model;
     }
 

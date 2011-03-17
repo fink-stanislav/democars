@@ -24,10 +24,10 @@ public class FilterSortExpression extends DefaultExpression {
      *
      * @return String representation of JPQL statement
      */
-    public String evaluateExpression() {
+    public String evaluate() {
         JpqlExpressionBuilder builder = new JpqlExpressionBuilder(jpqlParams);
-        builder.append(filterExpression.evaluateExpression());
-        builder.append(sortExpression.evaluateExpression());
+        builder.append(filterExpression.evaluate());
+        builder.append(sortExpression.evaluate());
         return builder.getExpression();
     }
 }

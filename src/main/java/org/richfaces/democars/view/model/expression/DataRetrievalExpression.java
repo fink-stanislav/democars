@@ -14,5 +14,5 @@ public interface DataRetrievalExpression {
      *
      * @return String representation of Jpql-expression
      */
-    String evaluateExpression();
+    String evaluate();
 }

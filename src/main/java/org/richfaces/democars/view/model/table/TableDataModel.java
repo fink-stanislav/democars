@@ -45,7 +45,7 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
 
         FilterSortExpression filterSortExpression =
                 new FilterSortExpression(sortExpression, filterExpression);
-        String dataRetrievalExpression = filterSortExpression.evaluateExpression();
+        String dataRetrievalExpression = filterSortExpression.evaluate();
         builder.append(dataRetrievalExpression);
 
         rows = dataManager.executeQuery(builder.getExpression(), paginationParams);

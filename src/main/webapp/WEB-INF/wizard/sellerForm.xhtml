@@ -73,5 +73,6 @@
     </a4j:commandButton>
     <a4j:commandButton value="Create" render="dataTable" limitRender="true"
                        action="#{createCarBean.createCar}">
+        <f:setPropertyActionListener target="#{createCarBean.ajaxRendered}" value="true"/>
     </a4j:commandButton>
 </ui:composition>

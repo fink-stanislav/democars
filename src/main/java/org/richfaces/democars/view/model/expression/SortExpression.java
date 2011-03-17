@@ -27,7 +27,7 @@ public class SortExpression extends DefaultExpression {
      *
      * @return String representation of sorting JPQL-expression.
      */
-    public String evaluateExpression() {
+    public String evaluate() {
         JpqlExpressionBuilder builder = new JpqlExpressionBuilder(jpqlParams);
 
         Set<Map.Entry<String, SortOrder>> entrySet = cleanUpParams(sortParams).entrySet();

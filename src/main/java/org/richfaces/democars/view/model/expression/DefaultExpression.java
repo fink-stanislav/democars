@@ -23,7 +23,7 @@ public class DefaultExpression implements DataRetrievalExpression {
      *
      * @return expression for retrieval all data - empty string
      */
-    public String evaluateExpression() {
+    public String evaluate() {
         return "";
     }
 
