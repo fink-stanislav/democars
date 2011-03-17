@@ -45,6 +45,15 @@ public class DataManager {
         entityTransaction.commit();
     }
 
+    public <T> void persistEntities(List<T> entities) {
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
+        for (T entity : entities) {
+            entityManager.persist(entity);
+        }
+        entityTransaction.commit();
+    }
+
     public Integer executeQuery(String query) {
         TypedQuery<Long> singleResultQuery = entityManager.createQuery(query, Long.class);
         return singleResultQuery.getSingleResult().intValue();

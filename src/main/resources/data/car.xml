@@ -1,0 +1,403 @@
+<?xml version="1.0"?>
+<results_table>
+    <row id="1">
+        <ID>1</ID>
+        <MODEL>1</MODEL>
+        <PRICE>26500.0</PRICE>
+        <MILEAGE>45000</MILEAGE>
+        <VIN>DDSWEEDKFR7451RHJAD2</VIN>
+        <CONDITION>USED</CONDITION>
+        <FEATURES>1</FEATURES>
+        <SELLER>1</SELLER>
+    </row>
+    <row id="2">
+        <ID>2</ID>
+        <MODEL>2</MODEL>
+        <PRICE>13000.0</PRICE>
+        <MILEAGE>1000</MILEAGE>
+        <VIN>RIRTFDKLJDVVDE4894EF</VIN>
+        <CONDITION>NEW</CONDITION>
+        <FEATURES>2</FEATURES>
+        <SELLER>2</SELLER>
+    </row>
+    <row id="3">
+        <ID>3</ID>
+        <MODEL>3</MODEL>
+        <PRICE>2600.0</PRICE>
+        <MILEAGE>100000</MILEAGE>
+        <VIN>FJASDKLFJWEJFEW89375</VIN>
+        <CONDITION>USED</CONDITION>
+        <FEATURES>3</FEATURES>
+        <SELLER>3</SELLER>
+    </row>
+    <row id="4">
+        <ID>4</ID>
+        <MODEL>4</MODEL>
+        <PRICE>4500.0</PRICE>
+        <MILEAGE>145000</MILEAGE>
+        <VIN>ASDFVNEJIE353RESJKDF</VIN>
+        <CONDITION>USED</CONDITION>
+        <FEATURES>4</FEATURES>
+        <SELLER>4</SELLER>
+    </row>
+    <row id="5">
+        <ID>5</ID>
+        <MODEL>5</MODEL>
+        <PRICE>10000.0</PRICE>
+        <MILEAGE>500</MILEAGE>
+        <VIN>ALEIU3U38AWEFOAISDF5</VIN>
+        <CONDITION>NEW</CONDITION>
+        <FEATURES>6</FEATURES>
+        <SELLER>5</SELLER>
+    </row>
+    <row id="6">
+        <ID>6</ID>
+        <MODEL>6</MODEL>
+        <PRICE>1600.0</PRICE>
+        <MILEAGE>230000</MILEAGE>
+        <VIN>AWFJ90RIOJGFIJEIWEJI</VIN>
+        <CONDITION>USED</CONDITION>
+        <FEATURES>7</FEATURES>
+        <SELLER>6</SELLER>
+    </row>
+    <row id="7">
+        <ID>7</ID>
+        <MODEL>7</MODEL>
+        <PRICE>5400.0</PRICE>
+        <MILEAGE>142142</MILEAGE>
+        <VIN>MBDFKNISDFBURIERGHFG</VIN>
+        <CONDITION>USED</CONDITION>
+        <FEATURES>8</FEATURES>
+        <SELLER>7</SELLER>
+    </row>
+    <row id="8">
+        <ID>8</ID>
+        <MODEL>8</MODEL>
+        <PRICE>19305.0</PRICE>
+        <MILEAGE>100</MILEAGE>
+        <VIN>FEGAH4AH34GFH34YHARE</VIN>
+        <CONDITION>NEW</CONDITION>
+        <FEATURES>9</FEATURES>
+        <SELLER>8</SELLER>
+    </row>
+    <row id="9">
+        <ID>9</ID>
+        <MODEL>9</MODEL>
+        <PRICE>7540.0</PRICE>
+        <MILEAGE>252200</MILEAGE>
+        <VIN>GFMFGP5095JDKYHWJHJ2</VIN>
+        <CONDITION>USED</CONDITION>
+        <FEATURES>10</FEATURES>
+        <SELLER>9</SELLER>
+    </row>
+    <row id="10">
+        <ID>10</ID>
+        <MODEL>10</MODEL>
+        <PRICE>12125.0</PRICE>
+        <MILEAGE>1242</MILEAGE>
+        <VIN>DGHMDTY548E5Y345ERGAF</VIN>
+        <CONDITION>USED</CONDITION>
+        <FEATURES>11</FEATURES>
+        <SELLER>10</SELLER>
+    </row>
+    <row id="11">
+        <ID>11</ID>
+        <MODEL>11</MODEL>
+        <PRICE>15000.0</PRICE>
+        <MILEAGE>541</MILEAGE>
+        <VIN>JIOTRHJBGDUZBGE74Q3Y</VIN>
+        <CONDITION>NEW</CONDITION>
+        <FEATURES>12</FEATURES>
+        <SELLER>11</SELLER>
+    </row>
+    <row id="12">
+        <ID>12</ID>
+        <MODEL>12</MODEL>
+        <PRICE>5400.0</PRICE>
+        <MILEAGE>200110</MILEAGE>
+        <VIN>USIERU343A3KSDTKRTRT</VIN>
+        <CONDITION>USED</CONDITION>
+        <FEATURES>13</FEATURES>
+        <SELLER>12</SELLER>
+    </row>
+    <row id="13">
+        <ID>13</ID>
+        <MODEL>13</MODEL>
+        <PRICE>7000.0</PRICE>
+        <MILEAGE>221041</MILEAGE>
+        <VIN>SGAW4EGHIAGNASBNSDDF</VIN>
+        <CONDITION>USED</CONDITION>
+        <FEATURES>14</FEATURES>
+        <SELLER>13</SELLER>
+    </row>
+    <row id="14">
+        <ID>14</ID>
+        <MODEL>14</MODEL>
+        <PRICE>25000.0</PRICE>
+        <MILEAGE>352</MILEAGE>
+        <VIN>AHRUIEHT4834QHDSKTHA</VIN>
+        <CONDITION>NEW</CONDITION>
+        <FEATURES>15</FEATURES>
+        <SELLER>14</SELLER>
+    </row>
+    <row id="15">
+        <ID>15</ID>
+        <MODEL>15</MODEL>
+        <PRICE>17000.0</PRICE>
+        <MILEAGE>54800</MILEAGE>
+        <VIN>AW4UTHA938HTRHTAK5ET</VIN>
+        <CONDITION>USED</CONDITION>
+        <FEATURES>16</FEATURES>
+        <SELLER>15</SELLER>
+    </row>
+    <row id="16">
+        <ID>16</ID>
+        <MODEL>16</MODEL>
+        <PRICE>13000.0</PRICE>
+        <MILEAGE>65000</MILEAGE>
+        <VIN>AGNDFJKGNA4YIGT2TA3K</VIN>
+        <CONDITION>USED</CONDITION>
+        <FEATURES>17</FEATURES>
+        <SELLER>16</SELLER>
+    </row>
+    <row id="17">
+        <ID>17</ID>
+        <MODEL>17</MODEL>
+        <PRICE>25000.0</PRICE>
+        <MILEAGE>251</MILEAGE>
+        <VIN>GAAKLBNAOIRTH4U3TSD2</VIN>
+        <CONDITION>NEW</CONDITION>
+        <FEATURES>18</FEATURES>
+        <SELLER>17</SELLER>
+    </row>
+    <row id="18">
+        <ID>18</ID>
+        <MODEL>18</MODEL>
+        <PRICE>14000.0</PRICE>
+        <MILEAGE>99000</MILEAGE>
+        <VIN>AGBNIO4ATBABGU74GSDT</VIN>
+        <CONDITION>USED</CONDITION>
+        <FEATURES>19</FEATURES>
+        <SELLER>18</SELLER>
+    </row>
+    <row id="19">
+        <ID>19</ID>
+        <MODEL>19</MODEL>
+        <PRICE>9000.0</PRICE>
+        <MILEAGE>85000</MILEAGE>
+        <VIN>FAG349THQHNAUITAOITR</VIN>
+        <CONDITION>USED</CONDITION>
+        <FEATURES>20</FEATURES>
+        <SELLER>19</SELLER>
+    </row>
+    <row id="20">
+        <ID>20</ID>
+        <MODEL>20</MODEL>
+        <PRICE>7500.0</PRICE>
+        <MILEAGE>120400</MILEAGE>
+        <VIN>GAKLGNAIOERNGAGNAEW1</VIN>
+        <CONDITION>USED</CONDITION>
+        <FEATURES>21</FEATURES>
+        <SELLER>20</SELLER>
+    </row>
+    <row id="21">
+        <ID>21</ID>
+        <MODEL>21</MODEL>
+        <PRICE>6800.0</PRICE>
+        <MILEAGE>70000</MILEAGE>
+        <VIN>NVAOEWTDSGADS4TW3TRE</VIN>
+        <CONDITION>USED</CONDITION>
+        <FEATURES>22</FEATURES>
+        <SELLER>21</SELLER>
+    </row>
+    <row id="22">
+        <ID>22</ID>
+        <MODEL>22</MODEL>
+        <PRICE>18200.0</PRICE>
+        <MILEAGE>600</MILEAGE>
+        <VIN>ASDGBERA434TYDFGHAER</VIN>
+        <CONDITION>NEW</CONDITION>
+        <FEATURES>23</FEATURES>
+        <SELLER>22</SELLER>
+    </row>
+    <row id="23">
+        <ID>23</ID>
+        <MODEL>23</MODEL>
+        <PRICE>4000.0</PRICE>
+        <MILEAGE>50000</MILEAGE>
+        <VIN>AWEG4HTRJSGFHBXHEAR0</VIN>
+        <CONDITION>USED</CONDITION>
+        <FEATURES>24</FEATURES>
+        <SELLER>23</SELLER>
+    </row>
+    <row id="24">
+        <ID>24</ID>
+        <MODEL>24</MODEL>
+        <PRICE>5400.0</PRICE>
+        <MILEAGE>20000</MILEAGE>
+        <VIN>A4YH34YRDH5YSARHAJAQ</VIN>
+        <CONDITION>USED</CONDITION>
+        <FEATURES>25</FEATURES>
+        <SELLER>24</SELLER>
+    </row>
+    <row id="25">
+        <ID>25</ID>
+        <MODEL>25</MODEL>
+        <PRICE>42100.0</PRICE>
+        <MILEAGE>210</MILEAGE>
+        <VIN>TJFGJSR5USHS5HSHAWHD</VIN>
+        <CONDITION>NEW</CONDITION>
+        <FEATURES>26</FEATURES>
+        <SELLER>25</SELLER>
+    </row>
+    <row id="26">
+        <ID>26</ID>
+        <MODEL>26</MODEL>
+        <PRICE>32500.0</PRICE>
+        <MILEAGE>10000</MILEAGE>
+        <VIN>H45HJ56JSGNWBS5HENSA</VIN>
+        <CONDITION>USED</CONDITION>
+        <FEATURES>27</FEATURES>
+        <SELLER>1</SELLER>
+    </row>
+    <row id="27">
+        <ID>27</ID>
+        <MODEL>27</MODEL>
+        <PRICE>8800.0</PRICE>
+        <MILEAGE>110000</MILEAGE>
+        <VIN>E5UTJSNSJSARTUAQJASF</VIN>
+        <CONDITION>USED</CONDITION>
+        <FEATURES>28</FEATURES>
+        <SELLER>2</SELLER>
+    </row>
+    <row id="28">
+        <ID>28</ID>
+        <MODEL>28</MODEL>
+        <PRICE>25400.0</PRICE>
+        <MILEAGE>12</MILEAGE>
+        <VIN>AHA4HAJGFJSUASJW45UH</VIN>
+        <CONDITION>NEW</CONDITION>
+        <FEATURES>29</FEATURES>
+        <SELLER>3</SELLER>
+    </row>
+    <row id="29">
+        <ID>29</ID>
+        <MODEL>29</MODEL>
+        <PRICE>21000.75</PRICE>
+        <MILEAGE>32000</MILEAGE>
+        <VIN>MMDNMXGFHJ45U658DFJX</VIN>
+        <CONDITION>USED</CONDITION>
+        <FEATURES>30</FEATURES>
+        <SELLER>4</SELLER>
+    </row>
+    <row id="30">
+        <ID>30</ID>
+        <MODEL>30</MODEL>
+        <PRICE>9999.99</PRICE>
+        <MILEAGE>145020</MILEAGE>
+        <VIN>MDGHMD6S46UIDKXGFJSW</VIN>
+        <CONDITION>USED</CONDITION>
+        <FEATURES>31</FEATURES>
+        <SELLER>5</SELLER>
+    </row>
+    <row id="31">
+        <ID>31</ID>
+        <MODEL>31</MODEL>
+        <PRICE>19000.0</PRICE>
+        <MILEAGE>552</MILEAGE>
+        <VIN>JSDFMCVGH56IDTYDKJS56</VIN>
+        <CONDITION>NEW</CONDITION>
+        <FEATURES>32</FEATURES>
+        <SELLER>6</SELLER>
+    </row>
+    <row id="32">
+        <ID>32</ID>
+        <MODEL>32</MODEL>
+        <PRICE>22000.0</PRICE>
+        <MILEAGE>170000</MILEAGE>
+        <VIN>DGYKYUU64JEJKSTY45SRT</VIN>
+        <CONDITION>USED</CONDITION>
+        <FEATURES>33</FEATURES>
+        <SELLER>7</SELLER>
+    </row>
+    <row id="33">
+        <ID>33</ID>
+        <MODEL>33</MODEL>
+        <PRICE>65000.0</PRICE>
+        <MILEAGE>168000</MILEAGE>
+        <VIN>JDTKCGK6IKSA5WKW56KST</VIN>
+        <CONDITION>USED</CONDITION>
+        <FEATURES>34</FEATURES>
+        <SELLER>8</SELLER>
+    </row>
+    <row id="34">
+        <ID>34</ID>
+        <MODEL>34</MODEL>
+        <PRICE>4100.0</PRICE>
+        <MILEAGE>169442</MILEAGE>
+        <VIN>JDGFJSDFJS5U6IEI5665T</VIN>
+        <CONDITION>USED</CONDITION>
+        <FEATURES>35</FEATURES>
+        <SELLER>9</SELLER>
+    </row>
+    <row id="35">
+        <ID>35</ID>
+        <MODEL>35</MODEL>
+        <PRICE>75000.0</PRICE>
+        <MILEAGE>120</MILEAGE>
+        <VIN>SR5DTYKGHKOUYLFULDFDG</VIN>
+        <CONDITION>NEW</CONDITION>
+        <FEATURES>36</FEATURES>
+        <SELLER>10</SELLER>
+    </row>
+    <row id="36">
+        <ID>36</ID>
+        <MODEL>36</MODEL>
+        <PRICE>26000.0</PRICE>
+        <MILEAGE>32110</MILEAGE>
+        <VIN>J7K7KEKEKEYI6UE6UE6U5</VIN>
+        <CONDITION>USED</CONDITION>
+        <FEATURES>37</FEATURES>
+        <SELLER>11</SELLER>
+    </row>
+    <row id="37">
+        <ID>37</ID>
+        <MODEL>37</MODEL>
+        <PRICE>14500.0</PRICE>
+        <MILEAGE>45051</MILEAGE>
+        <VIN>BNCVBRTMHSAYHAERHS450</VIN>
+        <CONDITION>USED</CONDITION>
+        <FEATURES>38</FEATURES>
+        <SELLER>12</SELLER>
+    </row>
+    <row id="38">
+        <ID>38</ID>
+        <MODEL>38</MODEL>
+        <PRICE>23560.0</PRICE>
+        <MILEAGE>63210</MILEAGE>
+        <VIN>AGGNHMHGKDJDYKDKDGHSG</VIN>
+        <CONDITION>USED</CONDITION>
+        <FEATURES>39</FEATURES>
+        <SELLER>13</SELLER>
+    </row>
+    <row id="39">
+        <ID>39</ID>
+        <MODEL>39</MODEL>
+        <PRICE>5420.0</PRICE>
+        <MILEAGE>85000</MILEAGE>
+        <VIN>AERYQ346YRHXGFJTYSDI7</VIN>
+        <CONDITION>USED</CONDITION>
+        <FEATURES>40</FEATURES>
+        <SELLER>14</SELLER>
+    </row>
+    <row id="40">
+        <ID>40</ID>
+        <MODEL>40</MODEL>
+        <PRICE>11000.0</PRICE>
+        <MILEAGE>64100</MILEAGE>
+        <VIN>SHTRDJ455QHWERHJSHSER</VIN>
+        <CONDITION>USED</CONDITION>
+        <FEATURES>5</FEATURES>
+        <SELLER>15</SELLER>
+    </row>
+</results_table>

@@ -1,9 +1,11 @@
 package org.richfaces.democars.view.beans.popup;
 
+import org.richfaces.democars.application.DataBasePopulator;
 import org.richfaces.democars.model.entities.Seller;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import java.io.IOException;
 import java.io.Serializable;
 
 @ManagedBean(name = "showSellerBean")
