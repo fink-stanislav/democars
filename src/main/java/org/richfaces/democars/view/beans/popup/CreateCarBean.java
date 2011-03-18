@@ -48,6 +48,7 @@ public class CreateCarBean {
         legalSeller = new LegalSeller();
         seller = individualSeller;
         seller.setAddress(address);
+        seller.setDtype(seller.getClass().getName());
         car.setSeller(seller);
     }
 
@@ -65,6 +66,7 @@ public class CreateCarBean {
     private void determineSeller() {
         if (sellerType.equals("legalSeller")) {
             seller = legalSeller;
+            seller.setDtype(seller.getClass().getName());
             seller.setAddress(address);
             car.setSeller(seller);
         }

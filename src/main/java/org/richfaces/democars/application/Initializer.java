@@ -3,6 +3,8 @@ package org.richfaces.democars.application;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import java.io.IOException;
+
 import static org.richfaces.democars.model.persistence.EntityManagerProvider.getEntityManagerProvider;
 
 public class Initializer implements ServletContextListener {

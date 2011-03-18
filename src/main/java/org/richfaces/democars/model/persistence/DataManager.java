@@ -1,11 +1,19 @@
 package org.richfaces.democars.model.persistence;
 
+import org.richfaces.democars.application.DataBasePopulator;
 import org.richfaces.democars.view.model.expression.PaginationParams;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 import static org.richfaces.democars.model.persistence.EntityManagerProvider.getEntityManagerProvider;
@@ -16,10 +24,18 @@ import static org.richfaces.democars.model.persistence.EntityManagerProvider.get
  * @author S. Fink
  */
 public class DataManager {
+    private static Boolean populated = false;
     private EntityManager entityManager;
 
     public DataManager() {
         entityManager = getEntityManagerProvider().getEntityManager();
+        if (!populated) {
+            try {
+                new DataBasePopulator().populate();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     public <T> void removeEntity(T entity) {

@@ -20,7 +20,7 @@ public class FilterExpression extends DefaultExpression {
     }
 
     /**
-     * Builds JPQL expression for filtering data.
+     * Builds JPQL expression for filtering sqlscript.
      * Cleans up {@code filterParams} map from null values and empty strings.
      * If {@code filterParams} map become empty, returns built query - in this case empty string.
      * Otherwise builds like expression for string parameters and comparison expression for numeric ones.

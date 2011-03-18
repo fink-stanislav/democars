@@ -14,11 +14,13 @@ public abstract class Seller implements Serializable {
     @JoinColumn(name = "address")
     protected Address address;
 
+    private String dtype;
+
     public Integer getId() {
         return id;
     }
 
-    private void setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -28,6 +30,14 @@ public abstract class Seller implements Serializable {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public String getDtype() {
+        return dtype;
+    }
+
+    public void setDtype(String dtype) {
+        this.dtype = dtype;
     }
 
     @Override
