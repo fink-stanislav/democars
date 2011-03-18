@@ -2,7 +2,7 @@ package org.richfaces.democars.view.model.expression;
 
 /**
  * Implements default functionality of {@link DataRetrievalExpression}
- * Retrieves data as it is - without sorting or filtering.
+ * Retrieves sqlscript as it is - without sorting or filtering.
  *
  * @author S. Fink
  */
@@ -21,7 +21,7 @@ public class DefaultExpression implements DataRetrievalExpression {
     /**
      * Returns Empty string
      *
-     * @return expression for retrieval all data - empty string
+     * @return expression for retrieval all sqlscript - empty string
      */
     public String evaluateExpression() {
         return "";

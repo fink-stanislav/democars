@@ -11,10 +11,6 @@ public class Initializer implements ServletContextListener {
 
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         getEntityManagerProvider();
-        try {
-            new DataBasePopulator().build();
-        } catch (Exception e) {
-        }
     }
 
     public void contextDestroyed(ServletContextEvent servletContextEvent) {

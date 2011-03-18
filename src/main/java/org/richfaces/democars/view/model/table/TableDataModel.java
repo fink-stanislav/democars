@@ -36,7 +36,7 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
     }
 
     /**
-     * Updates table rows. Evaluates data retrieval expression,
+     * Updates table rows. Evaluates sqlscript retrieval expression,
      * executes it and sets new value to the rows list.
      */
     public void updateRows() {
@@ -79,7 +79,7 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
      * Returns number of rows, corresponding to evaluated expression. In case of sorting,
      * number of obtained rows is equal to total number of rows in database table.
      *
-     * @return int row number of retrieved data
+     * @return int row number of retrieved sqlscript
      */
     public int getRowCount() {
         return rowCount;

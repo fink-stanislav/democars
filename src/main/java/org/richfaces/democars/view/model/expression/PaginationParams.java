@@ -1,7 +1,7 @@
 package org.richfaces.democars.view.model.expression;
 
 /**
- * Encapsulates parameters for pagination of retrieved data.
+ * Encapsulates parameters for pagination of retrieved sqlscript.
  * This class was provided for convenience of using such parameters.
  * Number of parameters to pass was reduced by using this class.
  *
