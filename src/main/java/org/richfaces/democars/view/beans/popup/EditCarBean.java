@@ -11,10 +11,10 @@ import java.io.Serializable;
 @SessionScoped
 public class EditCarBean implements Serializable {
     private Car car;
-    private DataManager dataManager;
+    private DataManager<Car> dataManager;
 
     public EditCarBean() {
-        dataManager = new DataManager();
+        dataManager = new DataManager<Car>(Car.class);
     }
 
     public Car getCar() {

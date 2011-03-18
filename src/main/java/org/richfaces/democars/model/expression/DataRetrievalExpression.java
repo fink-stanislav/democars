@@ -1,4 +1,4 @@
-package org.richfaces.democars.view.model.expression;
+package org.richfaces.democars.model.expression;
 
 /**
  * Common interface for expression-generating classes.

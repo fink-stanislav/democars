@@ -5,8 +5,8 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:a4j="http://richfaces.org/a4j">
 
-    <rich:dataTable id="dataTable" value="#{arrangeableModelBean.model}" rows="#{arrangeableModelBean.pageRowCount}"
-                    var="car"
+    <rich:dataTable id="dataTable" value="#{arrangeableModelBean.model}" rows="10"
+                    var="car" rowKeyVar="key"
                     columnClasses="column-default, column-default,
                                column-default, column-narrow, column-default,
                                column-narrow, column-default, column-narrow">
@@ -128,7 +128,7 @@
         </rich:column>
 
         <f:facet name="footer">
-            <rich:dataScroller fastStep="2" page="#{arrangeableModelBean.currentPage}">
+            <rich:dataScroller fastStep="2">
                 <f:facet name="first">
                     <h:outputText value="First"/>
                 </f:facet>

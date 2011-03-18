@@ -9,7 +9,7 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean(name = "createCarBean")
 @SessionScoped
 public class CreateCarBean {
-    private DataManager dataManager;
+    private DataManager<Car> dataManager;
     private Car car;
     private Features features;
     private Address address;
@@ -30,7 +30,7 @@ public class CreateCarBean {
 
     public CreateCarBean() {
         clear();
-        dataManager = new DataManager();
+        dataManager = new DataManager<Car>(Car.class);
         sellerType = "individualSeller";
     }
 

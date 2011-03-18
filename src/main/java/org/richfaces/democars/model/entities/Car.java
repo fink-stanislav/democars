@@ -1,12 +1,13 @@
 package org.richfaces.democars.model.entities;
 
 import org.richfaces.democars.model.enums.Condition;
+import org.richfaces.democars.view.model.Identifiable;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-public class Car implements Serializable {
+public class Car implements Serializable, Identifiable {
     @Id
     @GeneratedValue
     private Integer id;

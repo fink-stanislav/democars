@@ -1,9 +1,11 @@
 package org.richfaces.democars.view.model.table;
 
+import org.richfaces.component.SortOrder;
+import org.richfaces.democars.model.params.EntityParams;
+import org.richfaces.democars.model.params.PaginationParams;
 import org.richfaces.democars.model.persistence.DataManager;
 import org.richfaces.democars.model.util.JpqlExpressionBuilder;
-import org.richfaces.component.SortOrder;
-import org.richfaces.democars.view.model.expression.*;
+import org.richfaces.democars.model.expression.*;
 
 import javax.faces.model.DataModel;
 import java.io.Serializable;
@@ -17,22 +19,22 @@ import java.util.Map;
  * @author S. Fink
  */
 public class TableDataModel<T> extends DataModel<T> implements Serializable {
-    private DataManager dataManager;
+    private DataManager<T> dataManager;
     private Integer rowCount = 0;
     private Integer rowIndex = 0;
     private List<T> rows;
     private PaginationParams paginationParams;
-    private JpqlParams jpqlParams;
+    private EntityParams entityParams;
 
     private FilterExpression filterExpression;
     private SortExpression sortExpression;
 
-    public TableDataModel(PaginationParams paginationParams) {
+    public TableDataModel(PaginationParams paginationParams, Class<T> entityClass) {
         this.paginationParams = new PaginationParams(paginationParams);
-        jpqlParams = new JpqlParams("Car", "c");
-        dataManager = new DataManager();
-        filterExpression = new FilterExpression(jpqlParams);
-        sortExpression = new SortExpression(jpqlParams);
+        entityParams = new EntityParams("Car", "c");
+        dataManager = new DataManager<T>(entityClass);
+        filterExpression = new FilterExpression(entityParams);
+        sortExpression = new SortExpression(entityParams);
     }
 
     /**
@@ -40,7 +42,7 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
      * executes it and sets new value to the rows list.
      */
     public void updateRows() {
-        JpqlExpressionBuilder builder = new JpqlExpressionBuilder(jpqlParams);
+        JpqlExpressionBuilder builder = new JpqlExpressionBuilder(entityParams);
         builder.buildSelectExpression();
 
         FilterSortExpression filterSortExpression =
@@ -52,7 +54,7 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
 
         adjustPagesAfterDelete();
 
-        JpqlExpressionBuilder countBuilder = new JpqlExpressionBuilder(jpqlParams);
+        JpqlExpressionBuilder countBuilder = new JpqlExpressionBuilder(entityParams);
         countBuilder.buildCountExpression(dataRetrievalExpression);
         rowCount = dataManager.executeQuery(countBuilder.getExpression());
     }
@@ -138,11 +140,11 @@ public class TableDataModel<T> extends DataModel<T> implements Serializable {
         this.paginationParams = paginationParams;
     }
 
-    public JpqlParams getJpqlParams() {
-        return jpqlParams;
+    public EntityParams getEntityParams() {
+        return entityParams;
     }
 
-    public void setJpqlParams(JpqlParams jpqlParams) {
-        this.jpqlParams = jpqlParams;
+    public void setEntityParams(EntityParams entityParams) {
+        this.entityParams = entityParams;
     }
 }

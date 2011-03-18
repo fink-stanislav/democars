@@ -1,7 +1,7 @@
 package org.richfaces.democars.view.beans.table;
 
 import org.richfaces.democars.model.entities.Car;
-import org.richfaces.democars.view.model.expression.PaginationParams;
+import org.richfaces.democars.model.params.PaginationParams;
 import org.richfaces.democars.view.model.table.TableDataModel;
 import org.richfaces.component.SortOrder;
 
@@ -28,7 +28,7 @@ public class TableBean implements Serializable {
 
     public TableBean() {
         paginationParams = new PaginationParams();
-        tableModel = new TableDataModel<Car>(paginationParams);
+        tableModel = new TableDataModel<Car>(paginationParams, Car.class);
         filterParams = new HashMap<String, Object>();
         sortParams = new HashMap<String, SortOrder>();
     }

@@ -1,19 +1,10 @@
 package org.richfaces.democars.model.persistence;
 
-import org.richfaces.democars.application.DataBasePopulator;
-import org.richfaces.democars.view.model.expression.PaginationParams;
+import org.richfaces.democars.model.params.PaginationParams;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 
 import static org.richfaces.democars.model.persistence.EntityManagerProvider.getEntityManagerProvider;
@@ -23,12 +14,14 @@ import static org.richfaces.democars.model.persistence.EntityManagerProvider.get
  *
  * @author S. Fink
  */
-public class DataManager {
+public class DataManager<T> {
     private static Boolean populated = false;
     private EntityManager entityManager;
+    private Class<T> entityClass;
 
-    public DataManager() {
+    public DataManager(Class<T> entityClass) {
         entityManager = getEntityManagerProvider().getEntityManager();
+        this.entityClass = entityClass;
         if (!populated) {
             try {
                 new DataBasePopulator().populate();
@@ -38,24 +31,24 @@ public class DataManager {
         }
     }
 
-    public <T> void removeEntity(T entity) {
+    public void removeEntity(T entity) {
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
         entityManager.remove(entity);
         entityTransaction.commit();
     }
 
-    public <T> void updateEntity(T entity) {
+    public void updateEntity(T entity) {
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
         entityManager.merge(entity);
         entityTransaction.commit();
     }
 
-    public <T> void persistEntities(T... entities) {
+    public void persistEntities(Object... entities) {
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
-        for (T entity : entities) {
+        for (Object entity : entities) {
             entityManager.persist(entity);
         }
         entityTransaction.commit();
@@ -66,6 +59,10 @@ public class DataManager {
         return singleResultQuery.getSingleResult().intValue();
     }
 
+    public T getEntityById(Object id, Class<T> entityClass) {
+        return entityManager.find(entityClass, id);
+    }
+
     /**
      * Executes JPQL query from string. Retrieves specified number of results.
      *
@@ -73,10 +70,17 @@ public class DataManager {
      * @param params contains range for results
      * @return List of entities
      */
-    public List executeQuery(String query, PaginationParams params) {
-        Query rangedQuery = entityManager.createQuery(query);
+    public List<T> executeQuery(String query, PaginationParams params) {
+        TypedQuery<T> rangedQuery = entityManager.createQuery(query, entityClass);
         rangedQuery.setFirstResult(params.getCurrentPage() * params.getPageSize() - params.getPageSize());
         rangedQuery.setMaxResults(params.getPageSize());
+        return rangedQuery.getResultList();
+    }
+
+    public List <T>executeQuery(String query, Integer firstRow, Integer rowCount) {
+        TypedQuery<T> rangedQuery = entityManager.createQuery(query, entityClass);
+        rangedQuery.setFirstResult(firstRow);
+        rangedQuery.setMaxResults(rowCount);
         return rangedQuery.getResultList();
     }
 }

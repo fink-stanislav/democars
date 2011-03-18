@@ -4,101 +4,79 @@ import org.ajax4jsf.model.DataVisitor;
 import org.ajax4jsf.model.ExtendedDataModel;
 import org.ajax4jsf.model.Range;
 import org.ajax4jsf.model.SequenceRange;
+import org.richfaces.democars.application.PropertyManager;
+import org.richfaces.democars.model.params.EntityParams;
 import org.richfaces.democars.model.persistence.DataManager;
 import org.richfaces.democars.model.util.JpqlExpressionBuilder;
-import org.richfaces.democars.view.model.expression.DataRetrievalExpression;
-import org.richfaces.democars.view.model.expression.DefaultExpression;
-import org.richfaces.democars.view.model.expression.JpqlParams;
-import org.richfaces.democars.view.model.expression.PaginationParams;
+import org.richfaces.democars.view.model.Identifiable;
+import org.richfaces.democars.model.expression.DataRetrievalExpression;
+import org.richfaces.democars.model.expression.DefaultExpression;
 import org.richfaces.model.Arrangeable;
 import org.richfaces.model.ArrangeableState;
-import org.richfaces.model.FilterField;
-import org.richfaces.model.SortField;
 
 import javax.faces.context.FacesContext;
-import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class ArrangeableModel<T> extends ExtendedDataModel<T> implements Arrangeable {
-
-    private List<FilterField> filterFields;
-
-    private List<SortField> sortFields;
+public class ArrangeableModel<T extends Identifiable> extends ExtendedDataModel<T> implements Arrangeable {
 
     private SequenceRange cachedRange;
 
-    private List<T> rows;
+    private Map<Integer, T> cachedRows;
 
-    private Object rowKey;
+    private T rowItem;
 
-    private int rowIndex;
+    private Class<T> itemClass;
 
-    private DataManager dataManager;
+    private Integer rowKey; // item id
 
-    private JpqlParams persistenceParams;
-
-    private PaginationParams paginationParams;
+    private DataManager<T> dataManager;
 
     private DataRetrievalExpression expression;
 
-    public ArrangeableModel() {
-        dataManager = new DataManager();
-        persistenceParams = new JpqlParams("Car", "c");
-        paginationParams = new PaginationParams();
+    private EntityParams persistenceParams;
+
+    public ArrangeableModel(Class<T> itemClass) {
+        dataManager = new DataManager<T>(itemClass);
+        persistenceParams = new EntityParams(
+                PropertyManager.getPropertyManager().getProperty("entity.name"),
+                PropertyManager.getPropertyManager().getProperty("entity.alias")
+        );
         expression = new DefaultExpression(persistenceParams);
+        cachedRows = new HashMap<Integer, T>();
+        this.itemClass = itemClass;
     }
 
-    /**
-     * index to key
-     */
     @Override
     public void setRowKey(Object key) {
-        if (null == key) {
-            setRowIndex(-1);
-            rowKey = null;
-        } else {
-            setRowIndex(((Integer) key).intValue());
-        }
+        rowKey = (Integer) key;
     }
 
     @Override
     public Object getRowKey() {
-        if (rowIndex < 0) {
-            return null;
-        }
         return rowKey;
-    }
-
-    /**
-     * obtain index as usual
-     */
-    @Override
-    public int getRowIndex() {
-        return rowIndex % paginationParams.getPageSize();
-    }
-
-    @Override
-    public void setRowIndex(int rowIndex) {
-        this.rowIndex = rowIndex;
     }
 
     @Override
     public boolean isRowAvailable() {
-        if (getRowKey() == null) {
-            return false;
-        }
-        if (rows.size() <= (Integer) getRowKey()) {
-            return false;
-        }
-        if (rows.size() > 0 && rows.get((Integer) getRowKey()) != null) {
-            return true;
-        }
-        return false;
+        return rowKey != null && cachedRows.get(rowKey) != null;
     }
 
     @Override
     public T getRowData() {
-        return rows.get((Integer) getRowKey());
+        if (rowKey != null) {
+            T result = cachedRows.get(rowKey);
+            if (result == null) {
+                result = dataManager.getEntityById(rowKey, itemClass);
+                cachedRows.put(rowKey, result);
+                return result;
+            } else {
+                return result;
+            }
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -114,10 +92,6 @@ public class ArrangeableModel<T> extends ExtendedDataModel<T> implements Arrange
      * updates filter and sort parameters, modifies table data in appropriate way
      */
     public void arrange(FacesContext context, ArrangeableState state) {
-        if (state != null) {
-            filterFields = state.getFilterFields();
-            sortFields = state.getSortFields();
-        }
         filter();
         sort();
     }
@@ -141,29 +115,17 @@ public class ArrangeableModel<T> extends ExtendedDataModel<T> implements Arrange
     public void walk(FacesContext facesContext, DataVisitor visitor, Range range, Object argument) {
         JpqlExpressionBuilder builder = new JpqlExpressionBuilder(persistenceParams);
         builder.buildSelectExpression();
-        rows = dataManager.executeQuery(builder.getExpression(), paginationParams);
-    }
+        SequenceRange sequenceRange = (SequenceRange) range;
 
-    /**
-     * @return number of rows per page
-     */
-    public Integer getPageRowCount() {
-        return paginationParams.getPageSize();
-    }
+        int firstRow = sequenceRange.getFirstRow();
+        int numberOfRows = sequenceRange.getRows();
 
-    public void setPageRowCount(Integer pageRowCount) {
-        paginationParams.setPageSize(pageRowCount);
-    }
+        List<T> items = dataManager.executeQuery(builder.getExpression(), firstRow, numberOfRows);
 
-    /**
-     * @return number of current page
-     */
-    public Integer getCurrentPage() {
-        return paginationParams.getCurrentPage();
-    }
-
-    public void setCurrentPage(Integer currentPage) {
-        paginationParams.setCurrentPage(currentPage);
+        for (T item : items) {
+            cachedRows.put(item.getId(), item);
+            visitor.process(facesContext, item.getId(), argument);
+        }
     }
 
     /**
@@ -176,5 +138,14 @@ public class ArrangeableModel<T> extends ExtendedDataModel<T> implements Arrange
 
     @Override
     public void setWrappedData(Object data) {
+    }
+
+    @Override
+    public int getRowIndex() {
+        return -1;
+    }
+
+    @Override
+    public void setRowIndex(int rowIndex) {
     }
 }

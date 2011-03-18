@@ -1,4 +1,4 @@
-package org.richfaces.democars.view.model.expression;
+package org.richfaces.democars.model.expression;
 
 import org.richfaces.democars.model.util.JpqlExpressionBuilder;
 
@@ -12,7 +12,7 @@ public class FilterSortExpression extends DefaultExpression {
     private FilterExpression filterExpression;
 
     public FilterSortExpression(SortExpression sortExpression, FilterExpression filterExpression) {
-        super(sortExpression.jpqlParams);
+        super(sortExpression.entityParams);
         this.sortExpression = sortExpression;
         this.filterExpression = filterExpression;
     }
@@ -25,7 +25,7 @@ public class FilterSortExpression extends DefaultExpression {
      * @return String representation of JPQL statement
      */
     public String evaluate() {
-        JpqlExpressionBuilder builder = new JpqlExpressionBuilder(jpqlParams);
+        JpqlExpressionBuilder builder = new JpqlExpressionBuilder(entityParams);
         builder.append(filterExpression.evaluate());
         builder.append(sortExpression.evaluate());
         return builder.getExpression();

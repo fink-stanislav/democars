@@ -1,6 +1,7 @@
 package org.richfaces.democars.model.util;
 
-import org.richfaces.democars.view.model.expression.JpqlParams;
+import org.richfaces.democars.model.expression.DataRetrievalExpression;
+import org.richfaces.democars.model.params.EntityParams;
 
 import static org.apache.commons.lang.StringUtils.*;
 import static org.apache.commons.lang.StringUtils.INDEX_NOT_FOUND;
@@ -15,7 +16,7 @@ public class JpqlExpressionBuilder {
     private String entityName;
     private StringBuilder expression;
 
-    public JpqlExpressionBuilder(JpqlParams params) {
+    public JpqlExpressionBuilder(EntityParams params) {
         this.entityName = params.getEntityName();
         this.entityAlias = params.getEntityAlias();
         expression = new StringBuilder();
@@ -81,6 +82,11 @@ public class JpqlExpressionBuilder {
 
     public JpqlExpressionBuilder append(String expression) {
         this.expression.append(" ").append(expression);
+        return this;
+    }
+
+    public JpqlExpressionBuilder append(DataRetrievalExpression expression) {
+        this.expression.append(" ").append(expression.evaluate());
         return this;
     }
 

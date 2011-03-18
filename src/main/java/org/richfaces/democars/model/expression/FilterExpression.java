@@ -1,5 +1,6 @@
-package org.richfaces.democars.view.model.expression;
+package org.richfaces.democars.model.expression;
 
+import org.richfaces.democars.model.params.EntityParams;
 import org.richfaces.democars.model.util.JpqlExpressionBuilder;
 
 import java.util.HashMap;
@@ -14,8 +15,8 @@ import java.util.Set;
 public class FilterExpression extends DefaultExpression {
     private Map<String, Object> filterParams;
 
-    public FilterExpression(JpqlParams jpqlParams) {
-        super(jpqlParams);
+    public FilterExpression(EntityParams entityParams) {
+        super(entityParams);
         this.filterParams = new HashMap<String, Object>();
     }
 
@@ -28,7 +29,7 @@ public class FilterExpression extends DefaultExpression {
      * @return string representation of JPQL statement
      */
     public String evaluate() {
-        JpqlExpressionBuilder builder = new JpqlExpressionBuilder(jpqlParams);
+        JpqlExpressionBuilder builder = new JpqlExpressionBuilder(entityParams);
 
         Set<Map.Entry<String, Object>> entrySet = cleanUpParams(filterParams).entrySet();
         if (entrySet.isEmpty()) {

@@ -1,4 +1,4 @@
-package org.richfaces.democars.application;
+package org.richfaces.democars.model.persistence;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -8,16 +8,22 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import static org.richfaces.democars.application.PropertyManager.getPropertyManager;
+
 public class DataBasePopulator {
     private URL scriptUrl;
 
     public DataBasePopulator() {
         ClassLoader cs = getClass().getClassLoader();
-        scriptUrl = cs.getResource("import.sql");
+        scriptUrl = cs.getResource(
+                getPropertyManager().getProperty("persistence.sqlscript")
+        );
     }
 
     public Connection getConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:derby:demoCars");
+        return DriverManager.getConnection(
+                getPropertyManager().getProperty("persistence.connection.url")
+        );
     }
 
     public void populate() throws Exception {

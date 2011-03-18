@@ -12,7 +12,7 @@
         <commons-lang-version>2.5</commons-lang-version>
         <servlet-api-version>2.5</servlet-api-version>
         <jsf-version>2.0.3</jsf-version>
-        <richfaces-version>4.0.0.20110227-CR1</richfaces-version>
+        <richfaces-version>4.0.0-SNAPSHOT</richfaces-version>
         <junit-version>3.8.1</junit-version>
         <a4j-version>1.0.5</a4j-version>
         <hibernate-core-version>3.5.4-Final</hibernate-core-version>
