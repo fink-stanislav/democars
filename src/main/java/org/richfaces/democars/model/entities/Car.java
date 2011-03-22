@@ -1,7 +1,6 @@
 package org.richfaces.democars.model.entities;
 
 import org.richfaces.democars.model.enums.Condition;
-import org.richfaces.democars.view.model.Identifiable;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -17,7 +16,7 @@ public class Car implements Serializable, Identifiable {
     @Enumerated(EnumType.STRING)
     private Condition condition;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     @JoinColumn(name = "seller")
     private Seller seller;
 

@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 @Entity
-public class Address implements Serializable {
+public class Address implements Serializable, Identifiable {
     @Id
     @GeneratedValue
     private Integer id;

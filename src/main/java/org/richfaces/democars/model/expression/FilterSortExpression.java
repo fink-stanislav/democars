@@ -18,7 +18,7 @@ public class FilterSortExpression extends DefaultExpression {
     }
 
     /**
-     * Builds expression for retrieving filtered and sorted sqlscript.
+     * Builds expression for retrieving filtered and sorted data.
      * The result depends on parameters of {@code SortExpression} and {@code FilterExpression} and
      * may vary from empty string to statement containing order by and like expressions.
      *

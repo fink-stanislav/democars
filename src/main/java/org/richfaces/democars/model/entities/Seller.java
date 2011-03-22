@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Seller implements Serializable {
+public abstract class Seller implements Serializable, Identifiable {
     @Id
     @GeneratedValue
     protected Integer id;

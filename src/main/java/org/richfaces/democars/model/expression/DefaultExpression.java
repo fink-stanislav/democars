@@ -4,7 +4,7 @@ import org.richfaces.democars.model.params.EntityParams;
 
 /**
  * Implements default functionality of {@link DataRetrievalExpression}
- * Retrieves sqlscript as it is - without sorting or filtering.
+ * Retrieves data as it is - without sorting or filtering.
  *
  * @author S. Fink
  */
@@ -23,7 +23,7 @@ public class DefaultExpression implements DataRetrievalExpression {
     /**
      * Returns Empty string
      *
-     * @return expression for retrieval all sqlscript - empty string
+     * @return expression for retrieval all data - empty string
      */
     public String evaluate() {
         return "";

@@ -19,8 +19,8 @@
                     <h:outputText value="#{editCarBean.car.model.model}" styleClass="text-bold"/>
                     <h:outputText value="VIN"/>
                     <h:outputText value="#{editCarBean.car.vin}"/>
-                    <a4j:commandButton value="Delete" action="#{editCarBean.deleteCar}" limitRender="true"
-                                       oncomplete="#{rich:component('carDeletePanel')}.hide()" render="dataTable"/>
+                    <a4j:commandButton value="Delete" action="#{editCarBean.deleteCar}"
+                                       render="dataTable" oncomplete="#{rich:component('carDeletePanel')}.hide()"/>
                     <a4j:commandButton value="Cancel"
                                        oncomplete="#{rich:component('carDeletePanel')}.hide()"/>
                 </h:panelGrid>

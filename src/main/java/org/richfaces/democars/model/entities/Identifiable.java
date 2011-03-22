@@ -1,4 +1,4 @@
-package org.richfaces.democars.view.model;
+package org.richfaces.democars.model.entities;
 
 public interface Identifiable {
     Integer getId();

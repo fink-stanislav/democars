@@ -18,8 +18,4 @@ public class ShowSellerBean implements Serializable {
     public void setSeller(Seller seller) {
         this.seller = seller;
     }
-
-    public String outcome() {
-        return "";
-    }
 }

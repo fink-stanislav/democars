@@ -48,6 +48,7 @@ public class DataBasePopulator {
         }
         statement.close();
         connection.setAutoCommit(true);
+        connection.commit();
         connection.close();
         bufRead.close();
     }

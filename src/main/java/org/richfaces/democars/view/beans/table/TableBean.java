@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Bean for connecting {@link TableDataModel} and RichFaces sqlscript table
+ * Bean for connecting {@link TableDataModel} and RichFaces data table
  *
  * @author S. Fink
  */
@@ -49,7 +49,7 @@ public class TableBean implements Serializable {
      * After that {@code TableDataModel} view (RichFaces dataTable)
      * forces {@code TableDataModel} to update.
      * <p/>
-     * Number of filtered sqlscript rows could be less than number of displayed rows. Hence filtered
+     * Number of filtered data rows could be less than number of displayed rows. Hence filtered
      * rows may become invisible - their number stays below current page number multiplied by page size.
      * That's the reason to set current page number to one;
      */

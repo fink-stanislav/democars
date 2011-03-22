@@ -1,7 +1,5 @@
 package org.richfaces.democars.view.beans.faces;
 
-import org.richfaces.democars.application.PropertyManager;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
