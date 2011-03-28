@@ -3,6 +3,12 @@ package org.richfaces.democars.view.model.table;
 import org.ajax4jsf.model.ExtendedDataModel;
 import org.richfaces.model.Arrangeable;
 
+/**
+ * Implements rudimentary methods of JSF framework. Provided for convenience.
+ *
+ * @param <T> entity class
+ * @author S. Fink
+ */
 public abstract class AbstractArrangeableModel<T> extends ExtendedDataModel<T> implements Arrangeable {
     /**
      * obsolete methods

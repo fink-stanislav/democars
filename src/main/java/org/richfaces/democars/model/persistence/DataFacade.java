@@ -18,6 +18,13 @@ import java.util.Map;
 import static org.apache.commons.lang.StringUtils.indexOf;
 import static org.apache.commons.lang.StringUtils.substring;
 
+/**
+ * Implementation of {@code DataRetrievalInterface} for storage using jpa.
+ * Functionality based on {@code DataRetrievalExpression}
+ *
+ * @param <T> entity class.
+ * @author S.Fink
+ */
 public class DataFacade<T> implements DataRetrievalInterface<T> {
     private DataManager<T> dataManager;
     private EntityParams persistenceParams;

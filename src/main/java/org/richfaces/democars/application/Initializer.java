@@ -7,8 +7,12 @@ import java.io.IOException;
 
 import static org.richfaces.democars.model.persistence.EntityManagerProvider.getEntityManagerProvider;
 
+/**
+ * Initializes persistence provider.
+ *
+ * @author S. Fink
+ */
 public class Initializer implements ServletContextListener {
-
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         getEntityManagerProvider();
     }

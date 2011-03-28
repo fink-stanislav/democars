@@ -10,6 +10,12 @@ import java.sql.Statement;
 
 import static org.richfaces.democars.application.PropertyManager.getPropertyManager;
 
+/**
+ * Populates database with data from specified sql-script.
+ * Uses JDBC because of native queries in script.
+ *
+ * @author S. Fink
+ */
 public class DataBasePopulator {
     private URL scriptUrl;
 
@@ -26,6 +32,13 @@ public class DataBasePopulator {
         );
     }
 
+    /**
+     * Populates database.
+     * Reads sql-script file line by line.
+     * If there is "--commit" in line - commits batch statement. Adds new batch otherwise.
+     *
+     * @throws Exception if something goes wrong
+     */
     public void populate() throws Exception {
         FileReader input = new FileReader(scriptUrl.getFile());
         BufferedReader bufRead = new BufferedReader(input);

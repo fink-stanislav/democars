@@ -19,6 +19,11 @@ public class DataManager<T> {
     private EntityManager entityManager;
     private Class<T> entityClass;
 
+    /**
+     * Constructs new DataManager and populates database if it is empty.
+     *
+     * @param entityClass
+     */
     public DataManager(Class<T> entityClass) {
         entityManager = getEntityManagerProvider().getEntityManager();
         this.entityClass = entityClass;
@@ -77,7 +82,7 @@ public class DataManager<T> {
         return rangedQuery.getResultList();
     }
 
-    public List <T>executeQuery(String query, Integer firstRow, Integer rowCount) {
+    public List<T> executeQuery(String query, Integer firstRow, Integer rowCount) {
         TypedQuery<T> rangedQuery = entityManager.createQuery(query, entityClass);
         rangedQuery.setFirstResult(firstRow);
         rangedQuery.setMaxResults(rowCount);

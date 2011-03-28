@@ -16,6 +16,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Model implementation for table.
+ * Uses {@code DataRetrievalInterface} for data access.
+ *
+ * @param <T> entity class.
+ * @author S. Fink
+ */
 public class ArrangeableModel<T extends Identifiable> extends AbstractArrangeableModel<T> {
     private Map<Integer, T> cachedRows;
     private Integer rowKey;
@@ -37,7 +44,9 @@ public class ArrangeableModel<T extends Identifiable> extends AbstractArrangeabl
     }
 
     /**
-     * process rows
+     * Gets specified range of rows, caches it and process.
+     * Caching is not necessary.
+     * {@code visitor.process(...)} method is important - it forces framework to obtain row data by keys.
      */
     @Override
     public void walk(FacesContext facesContext, DataVisitor visitor, Range range, Object argument) {
@@ -61,6 +70,9 @@ public class ArrangeableModel<T extends Identifiable> extends AbstractArrangeabl
         return rowKey != null && cachedRows.get(rowKey) != null;
     }
 
+    /**
+     * @return row data obtained by key from cache or persistent storage.
+     */
     @Override
     public T getRowData() {
         T rowItem = null;
@@ -80,8 +92,7 @@ public class ArrangeableModel<T extends Identifiable> extends AbstractArrangeabl
      * @return total row amount
      */
     @Override
-    public int getRowCount
-    () {
+    public int getRowCount() {
         return data.getRowCount();
     }
 }
