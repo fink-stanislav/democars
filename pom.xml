@@ -12,6 +12,7 @@
         <commons-lang-version>2.5</commons-lang-version>
         <servlet-api-version>2.5</servlet-api-version>
         <jsf-version>2.0.3</jsf-version>
+        <el-api-version>1.0</el-api-version>
         <richfaces-version>4.0.0-SNAPSHOT</richfaces-version>
         <junit-version>3.8.1</junit-version>
         <a4j-version>1.0.5</a4j-version>
@@ -70,6 +71,11 @@
             <artifactId>jsf-api</artifactId>
             <version>${jsf-version}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>el-api</artifactId>
+            <version>${el-api-version}</version>
         </dependency>
 
         <dependency>
@@ -133,12 +139,6 @@
             <groupId>org.apache.derby</groupId>
             <artifactId>derbyclient</artifactId>
             <version>${derby-version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.el</groupId>
-            <artifactId>el-api</artifactId>
-            <version>1.0</version>
         </dependency>
     </dependencies>
 
