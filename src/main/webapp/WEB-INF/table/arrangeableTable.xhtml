@@ -6,7 +6,7 @@
                 xmlns:a4j="http://richfaces.org/a4j">
 
     <rich:dataTable id="dataTable" value="#{arrangeableModelBean.model}" rows="10"
-                    var="car" rowKeyVar="key"
+                    var="car" rowKeyVar="key" filterVar="filter"
                     columnClasses="column-default, column-default,
                                column-default, column-narrow, column-default,
                                column-narrow, column-default, column-narrow">
@@ -14,41 +14,53 @@
             <h:outputText value="Cars Store"/>
         </f:facet>
 
-        <rich:column id="make">
+        <rich:column id="make" sortOrder="#{arrangeableModelBean.makeSortOrder}" sortBy="#{car.model.make}"
+                     filterValue="#{arrangeableModelBean.makeFilterValue}" filterExpression="#{car.model.make}">
             <f:facet name="header">
-                <h:outputText value="Make"/>
+                <ui:include src="/WEB-INF/menu/menu.xhtml">
+                    <ui:param name="menuName" value="Make"/>
+                    <ui:param name="targetProperty" value="#{arrangeableModelBean.makeSortOrder}"/>
+                </ui:include>
             </f:facet>
             <h:outputText value="#{car.model.make}"/>
             <f:facet name="footer">
                 <a4j:commandLink id="filterByMakeLink" render="dataTable">
                     <h:outputText value="Filter by make:"/>
                 </a4j:commandLink>
-                <h:inputText id="makeFilterInput">
-                    <f:validateRegex pattern="^[a-zA-Z0-9 ]*$"/>
+                <h:inputText id="makeFilterInput" value="#{arrangeableModelBean.makeFilterValue}">
+                    <f:validateRegex pattern="^[a-zA-Z0-9\- ]*$"/>
                 </h:inputText>
                 <rich:message for="makeFilterInput"/>
             </f:facet>
         </rich:column>
 
-        <rich:column id="model">
+        <rich:column id="model" sortOrder="#{arrangeableModelBean.modelSortOrder}" sortBy="#{car.model.model}"
+                     filterValue="#{arrangeableModelBean.modelFilterValue}" filterExpression="#{car.model.model}">
             <f:facet name="header">
-                <h:outputText value="Model"/>
+                <ui:include src="/WEB-INF/menu/menu.xhtml">
+                    <ui:param name="menuName" value="Model"/>
+                    <ui:param name="targetProperty" value="#{arrangeableModelBean.modelSortOrder}"/>
+                </ui:include>
             </f:facet>
             <h:outputText value="#{car.model.model}"/>
             <f:facet name="footer">
                 <a4j:commandLink id="filterByModelLink" render="dataTable">
                     <h:outputText value="Filter by model:"/>
                 </a4j:commandLink>
-                <h:inputText id="filterModelInput">
-                    <f:validateRegex pattern="^[a-zA-Z0-9 ]*$"/>
+                <h:inputText id="filterModelInput" value="#{arrangeableModelBean.modelFilterValue}">
+                    <f:validateRegex pattern="^[a-zA-Z0-9\- ]*$"/>
                 </h:inputText>
                 <rich:message for="filterModelInput"/>
             </f:facet>
         </rich:column>
 
-        <rich:column id="price">
+        <rich:column id="price" sortOrder="#{arrangeableModelBean.priceSortOrder}" sortBy="#{car.price}"
+                     filterValue="#{arrangeableModelBean.priceFilterValue}" filterExpression="#{car.price}">
             <f:facet name="header">
-                <h:outputText value="Price"/>
+                <ui:include src="/WEB-INF/menu/menu.xhtml">
+                    <ui:param name="menuName" value="Make"/>
+                    <ui:param name="targetProperty" value="#{arrangeableModelBean.priceSortOrder}"/>
+                </ui:include>
             </f:facet>
             <h:outputText value="#{car.price}">
                 <f:convertNumber minFractionDigits="2" maxFractionDigits="2" groupingUsed="false"
@@ -58,7 +70,7 @@
                 <a4j:commandLink id="filterByPriceLink" render="dataTable">
                     <h:outputText value="Filter by price:"/>
                 </a4j:commandLink>
-                <h:inputText converter="javax.faces.Double"/>
+                <h:inputText value="#{arrangeableModelBean.priceFilterValue}" converter="javax.faces.Double"/>
             </f:facet>
         </rich:column>
 

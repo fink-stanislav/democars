@@ -3,34 +3,37 @@ package org.richfaces.democars.view.model.table;
 import org.ajax4jsf.model.DataVisitor;
 import org.ajax4jsf.model.Range;
 import org.ajax4jsf.model.SequenceRange;
+import org.richfaces.component.SortOrder;
 import org.richfaces.democars.model.entities.Identifiable;
 import org.richfaces.democars.model.persistence.DataFacade;
 import org.richfaces.democars.model.persistence.DataRetrievalInterface;
 import org.richfaces.model.ArrangeableState;
+import org.richfaces.renderkit.Expression;
 
+import javax.faces.FacesException;
 import javax.faces.context.FacesContext;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class ArrangeableModel<T extends Identifiable> extends AbstractArrangeableModel<T> {
-    private SequenceRange cachedRange;
     private Map<Integer, T> cachedRows;
-    private T rowItem;
     private Integer rowKey;
     private DataRetrievalInterface<T> data;
 
-    public ArrangeableModel(Class<T> itemClass) {
-        data = new DataFacade<T>(itemClass);
+    public ArrangeableModel(DataRetrievalInterface<T> data) {
+        this.data = data;
         cachedRows = new HashMap<Integer, T>();
     }
 
     /**
-     * updates filter and sort parameters, modifies table data in appropriate way
+     * updates filter and sort parameters
      */
     public void arrange(FacesContext context, ArrangeableState state) {
-        // data.applyFilterParams(state.getFilterFields());
-        // data.applySortParams(state.getSortFields());
+        if (state != null) {
+            data.applyFilterParams(state.getFilterFields());
+            data.applySortParams(state.getSortFields());
+        }
     }
 
     /**
@@ -60,25 +63,25 @@ public class ArrangeableModel<T extends Identifiable> extends AbstractArrangeabl
 
     @Override
     public T getRowData() {
+        T rowItem = null;
         if (rowKey != null) {
             rowItem = cachedRows.get(rowKey);
             if (rowItem == null) {
                 rowItem = data.getItemByKey(rowKey);
                 cachedRows.put(rowKey, rowItem);
                 return rowItem;
-            } else {
-                return rowItem;
             }
-        } else {
-            return null;
+            return rowItem;
         }
+        return rowItem;
     }
 
     /**
      * @return total row amount
      */
     @Override
-    public int getRowCount() {
+    public int getRowCount
+    () {
         return data.getRowCount();
     }
 }

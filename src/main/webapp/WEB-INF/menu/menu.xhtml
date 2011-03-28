@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:rich="http://richfaces.org/rich">
+    <rich:dropDownMenu showEvent="click" popupWidth="50">
+        <f:facet name="label">
+            <h:outputText value="#{menuName}"/>
+        </f:facet>
+        <rich:menuItem render="dataTable" mode="ajax" styleClass="menuItem" limitRender="true">
+            <f:facet name="icon">
+                <h:selectBooleanCheckbox disabled="true" value="#{targetProperty.name() eq 'ascending'}"/>
+            </f:facet>
+            <h:outputText value="Ascending sort"/>
+            <f:setPropertyActionListener target="#{targetProperty}" value="ascending"/>
+        </rich:menuItem>
+        <rich:menuItem render="dataTable" mode="ajax" styleClass="menuItem" limitRender="true">
+            <f:facet name="icon">
+                <h:selectBooleanCheckbox disabled="true" value="#{targetProperty.name() eq 'descending'}"/>
+            </f:facet>
+            <h:outputText value="Descending sort"/>
+            <f:setPropertyActionListener target="#{targetProperty}" value="descending"/>
+        </rich:menuItem>
+        <rich:menuItem render="dataTable" mode="ajax" styleClass="menuItem" limitRender="true">
+            <f:facet name="icon">
+                <h:selectBooleanCheckbox disabled="true" value="#{targetProperty.name() eq 'unsorted'}"/>
+            </f:facet>
+            <h:outputText value="Unsorted"/>
+            <f:setPropertyActionListener target="#{targetProperty}" value="unsorted"/>
+        </rich:menuItem>
+    </rich:dropDownMenu>
+</ui:composition>

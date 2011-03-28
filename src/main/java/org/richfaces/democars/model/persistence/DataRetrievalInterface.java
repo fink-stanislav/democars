@@ -4,6 +4,7 @@ import org.ajax4jsf.model.SequenceRange;
 import org.richfaces.model.FilterField;
 import org.richfaces.model.SortField;
 
+import javax.faces.context.FacesContext;
 import java.util.List;
 
 public interface DataRetrievalInterface<T> {
