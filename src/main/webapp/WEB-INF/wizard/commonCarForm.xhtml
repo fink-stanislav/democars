@@ -24,8 +24,8 @@
 
         <h:outputText value="Price"/>
         <h:inputText id="priceInput" value="#{createCarBean.car.price}">
-            <f:validateRequired/>
             <f:validateDoubleRange minimum="0" maximum="100000"/>
+            <f:validateRequired/>
             <rich:validator event="blur"/>
         </h:inputText>
         <rich:message for="priceInput" id="messageForPrice"/>

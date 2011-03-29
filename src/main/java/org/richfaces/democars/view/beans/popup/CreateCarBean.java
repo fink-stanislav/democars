@@ -18,15 +18,6 @@ public class CreateCarBean {
     private LegalSeller legalSeller;
     private Model model;
     private String sellerType;
-    private Boolean ajaxRendered;
-
-    public Boolean getAjaxRendered() {
-        return ajaxRendered;
-    }
-
-    public void setAjaxRendered(Boolean ajaxRendered) {
-        this.ajaxRendered = ajaxRendered;
-    }
 
     public CreateCarBean() {
         clear();
