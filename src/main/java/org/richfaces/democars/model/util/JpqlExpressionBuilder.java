@@ -1,5 +1,6 @@
 package org.richfaces.democars.model.util;
 
+
 import org.richfaces.democars.model.expression.DataRetrievalExpression;
 import org.richfaces.democars.model.params.EntityParams;
 
@@ -29,21 +30,21 @@ public class JpqlExpressionBuilder {
      */
     public JpqlExpressionBuilder buildSelectExpression() {
         StringBuilder sb = new StringBuilder();
-        sb.append(" select ")
+        sb.append("select ")
                 .append(entityAlias)
                 .append(" from ")
                 .append(entityName).append(" ")
-                .append(entityAlias);
+                .append(entityAlias).append(" ");
         return this.append(sb.toString());
     }
 
     public JpqlExpressionBuilder buildCountExpression(String dataRetrievalExpression) {
         StringBuilder sb = new StringBuilder();
-        sb.append(" select count(")
+        sb.append("select count(")
                 .append(entityAlias)
                 .append(") from ")
                 .append(entityName).append(" ")
-                .append(entityAlias);
+                .append(entityAlias).append(" ");
         append(sb.toString());
         append(dataRetrievalExpression);
 
@@ -62,11 +63,11 @@ public class JpqlExpressionBuilder {
 
     public JpqlExpressionBuilder buildLikeExpression(String paramName, Object paramValue) {
         StringBuilder sb = new StringBuilder();
-        sb.append(" upper(").append(entityAlias).append(".")
+        sb.append("upper(").append(entityAlias).append(".")
                 .append(paramName)
                 .append(") like '")
                 .append(((String) paramValue).toUpperCase())
-                .append("%'");
+                .append("%'").append(" ");
         return this.append(sb.toString());
     }
 
@@ -76,17 +77,17 @@ public class JpqlExpressionBuilder {
                 .append(".")
                 .append(paramName).append(" ")
                 .append(sign).append(" ")
-                .append(paramValue);
+                .append(paramValue).append(" ");
         return this.append(sb.toString());
     }
 
     public JpqlExpressionBuilder append(String expression) {
-        this.expression.append(" ").append(expression);
+        this.expression.append(expression);
         return this;
     }
 
     public JpqlExpressionBuilder append(DataRetrievalExpression expression) {
-        this.expression.append(" ").append(expression.evaluate());
+        this.expression.append(expression.evaluate());
         return this;
     }
 
@@ -105,19 +106,18 @@ public class JpqlExpressionBuilder {
 
     public JpqlExpressionBuilder addOrderParams(String paramName, String sortOrder) {
         StringBuilder sb = new StringBuilder();
-        sb.append(" ")
-                .append(entityAlias).append(".")
+        sb.append(entityAlias).append(".")
                 .append(paramName).append(" ")
                 .append(sortOrder);
         return this.append(sb.toString());
     }
 
     public JpqlExpressionBuilder addWhere() {
-        return append(" where ");
+        return append("where ");
     }
 
     public JpqlExpressionBuilder addAnd() {
-        return append(" and ");
+        return append("and ");
     }
 
     public String getExpression() {

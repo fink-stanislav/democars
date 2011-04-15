@@ -3,14 +3,10 @@ package org.richfaces.democars.view.model.table;
 import org.ajax4jsf.model.DataVisitor;
 import org.ajax4jsf.model.Range;
 import org.ajax4jsf.model.SequenceRange;
-import org.richfaces.component.SortOrder;
 import org.richfaces.democars.model.entities.Identifiable;
-import org.richfaces.democars.model.persistence.DataFacade;
 import org.richfaces.democars.model.persistence.DataRetrievalInterface;
 import org.richfaces.model.ArrangeableState;
-import org.richfaces.renderkit.Expression;
 
-import javax.faces.FacesException;
 import javax.faces.context.FacesContext;
 import java.util.HashMap;
 import java.util.List;

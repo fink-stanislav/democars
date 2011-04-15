@@ -5,12 +5,12 @@ import org.richfaces.component.SortOrder;
 import org.richfaces.democars.application.PropertyManager;
 import org.richfaces.democars.model.expression.*;
 import org.richfaces.democars.model.params.EntityParams;
+import org.richfaces.democars.model.params.FilterParams;
 import org.richfaces.democars.model.util.JpqlExpressionBuilder;
 import org.richfaces.model.FilterField;
 import org.richfaces.model.SortField;
 
 import javax.el.ValueExpression;
-import javax.faces.context.FacesContext;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,13 +82,13 @@ public class DataFacade<T> implements DataRetrievalInterface<T> {
     }
 
     public void applyFilterParams(List<FilterField> filterFields) {
-        Map<String, Object> filterParams = new HashMap<String, Object>();
+        FilterParams filterParams = new FilterParams();
         if (!filterFields.isEmpty()) {
             for (FilterField field : filterFields) {
                 Object filterValue = field.getFilterValue();
                 String filterName = parseParam(field.getFilterExpression());
                 if (filterValue != null) {
-                    filterParams.put(filterName, filterValue);
+                    filterParams.setParam(filterName, filterValue);
                 }
             }
         }

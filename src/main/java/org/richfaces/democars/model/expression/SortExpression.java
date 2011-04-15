@@ -55,7 +55,7 @@ public class SortExpression extends DefaultExpression {
         return builder.getExpression();
     }
 
-    private Map<String, SortOrder> cleanUpParams(Map<String, SortOrder> params) {
+    protected Map<String, SortOrder> cleanUpParams(Map<String, SortOrder> params) {
         Map<String, SortOrder> sortParams = new HashMap<String, SortOrder>();
         sortParams.putAll(params);
         Set<Map.Entry<String, SortOrder>> sortParamEntrySet = params.entrySet();
